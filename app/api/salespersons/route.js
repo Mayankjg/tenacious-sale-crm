@@ -11,7 +11,7 @@
 //   return Response.json({ success: true, data: newSalesperson });
 // }
 
-let salespersons = []; // temporary store (will reset when server restarts)
+let salespersons = [];
 
 export async function GET() {
   return Response.json(salespersons);
