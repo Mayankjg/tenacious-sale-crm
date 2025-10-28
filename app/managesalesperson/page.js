@@ -1,82 +1,107 @@
+// "use client";
+// import React from "react";
+// import { useRouter } from "next/navigation";
+// import "./salesperson.css";
+
+// export default function ManageSalesperson() {
+//   const router = useRouter();
+
+//   const handleAddSalesperson = () => {
+//     router.push("/addsalesperson");
+//   };
+
+//   return (
+//     <div className="page-container">
+//       <div className="header">
+//         <h2>
+//           Salesperson <span className="bold-text">List</span>
+//         </h2>
+//         <button className="add-sales-btn" onClick={handleAddSalesperson}>
+//           Add Sales Person
+//         </button>
+//       </div>
+
+//       <hr className="divider" />
+
+//       <div className="search-section">
+//         <input type="text" placeholder="Search" className="search-input" />
+//         <button className="search-btn">Search</button>
+//       </div>
+//     </div>
+//   );
+// }
+
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import "./salesperson.css";
 
 export default function ManageSalesperson() {
   const router = useRouter();
   const [salespersons, setSalespersons] = useState([]);
 
   useEffect(() => {
-    async function fetchSalespersons() {
-      const res = await fetch("/api/salespersons");
-      const data = await res.json();
-      setSalespersons(data);
-    }
-    fetchSalespersons();
+    fetch("/api/salespersons")
+      .then((res) => res.json())
+      .then((data) => setSalespersons(data))
+      .catch((err) => console.error(err));
   }, []);
 
+  const handleAddSalesperson = () => {
+    router.push("/addsalesperson");
+  };
+
   return (
-    <div className="bg-white min-h-screen p-6 border border-gray-200">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold text-black">
-          Salesperson <span className="font-bold">List</span>
+    <div className="page-container">
+      <div className="header">
+        <h2>
+          Salesperson <span className="bold-text">List</span>
         </h2>
-        <button
-          onClick={() => router.push("/addsalesperson")}
-          className="bg-[#1e3a5f] text-white px-4 py-2 rounded hover:bg-[#2b4c78]"
-        >
+        <button className="add-sales-btn" onClick={handleAddSalesperson}>
           Add Sales Person
         </button>
       </div>
 
-      <hr className="border-t border-gray-300 mb-4" />
+      <hr className="divider" />
 
-      <div className="flex justify-end gap-2 mb-6">
-        <input
-          type="text"
-          placeholder="Search"
-          className="border border-gray-300 p-2 rounded w-64"
-        />
-        <button className="bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-600">
-          Search
-        </button>
+      <div className="search-section">
+        <input type="text" placeholder="Search" className="search-input" />
+        <button className="search-btn">Search</button>
       </div>
 
-      {/* Salesperson Table */}
-      <table className="w-full border border-gray-300 rounded-lg overflow-hidden">
-        <thead className="bg-gray-100 text-gray-700">
-          <tr>
-            <th className="p-2 border">#</th>
-            <th className="p-2 border">Username</th>
-            <th className="p-2 border">Email</th>
-            <th className="p-2 border">Designation</th>
-            <th className="p-2 border">Country</th>
-            <th className="p-2 border">Contact</th>
-          </tr>
-        </thead>
-        <tbody>
-          {salespersons.length > 0 ? (
-            salespersons.map((sp, index) => (
-              <tr key={sp.id} className="text-center">
-                <td className="p-2 border">{index + 1}</td>
-                <td className="p-2 border">{sp.username}</td>
-                <td className="p-2 border">{sp.email}</td>
-                <td className="p-2 border">{sp.designation}</td>
-                <td className="p-2 border">{sp.country}</td>
-                <td className="p-2 border">{sp.contact}</td>
+      <div className="table-container">
+        {salespersons.length === 0 ? (
+          <p className="no-data">No Salespersons Found</p>
+        ) : (
+          <table className="salesperson-table">
+            <thead>
+              <tr>
+                <th>User Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Designation</th>
+                <th>Country</th>
+                <th>Contact</th>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="6" className="text-center p-4 text-gray-500">
-                No records found.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {salespersons.map((p) => (
+                <tr key={p.id}>
+                  <td>{p.username}</td>
+                  <td>{p.firstname}</td>
+                  <td>{p.lastname}</td>
+                  <td>{p.email}</td>
+                  <td>{p.designation}</td>
+                  <td>{p.country}</td>
+                  <td>{p.contact}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 }
-
 

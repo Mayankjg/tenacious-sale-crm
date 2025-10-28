@@ -222,22 +222,13 @@ export default function Sidebar() {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <div className="sidebar">
-      <div className="sidebar-header">
-        <h1>Tenacious Sales</h1>
-      </div>
-
-      <div className="sidebar-welcome">
-        <p>Welcome</p>
-        <p>Test</p>
-      </div>
 
       <nav className="sidebar-nav">
         <ul>
           <li className="sidebar-item" onClick={() => router.push("/")}>
             <Home size={18} className="mr-3" /> Dashboard
           </li>
-          
+
           <div
             className="sidebar-collapsible"
             onClick={() => setOpenMenu(!openMenu)}
@@ -251,17 +242,16 @@ export default function Sidebar() {
           {openMenu && (
             <ul className="sidebar-submenu">
               <li onClick={() => router.push("/managesalesperson")}>
-                Salesperson List
+                 💠 Salesperson List
               </li>
-              <li>Request For Inactive</li>
-              <li>Push Notification</li>
-              <li>Track Your Salesperson</li>
-              <li>Account Expiry Report</li>
+              <li> 💠 Request For Inactive</li>
+              <li> 💠 Push Notification</li>
+              <li> 💠 Track Your Salesperson</li>
+              <li> 💠 Account Expiry Report</li>
             </ul>
           )}
         </ul>
       </nav>
-    </div>
   );
 }
 
