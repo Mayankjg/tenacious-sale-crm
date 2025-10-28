@@ -237,8 +237,7 @@ export default function Sidebar() {
           <li className="sidebar-item" onClick={() => router.push("/")}>
             <Home size={18} className="mr-3" /> Dashboard
           </li>
-
-          {/* Manage Salesperson */}
+          
           <div
             className="sidebar-collapsible"
             onClick={() => setOpenMenu(!openMenu)}
