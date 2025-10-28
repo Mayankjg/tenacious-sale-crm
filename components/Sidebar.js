@@ -236,7 +236,7 @@ export default function Sidebar() {
             <span className="flex items-center">
               <Users size={18} className="mr-3" /> Manage Salespersons
             </span>
-            {openMenu ? <ChevronDown size={20} /> : <ChevronLeft size={20} />}
+            {openMenu ? <ChevronDown size={20} /> : <ChevrondoLeft size={20} />}
           </div>
 
           {openMenu && (
