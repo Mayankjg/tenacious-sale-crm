@@ -14,20 +14,20 @@
 // }
 
 import "./globals.css";
-import Sidebar from "../components/Sidebar";
+import LayoutClient from "../components/LayoutClient";
 
 export const metadata = {
-  title: "Tenacious Sales Dashboard",
-  description: "CRM Sidebar UI",
+  title: "Tenacious Sales",
+  description: "CRM System",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex">
-        <Sidebar />
-        <main className="flex-1 p-6">{children}</main>
+      <body>
+        <LayoutClient>{children}</LayoutClient>
       </body>
     </html>
   );
 }
+
