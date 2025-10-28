@@ -109,7 +109,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import "./salesperson.css";
+import "./managesalesperson.css";
 
 export default function ManageSalesperson() {
   const router = useRouter();
