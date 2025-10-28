@@ -114,13 +114,144 @@
 //   );
 // }
 
+// "use client";
+// import React, { useState } from "react";
+// import { useRouter } from "next/navigation";
+// import "./AddSalesperson.css";
+
+// export default function AddSalesperson() {
+//   const [form, setForm] = useState({
+//     username: "",
+//     firstname: "",
+//     lastname: "",
+//     email: "",
+//     designation: "",
+//     country: "",
+//     contact: "",
+//   });
+//   const [preview, setPreview] = useState(null);
+//   const router = useRouter();
+
+//   const handleChange = (e) => {
+//     setForm({ ...form, [e.target.name]: e.target.value });
+//   };
+
+//   const handleImageChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) setPreview(URL.createObjectURL(file));
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     const res = await fetch("/api/salespersons", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(form),
+//     });
+
+//     const data = await res.json();
+//     if (data.success) {
+//       alert("Salesperson added successfully!");
+//       router.push("/managesalesperson");
+//     } else {
+//       alert("Error adding salesperson");
+//     }
+//   };
+
+//   const handleCancel = () => router.push("/managesalesperson");
+
+//   return (
+//     <div className="page-container">
+//       <div className="header">
+//         <h2>
+//           Add <span className="bold-text">Salesperson</span>
+//         </h2>
+//       </div>
+
+//       <hr className="divider" />
+
+//       <form className="form-container" onSubmit={handleSubmit}>
+//         <div className="form-row">
+//           <div className="form-group">
+//             <label>User Name</label>
+//             <input
+//               name="username"
+//               type="text"
+//               placeholder="User Name"
+//               onChange={handleChange}
+//             />
+//           </div>
+
+//           <div className="form-group image-upload">
+//             <label>Profile Image</label>
+//             <div className="upload-section">
+//               <input type="file" accept="image/*" onChange={handleImageChange} />
+//               <div className="image-preview">
+//                 {preview ? <img src={preview} alt="Preview" /> : <div className="no-image"></div>}
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+
+//         <div className="form-row">
+//           <div className="form-group">
+//             <label>First Name</label>
+//             <input name="firstname" type="text" placeholder="First Name" onChange={handleChange} />
+//           </div>
+
+//           <div className="form-group">
+//             <label>Last Name</label>
+//             <input name="lastname" type="text" placeholder="Last Name" onChange={handleChange} />
+//           </div>
+//         </div>
+
+//         <div className="form-row">
+//           <div className="form-group">
+//             <label>Email</label>
+//             <input name="email" type="email" placeholder="Email" onChange={handleChange} />
+//           </div>
+
+//           <div className="form-group">
+//             <label>Designation</label>
+//             <input name="designation" type="text" placeholder="Designation" onChange={handleChange} />
+//           </div>
+//         </div>
+
+//         <div className="form-row">
+//           <div className="form-group">
+//             <label>Country</label>
+//             <input name="country" type="text" placeholder="Country" onChange={handleChange} />
+//           </div>
+
+//           <div className="form-group">
+//             <label>Contact No</label>
+//             <input name="contact" type="text" placeholder="Contact No" onChange={handleChange} />
+//           </div>
+//         </div>
+
+//         <div className="button-section">
+//           <button type="submit" className="save-btn">
+//             Save
+//           </button>
+//           <button type="button" className="cancel-btn" onClick={handleCancel}>
+//             Cancel
+//           </button>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// }
+
+
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import "./AddSalesperson.css";
 
 export default function AddSalesperson() {
-  const [form, setForm] = useState({
+  const [preview, setPreview] = useState(null);
+  const [formData, setFormData] = useState({
     username: "",
     firstname: "",
     lastname: "",
@@ -129,37 +260,58 @@ export default function AddSalesperson() {
     country: "",
     contact: "",
   });
-  const [preview, setPreview] = useState(null);
+  const [error, setError] = useState("");
   const router = useRouter();
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) setPreview(URL.createObjectURL(file));
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // ✅ Validation check
+    if (
+      !formData.username.trim() ||
+      !formData.firstname.trim() ||
+      !formData.lastname.trim() ||
+      !formData.email.trim() ||
+      !formData.designation.trim() ||
+      !formData.country.trim() ||
+      !formData.contact.trim()
+    ) {
+      setError("⚠️ Please fill all required fields before saving.");
+      return;
+    }
+
+    setError("");
+
     const res = await fetch("/api/salespersons", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify(formData),
     });
 
-    const data = await res.json();
-    if (data.success) {
-      alert("Salesperson added successfully!");
+    if (res.ok) {
       router.push("/managesalesperson");
     } else {
-      alert("Error adding salesperson");
+      setError("❌ Failed to save salesperson. Try again.");
     }
   };
 
-  const handleCancel = () => router.push("/managesalesperson");
+  const handleCancel = () => {
+    router.push("/managesalesperson");
+  };
 
   return (
     <div className="page-container">
@@ -171,14 +323,18 @@ export default function AddSalesperson() {
 
       <hr className="divider" />
 
+      {/* ✅ Show error message */}
+      {error && <p className="error-text">{error}</p>}
+
       <form className="form-container" onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-group">
-            <label>User Name</label>
+            <label>User Name *</label>
             <input
-              name="username"
               type="text"
+              name="username"
               placeholder="User Name"
+              value={formData.username}
               onChange={handleChange}
             />
           </div>
@@ -188,7 +344,11 @@ export default function AddSalesperson() {
             <div className="upload-section">
               <input type="file" accept="image/*" onChange={handleImageChange} />
               <div className="image-preview">
-                {preview ? <img src={preview} alt="Preview" /> : <div className="no-image"></div>}
+                {preview ? (
+                  <img src={preview} alt="Preview" />
+                ) : (
+                  <div className="no-image"></div>
+                )}
               </div>
             </div>
           </div>
@@ -196,37 +356,76 @@ export default function AddSalesperson() {
 
         <div className="form-row">
           <div className="form-group">
-            <label>First Name</label>
-            <input name="firstname" type="text" placeholder="First Name" onChange={handleChange} />
+            <label>First Name *</label>
+            <input
+              type="text"
+              name="firstname"
+              placeholder="First Name"
+              value={formData.firstname}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
-            <label>Last Name</label>
-            <input name="lastname" type="text" placeholder="Last Name" onChange={handleChange} />
+            <label>Last Name *</label>
+            <input
+              type="text"
+              name="lastname"
+              placeholder="Last Name"
+              value={formData.lastname}
+              onChange={handleChange}
+            />
           </div>
         </div>
 
         <div className="form-row">
           <div className="form-group">
-            <label>Email</label>
-            <input name="email" type="email" placeholder="Email" onChange={handleChange} />
+            <label>Email *</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
-            <label>Designation</label>
-            <input name="designation" type="text" placeholder="Designation" onChange={handleChange} />
+            <label>Designation *</label>
+            <input
+              type="text"
+              name="designation"
+              placeholder="Designation"
+              value={formData.designation}
+              onChange={handleChange}
+            />
           </div>
         </div>
 
         <div className="form-row">
           <div className="form-group">
-            <label>Country</label>
-            <input name="country" type="text" placeholder="Country" onChange={handleChange} />
+            <label>Country *</label>
+            <select
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+            >
+              <option value="">Select Country</option>
+              <option>India</option>
+              <option>USA</option>
+              <option>UK</option>
+            </select>
           </div>
 
           <div className="form-group">
-            <label>Contact No</label>
-            <input name="contact" type="text" placeholder="Contact No" onChange={handleChange} />
+            <label>Contact No *</label>
+            <input
+              type="text"
+              name="contact"
+              placeholder="Contact No"
+              value={formData.contact}
+              onChange={handleChange}
+            />
           </div>
         </div>
 
@@ -234,7 +433,11 @@ export default function AddSalesperson() {
           <button type="submit" className="save-btn">
             Save
           </button>
-          <button type="button" className="cancel-btn" onClick={handleCancel}>
+        <button
+          type = "button"
+          className="cancel-btn"
+          onClick={handleCancel}
+          >
             Cancel
           </button>
         </div>
