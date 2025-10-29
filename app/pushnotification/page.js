@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import "./pushnotification.css";
-import { Input } from "postcss";
 
 export default function Page() {
     const [deviceType, setDeviceType] = useState("android");
@@ -22,13 +21,14 @@ export default function Page() {
                 Push <b>Notification</b>
             </h3>
             <div className="form-section">
-                <lable className="lable"> Sales Person</lable>
+                <label className="lable"> Sales Person</label>
                 <div className="radio-group">
                     <label>
                         <input
                             type="radio"
                             name="device"
                             checked={deviceType === "android"}
+                            onChange={() => setDeviceType("android")}
                         />{" "}
                         With Android device
                     </label>
@@ -78,7 +78,7 @@ export default function Page() {
             )}
 
             <div className="button-group">
-                <button className="btn btn-send" onClick={{ handleSend }}>
+                <button className="btn btn-send" onClick={handleSend}>
                     Send
                 </button>
                 <button className="btn btn-cencel"

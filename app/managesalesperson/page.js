@@ -7,6 +7,9 @@ export default function ManageSalesperson() {
   const router = useRouter();
   const [salespersons, setSalespersons] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedPerson, setSelectedPerson] = useState(null);
+  const [newEmail, setNewEmail] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetch("/api/salespersons")
@@ -25,6 +28,25 @@ export default function ManageSalesperson() {
 
   const handleAddSalesperson = () => {
     router.push("/addsalesperson");
+  };
+
+  const openModal = (person) => {
+    setSelectedPerson(person);
+    setNewEmail(person.email || "");
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedPerson(null);
+    setNewEmail("");
+  };
+
+  const handleEmailChange = () => {
+    if (!newEmail) return alert("Please enter an email ID");
+    // API call for update (example)
+    console.log("Updating email for:", selectedPerson.username, "to:", newEmail);
+    closeModal();
   };
 
   return (
@@ -74,22 +96,52 @@ export default function ManageSalesperson() {
 
                   <div className="sales-details-row">
                     <p className="sales-contact">📞 <strong>{p.contact}</strong></p>
-                    <p className="sales-designation">💼 Designation: <strong>{p.designation}</strong></p>
+                    <p className="sales-designation">
+                      💼 Designation: <strong>{p.designation}</strong>
+                    </p>
                   </div>
 
-                  <p className="sales-country">🌍 {p.country}</p>
+                  <p className="sales-country">{p.country}</p>
                 </div>
-
               </div>
 
               <div className="sales-right">
                 <button className="view-btn">View Leads</button>
-                <button className="change-btn">Change Email ID</button>
+                <button className="change-btn" onClick={() => openModal(p)}>
+                  Change Email ID
+                </button>
               </div>
             </div>
           ))
         )}
       </div>
+
+      {/* ---------- Email Change Modal ---------- */}
+      {showModal && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>Change Email ID</h3>
+              <span className="close-btn" onClick={closeModal}>
+                close or <b>Esc</b> Key
+              </span>
+            </div>
+
+            <div className="modal-body">
+              <label>New Email ID</label>
+              <input
+                type="email"
+                placeholder="Email ID"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
+              <button className="update-btn" onClick={handleEmailChange}>
+                Change Email-Id
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
