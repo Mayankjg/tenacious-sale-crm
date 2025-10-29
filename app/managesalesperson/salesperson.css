@@ -1,7 +1,7 @@
-.salesperson-page {
+/* .salesperson-page {
   background-color: #fff;
-  min-height: 100vh;
-  padding: 25px;
+  min-height: 300vh;
+  padding: 50px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -23,7 +23,7 @@
 
 .add-btn {
   background-color: #1e3a5f;
-  color: white;
+  color: rgb(236, 236, 236);
   border: none;
   padding: 10px 20px;
   border-radius: 6px;
@@ -35,14 +35,12 @@
   background-color: #2b4f7c;
 }
 
-/* Divider */
 .divider {
   border: 0;
   border-top: 2px solid #000;
   margin-top: 10px;
 }
 
-/* Search Section */
 .search-section {
   margin-top: 15px;
   display: flex;
@@ -71,7 +69,6 @@
   background-color: #008dbf;
 }
 
-/* Salesperson Cards */
 .salesperson-list {
   margin-top: 20px;
 }
@@ -173,11 +170,598 @@
   opacity: 0.9;
 }
 
-
 .no-data {
   text-align: center;
   font-size: 1rem;
   font-weight: 300;
   color: #000;
+  margin-top: 30px;
+} */
+
+.salesperson-page {
+  background-color: #fff;
+  min-height: 100vh;
+  padding: 25px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.salesperson-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.salesperson-header h2 {
+  color: #000;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.highlight {
+  font-weight: 300;
+}
+
+.add-btn {
+  background-color: #1e3a5f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.add-btn:hover {
+  background-color: #2b4f7c;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+.search-section {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.search-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  font-size: 0.9rem;
+}
+
+.search-btn {
+  background-color: #00a0d2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.search-btn:hover {
+  background-color: #008dbf;
+}
+
+.salesperson-list {
+  margin-top: 20px;
+}
+
+.sales-card {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  padding: 50px 50px;      
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: 0.3s ease;
+  margin-bottom: 12px;     
+}
+
+.sales-card:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+
+.sales-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.sales-info {
+  color: #000;
+  line-height: 1.4;
+}
+
+.sales-name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.sales-fullname {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 3px;
+}
+
+.sales-email a {
+  color: #0078d4;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.sales-email a:hover {
+  text-decoration: underline;
+}
+
+.sales-contact {
+  color: #000;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.sales-designation {
+  color: #5c3a3a;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.sales-country {
+  font-size: 0.85rem;
+  color: #333;
+}
+.salesperson-page {
+  background-color: #fff;
+  min-height: 100vh;
+  padding: 25px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.salesperson-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.salesperson-header h2 {
+  color: #000;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.highlight {
+  font-weight: 300;
+}
+
+.add-btn {
+  background-color: #1e3a5f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.add-btn:hover {
+  background-color: #2b4f7c;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+/* Search Section */
+.search-section {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.search-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  font-size: 0.9rem;
+}
+
+.search-btn {
+  background-color: #00a0d2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.search-btn:hover {
+  background-color: #008dbf;
+}
+
+/* Salesperson List */
+.salesperson-list {
+  margin-top: 20px;
+}
+
+/* Salesperson Card (compact) */
+.sales-card {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 15px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+  margin-bottom: 15px;
+}
+
+.sales-card:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Left Info Section */
+.sales-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.sales-info {
+  color: #000;
+  line-height: 1.4;
+}
+
+.sales-name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.sales-fullname {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 3px;
+}
+
+.sales-email a {
+  color: #0078d4;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.sales-email a:hover {
+  text-decoration: underline;
+}
+
+.sales-contact {
+  color: #000;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.sales-designation {
+  color: #5c3a3a;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.sales-country {
+  font-size: 0.85rem;
+  color: #333;
+}
+
+/* Right Buttons (smaller) */
+.sales-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.view-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.change-btn {
+  background-color: #1f3b63;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.view-btn:hover,
+.change-btn:hover {
+  opacity: 0.9;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 30px;
+}
+.salesperson-page {
+  background-color: #fff;
+  min-height: 100vh;
+  padding: 25px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.salesperson-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.salesperson-header h2 {
+  color: #000;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.highlight {
+  font-weight: 300;
+}
+
+.add-btn {
+  background-color: #1e3a5f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.add-btn:hover {
+  background-color: #2b4f7c;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+/* Search Section */
+.search-section {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.search-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  font-size: 0.9rem;
+}
+
+.search-btn {
+  background-color: #00a0d2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.search-btn:hover {
+  background-color: #008dbf;
+}
+
+/* Salesperson List */
+.salesperson-list {
+  margin-top: 20px;
+}
+
+/* Salesperson Card (compact) */
+.sales-card {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 15px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+  margin-bottom: 15px;
+}
+
+.sales-card:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Left Info Section */
+.sales-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.sales-info {
+  color: #000;
+  line-height: 1.4;
+}
+
+.sales-name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.sales-fullname {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 3px;
+}
+
+.sales-email a {
+  color: #0078d4;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.sales-email a:hover {
+  text-decoration: underline;
+}
+
+.sales-contact {
+  color: #000;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.sales-designation {
+  color: #5c3a3a;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.sales-country {
+  font-size: 0.85rem;
+  color: #333;
+}
+
+/* Right Buttons (smaller) */
+.sales-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.view-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.change-btn {
+  background-color: #1f3b63;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.view-btn:hover,
+.change-btn:hover {
+  opacity: 0.9;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 30px;
+}
+
+.sales-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.view-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.change-btn {
+  background-color: #1f3b63;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.view-btn:hover,
+.change-btn:hover {
+  opacity: 0.9;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
   margin-top: 30px;
 }
