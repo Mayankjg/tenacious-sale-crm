@@ -76,14 +76,15 @@ export default function ManageSalesperson() {
                   <p className="sales-email">
                     📧 <a href={`mailto:${p.email}`}>{p.email}</a>
                   </p>
-                  <p className="sales-contact">
-                    📞 <strong>{p.contact}</strong>
-                  </p>
-                  <p className="sales-designation">
-                    💼 Designation: <strong>{p.designation}</strong>
-                  </p>
+
+                  <div className="sales-details-row">
+                    <p className="sales-contact">📞 <strong>{p.contact}</strong></p>
+                    <p className="sales-designation">💼 Designation: <strong>{p.designation}</strong></p>
+                  </div>
+
                   <p className="sales-country">🌍 {p.country}</p>
                 </div>
+
               </div>
 
               <div className="sales-right">
@@ -97,6 +98,3 @@ export default function ManageSalesperson() {
     </div>
   );
 }
-
-
-
