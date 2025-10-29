@@ -59,7 +59,8 @@ export default function Sidebar() {
   useEffect(() => {
     if (
       pathname.startsWith("/managesalesperson") ||
-      pathname.startsWith("/pushnotification")
+      pathname.startsWith("/pushnotification") ||
+      pathname.startsWith("trackyourSalesperson")
     ) {
       setOpenMenu(true);
     }
@@ -100,10 +101,16 @@ export default function Sidebar() {
             >
               💠 Push Notification
             </li>
-            <li>💠 Track Your Salesperson</li>
+            <li
+              className={pathname === "/trackyourSalesperson" ? "active" : ""}
+              onClick={() => router.push("/trackyourSalesperson")}
+            >
+              💠 Track Your Salesperson
+            </li>
             <li>💠 Account Expiry Report</li>
           </ul>
         )}
+
       </ul>
     </nav>
   );
