@@ -8,7 +8,6 @@ export default function ManageSalesperson() {
   const [salespersons, setSalespersons] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Fetch salesperson data
   useEffect(() => {
     fetch("/api/salespersons")
       .then((res) => res.json())
@@ -16,7 +15,6 @@ export default function ManageSalesperson() {
       .catch((err) => console.error(err));
   }, []);
 
-  // Filtered list based on search
   const filteredSalespersons = salespersons.filter(
     (p) =>
       p.username?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -31,10 +29,9 @@ export default function ManageSalesperson() {
 
   return (
     <div className="salesperson-page">
-      {/* Header Section */}
       <div className="salesperson-header">
         <h2>
-          Salesperson <span className="highlight">List</span>
+          Salesperson <b>List</b>
         </h2>
         <button className="add-btn" onClick={handleAddSalesperson}>
           Add Sales Person
@@ -43,7 +40,6 @@ export default function ManageSalesperson() {
 
       <hr className="divider" />
 
-      {/* Search Section */}
       <div className="search-section">
         <input
           type="text"
@@ -55,7 +51,6 @@ export default function ManageSalesperson() {
         <button className="search-btn">Search</button>
       </div>
 
-      {/* Salesperson Cards */}
       <div className="salesperson-list">
         {filteredSalespersons.length === 0 ? (
           <p className="no-data">No Salespersons Found</p>
