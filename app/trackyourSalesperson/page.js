@@ -1,112 +1,71 @@
-
-// "use client";
-// import { useEffect, useRef } from "react";
-// import "./trackyourSalesperson.css";
-
-// export default function trackyourSalesperson() {
-//   const mapRef = useRef(null);
-
-//   useEffect(() => {
-//     const loadMap = () => {
-//       if (window.google && mapRef.current) {
-//         const surat = { lat: 21.1702, lng: 72.8311 };
-
-//         const map = new window.google.maps.Map(mapRef.current, {
-//           center: surat,
-//           zoom: 12,
-//           mapTypeId: "roadmap",
-//         });
-
-//         new window.google.maps.Marker({
-//           position: surat,
-//           map: map,
-//           title: "Surat, Gujarat",
-//         });
-//       }
-//     };
-
-//     const existingScript = document.getElementById("googleMaps");
-//     if (!existingScript) {
-//       const script = document.createElement("script");
-//       script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBq9FfHZWuO0OZMcEmAKceK6-yEVxzxltM`;
-//       script.id = "googleMaps";
-//       script.async = true;
-//       script.defer = true;
-//       script.onload = loadMap;
-//       document.body.appendChild(script);
-//     } else {
-//       loadMap();
-//     }
-//   }, []);
-
-//   return (
-//     <div className="page-container">
-//       <div className="header">
-//         <div className="left-section">
-//           <button className="btn primary">Display On Map</button>
-//           <div className="message-box">
-//             Please Click <strong>Display On Map</strong> To View Your Sales Person On Map
-//           </div>
-//         </div>
-
-//         <div className="right-section">
-//           <button className="btn refresh">Refresh</button>
-//           <button className="btn show-online">Show Online Salespersons</button>
-//         </div>
-//       </div>
-
-//       <div className="map-container" ref={mapRef}></div>
-//     </div>
-//   );
-// }
-
-
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./trackyourSalesperson.css";
 
-export default function TrackYourSalesperson() {
+export default function trackyourSalesperson() {
   const mapRef = useRef(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const initMap = () => {
+    if (!window.google || !mapRef.current) return;
 
-  const loadMap = () => {
-    if (window.google && mapRef.current) {
-      const surat = { lat: 21.1702, lng: 72.8311 };
+    const surat = { lat: 21.1702, lng: 72.8311 };
+    const map = new window.google.maps.Map(mapRef.current, {
+      center: surat,
+      zoom: 12,
+      mapTypeId: "roadmap",
+    });
 
-      const map = new window.google.maps.Map(mapRef.current, {
-        center: surat,
-        zoom: 12,
-        mapTypeId: "roadmap",
-      });
+    new window.google.maps.Marker({
+      position: surat,
+      map,
+      title: "Surat, Gujarat",
+    });
 
-      new window.google.maps.Marker({
-        position: surat,
-        map: map,
-        title: "Surat, Gujarat",
-      });
-    }
+    setTimeout(() => {
+      setMapLoaded(true);
+      setLoading(false);
+    }, 3000);
   };
 
-  useEffect(() => {
-    const existingScript = document.getElementById("googleMaps");
+  const loadGoogleMaps = (showLoading = false) => {
+    if (showLoading) {
+      setLoading(true);
+      setMapLoaded(false);
+    }
+    if (window.google && window.google.maps) {
+      setLoading(true);
+      initMap();
+      return;
+    }
+
+    const existingScript = document.getElementById("googleMapsScript");
     if (!existingScript) {
       const script = document.createElement("script");
       script.src =
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyBq9FfHZWuO0OZMcEmAKceK6-yEVxzxltM"; 
-      script.id = "googleMaps";
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyBq9FfHZWuO0OZMcEmAKceK6-yEVxzxltM";
+      script.id = "googleMapsScript";
       script.async = true;
       script.defer = true;
-      script.onload = loadMap;
+      script.onload = initMap;
       document.body.appendChild(script);
     } else {
-      loadMap();
+      existingScript.addEventListener("load", initMap);
     }
-  }, []);
-
+  };
 
   const handleDisplayOnMap = () => {
-    loadMap();
-  };
+    loadGoogleMaps(true);
+  }
+
+  const handleRefresh = () => {
+    loadGoogleMaps(false);
+  }
+
+  useEffect(() => {
+    loadGoogleMaps(false);
+  }, []);
 
   return (
     <div className="page-container">
@@ -116,18 +75,31 @@ export default function TrackYourSalesperson() {
             Display On Map
           </button>
           <div className="message-box">
-            Please Click Display On Map To View Your Sales Person On Map
+            Please Click <strong> Display On Map </strong> To View Your Sales Person On Map
           </div>
         </div>
 
         <div className="right-section">
-          <button className="btn refresh">Refresh</button>
-          <button className="btn show-online">Show Online Salespersons</button>
+          <button className="btn refresh" onClick={handleRefresh}>
+            Refresh
+          </button>
+          <button className="btn show-online"> Show Online Salespersons</button>
         </div>
       </div>
 
-      <div className="map-container" ref={mapRef}></div>
+      {loading && (
+        <div className="loading">
+          Please Wait While Map is Loading...
+        </div>
+      )}
+
+      <div className="map-container"
+        ref={mapRef}
+        style={{
+          display: mapLoaded ? "block" : "none",
+        }}
+      >
+      </div>
     </div>
   );
 }
-
