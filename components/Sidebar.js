@@ -15,7 +15,7 @@ export default function Sidebar() {
     if (
       pathname.startsWith("/managesalesperson") ||
       pathname.startsWith("/pushnotification") ||
-      pathname.startsWith("trackyourSalesperson")
+      pathname.startsWith("trackyourSalesperson") 
     ) {
       setOpenMenu(true);
     }
