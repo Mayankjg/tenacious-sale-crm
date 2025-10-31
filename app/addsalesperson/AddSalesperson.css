@@ -1,6 +1,6 @@
-.page-container {
+/* .page-container {
   background: #fff;
-  padding: 20px;
+  padding: 10px;
   min-height: 100vh;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   border: 1px solid #e0e0e0;
@@ -37,6 +37,8 @@
 .form-row {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  margin-top: 10px;
   gap: 30px;
 }
 
@@ -44,7 +46,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-width: 220px;
+  min-width: 100px;
 }
 
 .form-group label {
@@ -79,8 +81,8 @@
 }
 
 .image-preview {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   border: 1px solid #ccc;
   display: flex;
   align-items: center;
@@ -89,8 +91,8 @@
 }
 
 .image-preview img {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   object-fit: cover;
 }
 
@@ -138,4 +140,194 @@
 
 .cancel-btn:hover {
   background-color: #f4f4f4;
+} */
+
+.page-container {
+  background: #fff;
+  padding: 20px;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #e0e0e0;
+}
+
+/* Header styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: #000;
+}
+
+.bold-text {
+  font-weight: 600;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+/* ===========================
+   FORM STYLING
+   =========================== */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Each row */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Input field group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Labels */
+.form-group label {
+  font-size: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Input fields & select dropdown */
+.form-group input,
+.form-group select {
+  padding: 10px 70px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+  outline: none;
+  width: 300px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #00a0d2;
+  box-shadow: 0 0 0 2px rgba(0, 160, 210, 0.2);
+}
+
+/* ===========================
+   IMAGE UPLOAD SECTION
+   =========================== */     
+.image-upload {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* File upload input */
+.image-upload input[type="file"] {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px;
+  font-size: 14px;
+  width: 200px;
+}
+
+/* Image preview box */
+.image-preview {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.no-image {
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* ===========================
+   BUTTONS
+   =========================== */
+.button-section {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  background: #f4f6f8;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+}
+
+.save-btn {
+  background-color: #00a0d2;
+  color: white;
+  border: none;
+  padding: 10px 40px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #008dbf;
+}
+
+.cancel-btn {
+  background-color: white;
+  color: #444;
+  border: 1px solid #ddd;
+  padding: 10px 35px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cancel-btn:hover {
+  background-color: #f4f4f4;
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+  }
+
+  .image-upload {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .image-preview {
+    width: 100px;
+    height: 100px;
+  }
 }
