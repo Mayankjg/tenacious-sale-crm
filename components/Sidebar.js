@@ -10,12 +10,12 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState(false);
 
-  // Automatically open Manage Salespersons menu if on any of its subpages
   useEffect(() => {
     if (
       pathname.startsWith("/managesalesperson") ||
       pathname.startsWith("/pushnotification") ||
-      pathname.startsWith("trackyourSalesperson") 
+      pathname.startsWith("trackyourSalesperson") ||
+      pathname.startsWith("accountexpiryreport")
     ) {
       setOpenMenu(true);
     }
@@ -62,7 +62,13 @@ export default function Sidebar() {
             >
               💠 Track Your Salesperson
             </li>
-            <li>💠 Account Expiry Report</li>
+
+            <li
+              className={pathname === "/accountexpiryreport" ? "active" : ""}
+              onClick={() => router.push("/accountexpiryreport")}
+            >
+              💠 Account Expiry Report
+            </li>
           </ul>
         )}
 
