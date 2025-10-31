@@ -34,7 +34,6 @@ export default function AddSalesperson() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ Validation check
     if (
       !formData.username.trim() ||
       !formData.firstname.trim() ||
@@ -50,7 +49,6 @@ export default function AddSalesperson() {
 
     setError("");
 
-    // ✅ Save record
     const res = await fetch("/api/salespersons", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -78,7 +76,6 @@ export default function AddSalesperson() {
 
       <hr className="divider" />
 
-      {/* ✅ Show error message */}
       {error && <p className="error-text">{error}</p>}
 
       <form className="form-container" onSubmit={handleSubmit}>
