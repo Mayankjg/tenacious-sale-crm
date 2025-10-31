@@ -39,14 +39,14 @@
 }
 
 .expiry-table thead tr th {
-  border: none !important;
-  padding: 12px 15px;
-  background-color: #edf0f3;
+  padding: 15px 15px;
+  background-color: #dadcdf;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 15px;
   color: #333;
   text-align: left; 
+  border: 1px solid #dcdcdc;
 }
 
 .expiry-table thead {
