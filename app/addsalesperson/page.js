@@ -105,7 +105,7 @@ export default function AddSalesperson() {
             </div>
           </div>
         </div>
-
+        
         <div className="form-row">
           <div className="form-group">
             <label>First Name *</label>
@@ -117,7 +117,6 @@ export default function AddSalesperson() {
               onChange={handleChange}
             />
           </div>
-
           <div className="form-group">
             <label>Last Name *</label>
             <input
