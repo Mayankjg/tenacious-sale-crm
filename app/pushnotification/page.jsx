@@ -165,24 +165,25 @@ export default function PushNotification() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f7f9] flex justify-center items-start py-10">
+    <div className="min-h-screen bg-[#e9edf0] flex justify-center items-start py-10">
       <div className="w-full max-w-6xl bg-white border border-[#dfe3e8] rounded-sm">
         {/* Header */}
-        <div className="border-b border-[#dfe3e8] px-6 py-4">
-          <h3 className="text-[18px] font-normal text-gray-800">
+        <div className="border-b border-[#000000] px-8 py-4">
+          <h3 className="text-[22px] font-normal text-gray-800">
             Push <span className="font-semibold">Notification</span>
           </h3>
         </div>
 
         {/* Body */}
-        <div className="px-8 py-8">
+        <div className="px-10 py-8">
           <div>
-            <label className="block text-gray-700 text-[15px] mb-3 font-normal">
+            {/* Sales Person */}
+            <label className="block text-gray-700 text-[18px] mb-4 font-medium">
               Sales Person
             </label>
 
             {/* Device Selection */}
-            <div className="flex items-center gap-10 mb-6">
+            <div className="flex items-center gap-24 mb-6">
               <label className="flex items-center gap-2 text-gray-700 text-[15px]">
                 <input
                   type="radio"
@@ -208,12 +209,12 @@ export default function PushNotification() {
               </label>
             </div>
 
-            {/* Checkboxes */}
-            <div className="flex flex-col gap-2 mb-8">
+            {/* User Checkboxes */}
+            <div className="flex flex-col gap-3 mb-8">
               {users.map((user) => (
                 <label
                   key={user}
-                  className="flex items-center gap-2 text-gray-700 text-[15px]"
+                  className="flex items-center gap-3 text-gray-700 text-[15px]"
                 >
                   <input
                     type="checkbox"
@@ -222,9 +223,8 @@ export default function PushNotification() {
                     className="w-[18px] h-[18px] accent-[#00a7cf]"
                   />
                   <span
-                    className={`${
-                      user === "Name" ? "font-semibold" : "font-normal"
-                    }`}
+                    className={`${user === "Name" ? "font-semibold" : "font-normal"
+                      }`}
                   >
                     {user}
                   </span>
@@ -232,9 +232,9 @@ export default function PushNotification() {
               ))}
             </div>
 
-            {/* Message */}
-            <div className="mb-6">
-              <label className="block text-gray-700 text-[15px] mb-3 font-normal">
+            {/* Message Box */}
+            <div>
+              <label className="block text-gray-700 text-[16px] mb-3 font-medium">
                 Message
               </label>
               <textarea
@@ -242,23 +242,23 @@ export default function PushNotification() {
                 onChange={(e) => setMessage(e.target.value)}
                 rows="5"
                 placeholder="Your Message"
-                className="w-full border border-[#dfe3e8] rounded-sm text-[15px] text-gray-700 p-3 outline-none focus:ring-2 focus:ring-[#00a7cf]"
+                className="w-[500px] border border-[#dfe3e8] rounded-sm text-[15px] text-gray-500 p-3 outline-none focus:ring-2 focus:ring-[#00a7cf]"
               ></textarea>
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="bg-[#f3f5f7] border-t border-[#dfe3e8] px-8 py-4 flex gap-4">
+        <div className="bg-[#f3f5f7] border-t border-[#dfe3e8] gap-40">
           <button
             onClick={handleSend}
-            className="bg-[#00a7cf] hover:bg-[#0097ba] text-white text-[15px] font-medium px-6 py-2 rounded-sm"
+            className="bg-[#00a7cf] hover:bg-[#0097ba] text-white text-[17px] font-medium px-8 py-2 rounded-[3px]"
           >
             Send
           </button>
           <button
             onClick={() => setMessage("")}
-            className="bg-white border border-[#dfe3e8] hover:bg-gray-50 text-gray-700 text-[15px] font-medium px-6 py-2 rounded-sm"
+            className="bg-white border border-[#000000] hover:bg-gray-50 text-gray-700 text-[17px] font-medium px-8 py-2 rounded-[3px]"
           >
             Cancel
           </button>
@@ -267,4 +267,5 @@ export default function PushNotification() {
     </div>
   );
 }
+
 
