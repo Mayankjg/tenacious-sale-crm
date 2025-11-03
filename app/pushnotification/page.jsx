@@ -136,40 +136,135 @@
 //   );
 // }
 
+
+
+
+
 "use client";
 import { useState } from "react";
 
 export default function PushNotification() {
+  const [device, setDevice] = useState("android");
+  const [selectedUsers, setSelectedUsers] = useState([]);
   const [message, setMessage] = useState("");
+
+  const users = ["Name", "suku chauhan"];
+
+  const handleUserSelect = (user) => {
+    if (selectedUsers.includes(user)) {
+      setSelectedUsers(selectedUsers.filter((u) => u !== user));
+    } else {
+      setSelectedUsers([...selectedUsers, user]);
+    }
+  };
 
   const handleSend = () => {
     if (!message.trim()) return alert("Please enter a message");
-    alert(`Push notification sent: ${message}`);
+    alert(`Notification sent to ${selectedUsers.join(", ")} on ${device} device`);
     setMessage("");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-      <div className="bg-white border border-gray-200 shadow-lg rounded-2xl p-8 w-full max-w-md">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-          Push Notification
-        </h2>
+    <div className="min-h-screen bg-[#f5f7f9] flex justify-center items-start py-10">
+      <div className="w-full max-w-6xl bg-white border border-[#dfe3e8] rounded-sm">
+        {/* Header */}
+        <div className="border-b border-[#dfe3e8] px-6 py-4">
+          <h3 className="text-[18px] font-normal text-gray-800">
+            Push <span className="font-semibold">Notification</span>
+          </h3>
+        </div>
 
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          rows="4"
-          placeholder="Enter your message..."
-          className="w-full border border-gray-300 rounded-lg p-3 resize-none focus:ring-2 focus:ring-blue-400 outline-none"
-        ></textarea>
+        {/* Body */}
+        <div className="px-8 py-8">
+          <div>
+            <label className="block text-gray-700 text-[15px] mb-3 font-normal">
+              Sales Person
+            </label>
 
-        <button
-          onClick={handleSend}
-          className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-        >
-          Send Notification
-        </button>
+            {/* Device Selection */}
+            <div className="flex items-center gap-10 mb-6">
+              <label className="flex items-center gap-2 text-gray-700 text-[15px]">
+                <input
+                  type="radio"
+                  name="device"
+                  value="android"
+                  checked={device === "android"}
+                  onChange={() => setDevice("android")}
+                  className="w-[18px] h-[18px] accent-[#00a7cf]"
+                />
+                With Android Device
+              </label>
+
+              <label className="flex items-center gap-2 text-gray-700 text-[15px]">
+                <input
+                  type="radio"
+                  name="device"
+                  value="iphone"
+                  checked={device === "iphone"}
+                  onChange={() => setDevice("iphone")}
+                  className="w-[18px] h-[18px] accent-[#00a7cf]"
+                />
+                With iPhone Device
+              </label>
+            </div>
+
+            {/* Checkboxes */}
+            <div className="flex flex-col gap-2 mb-8">
+              {users.map((user) => (
+                <label
+                  key={user}
+                  className="flex items-center gap-2 text-gray-700 text-[15px]"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedUsers.includes(user)}
+                    onChange={() => handleUserSelect(user)}
+                    className="w-[18px] h-[18px] accent-[#00a7cf]"
+                  />
+                  <span
+                    className={`${
+                      user === "Name" ? "font-semibold" : "font-normal"
+                    }`}
+                  >
+                    {user}
+                  </span>
+                </label>
+              ))}
+            </div>
+
+            {/* Message */}
+            <div className="mb-6">
+              <label className="block text-gray-700 text-[15px] mb-3 font-normal">
+                Message
+              </label>
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                rows="5"
+                placeholder="Your Message"
+                className="w-full border border-[#dfe3e8] rounded-sm text-[15px] text-gray-700 p-3 outline-none focus:ring-2 focus:ring-[#00a7cf]"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="bg-[#f3f5f7] border-t border-[#dfe3e8] px-8 py-4 flex gap-4">
+          <button
+            onClick={handleSend}
+            className="bg-[#00a7cf] hover:bg-[#0097ba] text-white text-[15px] font-medium px-6 py-2 rounded-sm"
+          >
+            Send
+          </button>
+          <button
+            onClick={() => setMessage("")}
+            className="bg-white border border-[#dfe3e8] hover:bg-gray-50 text-gray-700 text-[15px] font-medium px-6 py-2 rounded-sm"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );
 }
+

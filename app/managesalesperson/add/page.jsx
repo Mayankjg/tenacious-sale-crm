@@ -1,138 +1,11 @@
-// "use client";
-// import React, { useState } from "react";
-// import { useRouter } from "next/navigation";
-// import "./addsalesperson.css";
-
-// export default function AddSalesperson() {
-//   const [profileImage, setProfileImage] = useState(null);
-//   const router = useRouter();
-
-//   const handleImageChange = (e) => {
-//     if (e.target.files && e.target.files[0]) {
-//       setProfileImage(URL.createObjectURL(e.target.files[0]));
-//     }
-//   };
-
-//   return (
-//     <div className="addsalesperson-container">
-//       <div className="form-card">
-//         {/* Header */}
-//         <div className="form-header">
-//           <h2>
-//             Add <span>Salesperson</span>
-//           </h2>
-//         </div>
-
-//         {/* Form Section */}
-//         <div className="form-body">
-//           <form>
-//             <div className="form-row">
-//               <div className="form-group">
-//                 <label>User Name</label>
-//                 <input type="text" placeholder="User Name" />
-//               </div>
-
-//               <div className="form-group">
-//                 <label>Profile Image</label>
-//                 <div className="profile-upload">
-//                   <input type="file" onChange={handleImageChange} />
-//                   <div className="image-preview">
-//                     {profileImage ? (
-//                       <img src={profileImage} alt="Preview" />
-//                     ) : (
-//                       <div className="no-image">No file chosen</div>
-//                     )}
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-
-//             <div className="form-row">
-//               <div className="form-group">
-//                 <label>First Name</label>
-//                 <input type="text" placeholder="First Name" />
-//               </div>
-//               <div className="form-group">
-//                 <label>Last Name</label>
-//                 <input type="text" placeholder="Last Name" />
-//               </div>
-//             </div>
-
-//             <div className="form-row">
-//               <div className="form-group">
-//                 <label>Email</label>
-//                 <input type="email" placeholder="Email" />
-//               </div>
-//               <div className="form-group">
-//                 <label>Designation</label>
-//                 <input type="text" placeholder="Designation" />
-//               </div>
-//             </div>
-
-//             <div className="form-row">
-//               <div className="form-group">
-//                 <label>Country</label>
-//                 <select>
-//                   <option>Select Country</option>
-//                   <option>India</option>
-//                   <option>USA</option>
-//                   <option>UK</option>
-//                 </select>
-//               </div>
-//               <div className="form-group">
-//                 <label>Country Code</label>
-//                 <input type="text" placeholder="Code" disabled />
-//               </div>
-//               <div className="form-group">
-//                 <label>Contact No</label>
-//                 <input type="text" placeholder="Contact No" />
-//               </div>
-//             </div>
-//           </form>
-//         </div>
-
-//         {/* Footer Buttons */}
-//         <div className="form-footer">
-//           <button type="submit" className="btn-save">
-//             Save
-//           </button>
-//           <button
-//             type="button"
-//             className="btn-cancel"
-//             onClick={() => router.push("/salespersons")}
-//           >
-//             Cancel
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import "./addsalesperson.css";
 
 export default function AddSalesperson() {
   const [profileImage, setProfileImage] = useState(null);
-  const [formData, setFormData] = useState({
-    username: "",
-    firstname: "",
-    lastname: "",
-    email: "",
-    designation: "",
-    country: "",
-    code: "",
-    contact: "",
-  });
   const router = useRouter();
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -140,196 +13,252 @@ export default function AddSalesperson() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Saved Data:", formData);
-    alert("Salesperson added successfully!");
-    router.push("/salespersons");
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-start p-10 font-sans">
-      <div className="w-full max-w-7xl bg-white rounded-lg shadow-lg border border-gray-200">
+    <div className="addsalesperson-container">
+      <div className="form-card">
         {/* Header */}
-        <div className="border-b border-gray-200 p-6 bg-gray-50 rounded-t-lg">
-          <h2 className="text-xl font-semibold text-gray-800">
-            Add <span className="text-blue-600">Salesperson</span>
+        <div className="form-header">
+          <h2>
+            Add <span>Salesperson</span>
           </h2>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="p-8 space-y-8">
-          {/* User Name + Profile */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[30]">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                User Name
-              </label>
-              <input
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                placeholder="User Name"
-                className="w-[500px] border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+        {/* Form Section */}
+        <div className="form-body">
+          <form>
+            <div className="form-row">
+              <div className="form-group">
+                <label>User Name</label>
+                <input type="text" placeholder="User Name" />
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Profile Image
-              </label>
-              <div className="flex items-center gap-4">
-                <input
-                  type="file"
-                  onChange={handleImageChange}
-                  className="text-sm text-gray-700"
-                />
-                <div className="w-28 h-28 border border-gray-300 rounded-md flex items-center justify-center overflow-hidden bg-gray-50">
-                  {profileImage ? (
-                    <img
-                      src={profileImage}
-                      alt="Preview"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <span className="text-xs text-gray-400">No image</span>
-                  )}
+              <div className="form-group">
+                <label>Profile Image</label>
+                <div className="profile-upload">
+                  <input type="file" onChange={handleImageChange} />
+                  <div className="image-preview">
+                    {profileImage ? (
+                      <img src={profileImage} alt="Preview" />
+                    ) : (
+                      <div className="no-image">No file chosen</div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* First & Last Name */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[30]">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                First Name
-              </label>
-              <input
-                type="text"
-                name="firstname"
-                value={formData.firstname}
-                onChange={handleChange}
-                placeholder="First Name"
-                className="w-[500px] border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500"
-              />
+            <div className="form-row">
+              <div className="form-group">
+                <label>First Name</label>
+                <input type="text" placeholder="First Name" />
+              </div>
+              <div className="form-group">
+                <label>Last Name</label>
+                <input type="text" placeholder="Last Name" />
+              </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2 gap-[30]">
-                Last Name
-              </label>
-              <input
-                type="text"
-                name="lastname"
-                value={formData.lastname}
-                onChange={handleChange}
-                placeholder="Last Name"
-                className="w-[500px] border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-
-          {/* Email & Designation */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email"
-                className="w-[500px] border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500"
-              />
+            <div className="form-row">
+              <div className="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Email" />
+              </div>
+              <div className="form-group">
+                <label>Designation</label>
+                <input type="text" placeholder="Designation" />
+              </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Designation
-              </label>
-              <input
-                type="text"
-                name="designation"
-                value={formData.designation}
-                onChange={handleChange}
-                placeholder="Designation"
-                className="w-[500px] border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500"
-              />
+            <div className="form-row">
+              <div className="form-group">
+                <label>Country</label>
+                <select>
+                  <option>Select Country</option>
+                  <option>India</option>
+                  <option>USA</option>
+                  <option>UK</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Country Code</label>
+                <input type="text" placeholder="Code" disabled />
+              </div>
+              <div className="form-group">
+                <label>Contact No</label>
+                <input type="text" placeholder="Contact No" />
+              </div>
             </div>
-          </div>
+          </form>
+        </div>
 
-          {/* Country, Code, Contact */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Country
-              </label>
-              <select
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                className="w-[505px] border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Select Country</option>
-                <option value="India">India</option>
-                <option value="USA">USA</option>
-                <option value="UK">UK</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Country Code
-              </label>
-              <input
-                type="text"
-                name="code"
-                value={formData.code}
-                placeholder="Code"
-                disabled
-                className="w-[500px] border border-gray-200 rounded-md px-4 py-2 bg-gray-100 text-gray-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Contact No
-              </label>
-              <input
-                type="text"
-                name="contact"
-                value={formData.contact}
-                onChange={handleChange}
-                placeholder="Contact No"
-                className="w-[500px] border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-
-          {/* Buttons */}
-          <div className="flex justify-end gap-4 pt-6 border-t border-gray-200">
-            <button
-              type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-2 rounded-md shadow-sm"
-            >
-              Save    
-              
-            </button>
-            <button
-              type="button"
-              onClick={() => router.push("/salespersons")}
-              className="bg-white border border-gray-300 text-gray-700 font-medium px-8 py-2 rounded-md hover:bg-gray-100"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
+        {/* Footer Buttons */}
+        <div className="form-footer">
+          <button type="submit" className="btn-save">
+            Save
+          </button>
+          <button
+            type="button"
+            className="btn-cancel"
+            onClick={() => router.push("/salespersons")}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
+
+// "use client";
+// import React, { useState } from "react";
+
+// export default function AddSalesperson() {
+//   const [profileImage, setProfileImage] = useState(null);
+
+//   return (
+//     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-8">
+//       <div className="bg-white w-full max-w-4xl rounded-md shadow border"> {/* Adjusted max-w-4xl for a good default */}
+//         <div className="p-8 border-b"> {/* Reduced padding from p-10 to p-8 to match image */}
+//           {/* CHANGE: Removed bold span to match image */}
+//           <h2 className="text-xl font-semibold">
+//             Add Salesperson
+//           </h2>
+//         </div>
+
+//         {/* CHANGE: Adjusted grid gap for a more accurate layout */}
+//         <form className="p-8 grid grid-cols-2 gap-x-10 gap-y-6">
+//           {/* User Name */}
+//           <div>
+//             <label className="block text-gray-700 mb-1">User Name</label>
+//             <input
+//               type="text"
+//               placeholder="User Name"
+//               className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-gray-300"
+//             />
+//           </div>
+
+//           {/* Profile Image */}
+//           <div>
+//             <label className="block text-gray-700 mb-1">Profile Image</label>
+//             <div className="flex items-center space-x-4">
+//               {/* CHANGE: Removed custom classes to use the browser default, which matches the image */}
+//               <input
+//                 type="file"
+//                 onChange={(e) =>
+//                   setProfileImage(e.target.files ? e.target.files[0] : null)
+//                 }
+//               />
+//               {/* CHANGE: Adjusted w-32 h-40 (128x160px) to be rectangular, matching the image */}
+//               <div className="w-32 h-40 border flex items-center justify-center bg-gray-50 flex-shrink-0">
+//                 {profileImage ? (
+//                   <img
+//                     src={URL.createObjectURL(profileImage)}
+//                     alt="Preview"
+//                     className="w-full h-full object-cover"
+//                   />
+//                 ) : (
+//                   // Using a simple placeholder, but your placeholder URL is also fine
+//                   <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+//                 )}
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* First Name */}
+//           <div>
+//             <label className="block text-gray-700 mb-1">First Name</label>
+//             <input
+//               type="text"
+//               placeholder="First Name"
+//               className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-gray-300"
+//             />
+//           </div>
+
+//           {/* Last Name */}
+//           <div>
+//             <label className="block text-gray-700 mb-1">Last Name</label>
+//             <input
+//               type="text"
+//               placeholder="Last Name"
+//               className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-gray-300"
+//             />
+//           </div>
+
+//           {/* Email */}
+//           <div>
+//             <label className="block text-gray-700 mb-1">Email</label>
+//             <input
+//               type="email"
+//               placeholder="Email"
+//               className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-gray-300"
+//             />
+//           </div>
+
+//           {/* Designation */}
+//           <div>
+//             <label className="block text-gray-700 mb-1">Designation</label>
+//             <input
+//               type="text"
+//               placeholder="Designation"
+//               className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-gray-300"
+//             />
+//           </div>
+
+//           {/* Country */}
+//           <div>
+//             <label className="block text-gray-700 mb-1">Country</label>
+//             {/* CHANGE: Added bg-white to ensure it's not gray */}
+//             <select className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-gray-300 bg-white">
+//               <option value="">Select Country</option>
+//               <option value="India">India</option>
+//               <option value="USA">USA</option>
+//               <option value="UK">UK</option>
+//             </select>
+//           </div>
+
+//           {/* --- CHANGE: WRAPPED COUNTRY CODE AND CONTACT IN A DIV TO FIX LAYOUT --- */}
+//           <div>
+//             <div className="flex space-x-4">
+//               {/* Country Code */}
+//               <div className="w-1/3"> {/* Occupies 1/3 of the space */}
+//                 <label className="block text-gray-700 mb-1">Country Code</label>
+//                 <input
+//                   type="text"
+//                   placeholder="Code"
+//                   className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-gray-300"
+//                 />
+//               </div>
+//               {/* Contact No */}
+//               <div className="w-2/3"> {/* Occupies 2/3 of the space */}
+//                 <label className="block text-gray-700 mb-1">Contact No</label>
+//                 <input
+//                   type="text"
+//                   placeholder="Contact No"
+//                   className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-gray-300"
+//                 />
+//               </div>
+//             </div>
+//           </div>
+//           {/* --- END OF CHANGE --- */}
+
+//           {/* Buttons */}
+//           <div className="col-span-2 flex justify-end space-x-4 mt-6 border-t pt-6">
+//             <button
+//               type="button"
+//               className="px-6 py-2 bg-[#00afd7] text-white rounded hover:bg-[#009fc7] transition"
+//             >
+//               Save
+//             </button>
+//             <button
+//               type="button"
+//               className="px-6 py-2 bg-white border rounded text-gray-700 hover:bg-gray-100 transition"
+//             >
+//               Cancel
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// }
