@@ -105,7 +105,7 @@ export default function AddSalesperson() {
             </div>
           </div>
         </div>
-        
+
         <div className="form-row">
           <div className="form-group">
             <label>First Name *</label>
@@ -185,9 +185,9 @@ export default function AddSalesperson() {
             Save
           </button>
           <button
-            type="button"
-            className="cancel-btn"
-            onClick={handleCancel}
+          type="button"
+          className="cancel-btn"
+          onChange={handleCancel}
           >
             Cancel
           </button>
