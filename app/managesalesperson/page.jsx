@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { Mail, Phone, Briefcase, Trash2, Key } from "lucide-react";
 
 export default function SalespersonList() {
   const router = useRouter();
@@ -16,48 +17,124 @@ export default function SalespersonList() {
   }, []);
 
   return (
-    <div className="p-6 bg-white min-h-screen font-sans">
+    <div className="p-6 bg-[#f4f6f9] rounded-[5px] min-h-screen font-sans">
       {/* Header */}
+      {/* Header Section */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold text-gray-900">Salesperson List</h2>
+        <h2 className="text-2xl font-semibold text-gray-900">
+          Salesperson List
+        </h2>
+
         <button
           onClick={() => router.push("/managesalesperson/add")}
-          className="bg-[#252B4F] text-[#ffffff] hover:bg-[#133b74] text-white text-[18px] font-medium px-5 py-2 rounded-[6px]"
+          className="bg-[#252B4F] text-[white] hover:bg-[#133b74] text-[20px] mr-[10px] font-medium px-5 py-2 rounded-[5px]"
         >
           Add Sales Person
         </button>
       </div>
 
-      <hr className="border-gray-200 mb-6" />
+      <div className="flex items-center gap-2 mb-6">
+        <input
+          type="text"
+          placeholder="Search by name or email"
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-[300px] ml-[1000px] mr-[10px] h-[35px] border border-gray-300 rounded-[5px] mb-[40px] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00a7cf]"
+        />
+        <button className="bg-[#00a7cf] w-[70px] h-[35px] text-[white] mr-[10px] mb-[40px] px-5 py-2 text-sm font-medium rounded-[5px] hover:bg-[#0094b8]">
+          Search
+        </button>
+      </div>
 
-      {/* Table */}
+      {/* Cards Section */}
       {salespersons.length > 0 ? (
-        <table className="w-full border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100 text-left">
-              <th className="p-3">#</th>
-              <th className="p-3">Username</th>
-              <th className="p-3">Name</th>
-              <th className="p-3">Email</th>
-              <th className="p-3">Designation</th>
-              <th className="p-3">Country</th>
-              <th className="p-3">Contact</th>
-            </tr>
-          </thead>
-          <tbody>
-            {salespersons.map((sp, index) => (
-              <tr key={sp.id} className="border-t">
-                <td className="p-3">{index + 1}</td>
-                <td className="p-3">{sp.username}</td>
-                <td className="p-3">{sp.firstname} {sp.lastname}</td>
-                <td className="p-3">{sp.email}</td>
-                <td className="p-3">{sp.designation}</td>
-                <td className="p-3">{sp.country}</td>
-                <td className="p-3">{sp.code} {sp.contact}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="w-[1300px] grid grid-cols-1 gap-[20px]">
+          {salespersons.map((sp, index) => (
+            <div
+              key={index}
+              className="flex items-center mb-[10px] justify-between bg-white border border-gray-200 rounded-[10px] p-4 shadow-sm hover:shadow-md transition-all duration-200"
+            >
+              {/* Left Section - Info */}
+              <div className="flex items-start gap-4">
+                <img
+                  src={sp.profileImage || "/default-avatar.png"}
+                  alt="Profile"
+                  className="w-[40px] h-[40px] rounded-[20px] border border-gray-300 object-cover"
+                />
+                <div>
+                  <h3 className="text-[16px] ml-[10px] font-semibold text-gray-800 leading-tight">
+                    {sp.username}
+                  </h3>
+                  <p className="text-gray-600 ml-[10px] text-sm capitalize leading-tight">
+                    {sp.firstname} {sp.lastname}
+                  </p>
+
+                  <div className="flex flex-col mb-[10px] text-sm text-gray-700 mt-1">
+                    <div className="flex ml-[10px] mb-[10px] items-center gap-1 mr-4">
+                      <Briefcase className="w-4 h-4 text-gray-500" />
+                      <span>
+                        Designation:{" "}
+                        <span className="font-semibold">{sp.designation}</span>
+                      </span>
+                    </div>
+                    <div className="flex mb-[20px] ml-[10px] items-center gap-1">
+                      <Phone className="w-[20px] h-[20px] text-gray-500" />
+                      <span>
+                        Contact Number:{" "}
+                        <span className="font-semibold">
+                          {sp.code} {sp.contact}
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <p className="flex items-center ml-[10px] gap-1 text-sm text-gray-700 mt-[1px]">
+                    <Mail className="w-4 h-4 text-gray-500" />
+                    <a
+                      href={`mailto:${sp.email}`}
+                      className="text-[#007bff] hover:underline break-all"
+                    >
+                      {sp.email}
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-end gap-2 mr-[20px]">
+                {/* Delete Icon */}
+                <div className="relative group flex flex-col items-center">
+                  <Trash2
+                    className="w-[20px] h-5 text-gray-600 mb-[15px] cursor-pointer hover:text-red-600 transition"
+                    title="Delete"
+                  />
+                  <span className="absolute -top-[15px] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
+                    Delete
+                  </span>
+                </div>
+
+                {/* Change Password Icon */}
+                <div className="relative group flex flex-col items-center mt-2">
+                  <Key  
+                    className="w-[20px] h-5 text-gray-600 ml-[700px] cursor-pointer hover:text-[#133b74] transition"
+                    title="Change Password"
+                  />
+                  <span className="absolute -bottom-[30px] ml-[700px] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
+                    Change Password
+                  </span>
+                </div>
+              </div>
+
+              {/* Right Section - Buttons */}
+              <div className="flex flex-col items-end gap-2">
+                <button className="bg-[#dc3545] mb-[10px] mr-[20px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#c82333] text-sm font-medium px-4 py-2 rounded-md">
+                  View Leads
+                </button>
+                <button className="bg-[#133b74] mb-[10px] mr-[20px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-sm font-medium px-4 py-2 rounded-md flex items-center gap-1">
+                  <Key className="w-4 h-4" /> Change Email ID
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       ) : (
         <div className="text-center text-gray-500 text-[18px] font-medium mt-10">
           No Salespersons Found

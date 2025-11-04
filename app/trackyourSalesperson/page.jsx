@@ -74,7 +74,7 @@ export default function TrackYourSalesperson() {
             Display On Map
           </button>
 
-          <div className="border border-[#f8d0d0] bg-[#fff5f5] text-[#b91c1c] text-[18px] px-6 py-2 rounded-[4px] shadow-sm font-medium whitespace-nowrap">
+          <div className="border border-[#f8d0d0] bg-[#fff5f5] text-[#b91c1c] text-[18px] px-6 py-2 rounded-[4px] ml-[10px] shadow-sm font-medium whitespace-nowrap">
             Please Click <strong>Display On Map</strong> To View Your Sales Person On Map
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function TrackYourSalesperson() {
 
       {/* Loading Message */}
       {loading && (
-        <div className="text-center text-gray-700 bg-yellow-100 border border-yellow-300 rounded-md py-3 px-6 text-lg font-medium shadow-sm mt-4">
+        <div className="text-center text-gray-700 bg-yellow-100 border border-yellow-300 rounded-md py-3 px-6 text-lg font-medium shadow-sm mt-[4px] ml-[10px]">
           Please Wait While Map is Loading...
         </div>
       )}

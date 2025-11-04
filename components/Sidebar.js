@@ -1,79 +1,79 @@
-"use client";
+// "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import { Home, Users, ChevronDown, ChevronLeft } from "lucide-react";
-import "./Sidebar.css";
+// import { useState, useEffect } from "react";
+// import { useRouter, usePathname } from "next/navigation";
+// import { Home, Users, ChevronDown, ChevronLeft } from "lucide-react";
+// import "./Sidebar.css";
 
-export default function Sidebar() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [openMenu, setOpenMenu] = useState(false);
+// export default function Sidebar() {
+//   const router = useRouter();
+//   const pathname = usePathname();
+//   const [openMenu, setOpenMenu] = useState(false);
 
-  useEffect(() => {
-    if (
-      pathname.startsWith("/managesalesperson") ||
-      pathname.startsWith("/pushnotification") ||
-      pathname.startsWith("trackyourSalesperson") ||
-      pathname.startsWith("accountexpiryreport")
-    ) {
-      setOpenMenu(true);
-    }
-  }, [pathname]);
+//   useEffect(() => {
+//     if (
+//       pathname.startsWith("/managesalesperson") ||
+//       pathname.startsWith("/pushnotification") ||
+//       pathname.startsWith("trackyourSalesperson") ||
+//       pathname.startsWith("accountexpiryreport")
+//     ) {
+//       setOpenMenu(true);
+//     }
+//   }, [pathname]);
 
-  return (
-    <nav className="sidebar-nav">
-      <ul>
-        <li
-          className={`sidebar-item ${pathname === "/" ? "active" : ""}`}
-          onClick={() => router.push("/")}
-        >
-          <Home size={18} className="mr-3" /> Dashboard
-        </li>
+//   return (
+//     <nav className="sidebar-nav">
+//       <ul>
+//         <li
+//           className={`sidebar-item ${pathname === "/" ? "active" : ""}`}
+//           onClick={() => router.push("/")}
+//         >
+//           <Home size={18} className="mr-3" /> Dashboard
+//         </li>
 
-        <div
-          className="sidebar-collapsible"
-          onClick={() => setOpenMenu(!openMenu)}
-        >
-          <span className="flex items-center">
-            <Users size={18} className="mr-3" /> Manage Salespersons
-          </span>
-          {openMenu ? <ChevronDown size={20} /> : <ChevronLeft size={20} />}
-        </div>
+//         <div
+//           className="sidebar-collapsible"
+//           onClick={() => setOpenMenu(!openMenu)}
+//         >
+//           <span className="flex items-center">
+//             <Users size={18} className="mr-3" /> Manage Salespersons
+//           </span>
+//           {openMenu ? <ChevronDown size={20} /> : <ChevronLeft size={20} />}
+//         </div>
 
-        {openMenu && (
-          <ul className="sidebar-submenu">
-            <li
-              className={pathname === "/managesalesperson" ? "active" : ""}
-              onClick={() => router.push("/managesalesperson")}
-            >
-              💠 Salesperson List
-            </li>
-            <li>💠 Request For Inactive</li>
-            <li
-              className={pathname === "/pushnotification" ? "active" : ""}
-              onClick={() => router.push("/pushnotification")}
-            >
-              💠 Push Notification
-            </li>
-            <li
-              className={pathname === "/trackyourSalesperson" ? "active" : ""}
-              onClick={() => router.push("/trackyourSalesperson")}
-            >
-              💠 Track Your Salesperson
-            </li>
+//         {openMenu && (
+//           <ul className="sidebar-submenu">
+//             <li
+//               className={pathname === "/managesalesperson" ? "active" : ""}
+//               onClick={() => router.push("/managesalesperson")}
+//             >
+//               💠 Salesperson List
+//             </li>
+//             <li>💠 Request For Inactive</li>
+//             <li
+//               className={pathname === "/pushnotification" ? "active" : ""}
+//               onClick={() => router.push("/pushnotification")}
+//             >
+//               💠 Push Notification
+//             </li>
+//             <li
+//               className={pathname === "/trackyourSalesperson" ? "active" : ""}
+//               onClick={() => router.push("/trackyourSalesperson")}
+//             >
+//               💠 Track Your Salesperson
+//             </li>
 
-            <li
-              className={pathname === "/accountexpiryreport" ? "active" : ""}
-              onClick={() => router.push("/accountexpiryreport")}
-            >
-              💠 Account Expiry Report
-            </li>
-          </ul>
-        )}
+//             <li
+//               className={pathname === "/accountexpiryreport" ? "active" : ""}
+//               onClick={() => router.push("/accountexpiryreport")}
+//             >
+//               💠 Account Expiry Report
+//             </li>
+//           </ul>
+//         )}
 
-      </ul>
-    </nav>
-  );
-}
+//       </ul>
+//     </nav>
+//   );
+// }
 
