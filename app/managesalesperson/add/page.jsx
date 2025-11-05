@@ -31,47 +31,47 @@ export default function AddSalesperson() {
   };
 
   const handleImageChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProfileImage(reader.result); 
-    };
-    reader.readAsDataURL(file);
-  }
-};
-
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  const payload = {
-    ...formData,
-    profileImage, 
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
-  const res = await fetch("/api/salespersons", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
 
-  if (res.ok) {
-    alert("Salesperson saved successfully!");
-    router.push("/managesalesperson");
-  } else {
-    alert("Failed to save data");
-  }
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      ...formData,
+      profileImage,
+    };
+
+    const res = await fetch("/api/salespersons", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      alert("Salesperson saved successfully!");
+      router.push("/managesalesperson");
+    } else {
+      alert("Failed to save data");
+    }
+  };
 
   return (
-   <div className="bg-[#f4f6f9] h-[600px] w-[1000px] m-auto">
-  <div className="w-[1000px] h-[600px] max-w-10xl bg-white border border-[#e0e0e0] rounded-md shadow-md">
-    <div className="border-b border-[#000000] p-4 sm:p-5">
-      <h2 className="text-[20px] font-normal text-[#333] mt-[10px] mb-[10px] ml-[10px]">
-        Add <span className="font-semibold">Salesperson</span>
-      </h2>
-    </div>
+    <div className="bg-[#f4f6f9] h-[600px] w-[1000px] m-auto">
+      <div className="w-[1000px] h-[600px] max-w-10xl bg-white border border-[#e0e0e0] rounded-md shadow-md">
+        <div className="border-b border-[#000000] p-4 sm:p-5">
+          <h2 className="text-[20px] font-normal text-[#333] mt-[10px] mb-[10px] ml-[10px]">
+            Add <span className="font-semibold">Salesperson</span>
+          </h2>
+        </div>
 
         <form onSubmit={handleSubmit} className="p-4 sm:p-6 lg:p-8">
           <div className="grid grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-10 mt-[2px] mb-[2px]">
@@ -86,7 +86,7 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
                 placeholder="User Name"
                 className="w-[400px] h-[30px] mt-[10px] mb-[10px] ml-[10px] flex space-x-[10px] space-y-[4px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none"
-                style={{textIndent: "10px"}}
+                style={{ textIndent: "10px" }}
               />
             </div>
 
@@ -130,7 +130,7 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
                 placeholder="First Name"
                 className="w-[400px] h-[30px] mb-[10px] ml-[10px] flex border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none "
-                style={{textIndent: "10px"}}
+                style={{ textIndent: "10px" }}
               />
             </div>
             <div className="flex flex-col space-y-2">
@@ -144,17 +144,15 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
                 placeholder="Last Name"
                 className="w-[400px] h-[30px] mr-[10px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none"
-              style={{textIndent: "10px"}}
+                style={{ textIndent: "10px" }}
               />
             </div>
           </div>
-
-
           <div className="grid grid-cols-2 sm:grid-cols-2 gap-6 lg:gap-10 mb-8">
             <div>
               <label className="block text-sm text-gray-600 mb-[10px] ml-[10px]">
                 Email
-                </label>
+              </label>
               <input
                 type="email"
                 name="email"
@@ -162,7 +160,7 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
                 placeholder="Email"
                 className="w-[400px] h-[30px] ml-[10px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none"
-              style={{textIndent: "10px"}}
+                style={{ textIndent: "10px" }}
               />
             </div>
             <div>
@@ -176,8 +174,8 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
                 placeholder="Designation"
                 className="w-[400px] h-[30px] mr-[10px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none"
-             style={{textIndent: "10px"}}
-             />
+                style={{ textIndent: "10px" }}
+              />
             </div>
           </div>
 
@@ -191,8 +189,8 @@ const handleSubmit = async (e) => {
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
-              className="w-[405px] h-[23px] ml-[10px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none bg-white"
-              style={{textIndent: "10px"}}
+                className="w-[405px] h-[23px] ml-[10px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none bg-white"
+                style={{ textIndent: "10px" }}
               >
                 <option value="">Select Country</option>
                 <option value="India">India</option>
@@ -212,7 +210,7 @@ const handleSubmit = async (e) => {
                 readOnly
                 placeholder="Code"
                 className="w-[400px] h-[20px] mr-[10px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm bg-[#f7f7f7] text-gray-500"
-              style={{textIndent: "10px"}}
+                style={{ textIndent: "10px" }}
               />
             </div>
 
@@ -227,26 +225,29 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
                 placeholder="Contact No"
                 className="w-[400px] h-[30px] ml-[10px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none"
-              style={{textIndent: "10px"}}
+                style={{ textIndent: "10px" }}
               />
             </div>
           </div>
+          <div className="bg-[#f4f6f9] flex justify-end gap-4 p-4 sm:p-5 mt-[10px]">
+            <div className="bg-[#ffffff] w-full flex flex-col-1 px-4 py-4">
+              <button
+                type="submit"
+                className="h-[40px] w-[100px] ml-[600px]  flex items-center bg-[#00a7cf] hover:bg-[#009ac0] text-white px-8 py-2 rounded-[5px] text-sm font-medium"
+                style={{ textIndent: "25px" }}
+              >
+                Save
+              </button>
 
-
-          <div className="border-t h-[30px] border-[#e0e0e0] bg-[#f4f6f9] flex flex-cols-2 sm:flex-row justify-end gap-3 p-4 sm:p-5 mt-[10px]">
-            <button
-              type="submit"
-              className="w-[100px] h-[40px] bg-[#00a7cf] hover:bg-[#009ac0] mr-[30px] text-white px-8 py-2 rounded-[5px] text-sm font-medium w-[100px] sm:w-auto"
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              onClick={() => router.push("/salespersons")}
-              className="w-[100px] h-[40px] border border-[#ccc] bg-white text-gray-700  mr-[200px] px-8 py-2 rounded-[5px] text-sm w-[100px] sm:w-auto"
-            >
-              Cancel
-            </button>
+              <button
+                type="button"
+                onClick={() => router.push("/salespersons")}
+                className="h-[40px] w-[100] mr-[100px] ml-[20px] flex items-center border border-[#ccc] bg-white text-gray-700 px-8 py-2 rounded-[5px] text-sm"
+                style={{ textIndent: "25px" }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </form>
       </div>
