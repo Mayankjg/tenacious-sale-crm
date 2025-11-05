@@ -105,16 +105,13 @@
 
 "use client";
 import React, { useEffect, useState } from "react";
-// lucide-react માંથી Calendar આઇકન ઉમેર્યું
-import { Calendar } from "lucide-react"; 
+import { Calendar } from "lucide-react";
 
 export default function AccountExpiryReport() {
   const [data, setData] = useState([]);
 
-  // Mock data fetch
   useEffect(() => {
-    // Current date for comparison (Nov 5, 2025 IST)
-    const currentDate = new Date('2025-11-05'); 
+    const currentDate = new Date('2025-11-05');
 
     const reportData = [
       { id: 1, name: "Mayank", email: "mayank@gmail.com", expiry: "29-10-2025" }, // Expired (past date)
@@ -134,32 +131,32 @@ export default function AccountExpiryReport() {
 
   const getExpiryClass = (expiryDateStr) => {
     const today = new Date();
-  
+
     const [day, month, year] = expiryDateStr.split('-');
-    const expiryDate = new Date(`${year}-${month}-${day}`); 
-  
+    const expiryDate = new Date(`${year}-${month}-${day}`);
+
     const diffTime = expiryDate.getTime() - today.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     if (diffDays < 0) {
-      return "bg-red-50 hover:bg-red-100 text-red-800 border-l-4 border-red-500"; 
+      return "bg-red-50 hover:bg-red-100 text-red-800 border-l-4 border-red-500";
     } else if (diffDays <= 30) {
       return "bg-yellow-50 hover:bg-yellow-100 text-yellow-800 border-l-4 border-yellow-500";
     }
-    return "hover:bg-gray-50 text-gray-800"; 
+    return "hover:bg-gray-50 text-gray-800";
   };
 
   return (
 
     <div className="bg-[#eef1f4] p-8 min-h-screen flex justify-center items-start font-sans">
-      
+
       <div className="bg-white border border-gray-200 rounded-lg p-6 w-full max-w-5xl shadow-md">
-        
+
         <div className="border-b border-gray-300 pb-3 mb-5 flex items-center gap-3">
-            <Calendar className="w-6 h-6 text-gray-600" />
-            <h2 className="text-xl font-normal text-gray-800">
-              Account Expiry <span className="font-semibold text-black">Report</span>
-            </h2>
+          <Calendar className="w-6 h-6 text-gray-600" />
+          <h2 className="text-xl font-normal text-gray-800">
+            Account Expiry <span className="font-semibold text-black">Report</span>
+          </h2>
         </div>
 
         <div className="overflow-x-auto">
@@ -182,8 +179,8 @@ export default function AccountExpiryReport() {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {data.map((item, index) => (
-                <tr 
-                  key={item.id} 
+                <tr
+                  key={item.id}
                   className={getExpiryClass(item.expiry)}
                 >
                   <td className="px-6 py-3 whitespace-nowrap text-sm font-medium border border-gray-300" data-label="SR NO">
@@ -197,16 +194,16 @@ export default function AccountExpiryReport() {
                   </td>
                   <td className="px-6 py-3 whitespace-nowrap text-sm font-semibold border border-gray-300" data-label="Expiry Date">
                     {item.expiry}
-                    
+
                     {getExpiryClass(item.expiry).includes('red') && (
-                        <span className="ml-2 px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800">
-                            Expired
-                        </span>
+                      <span className="ml-2 px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800">
+                        Expired
+                      </span>
                     )}
                     {getExpiryClass(item.expiry).includes('yellow') && (
-                        <span className="ml-2 px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-200 text-yellow-800">
-                            Expiring Soon
-                        </span>
+                      <span className="ml-2 px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-200 text-yellow-800">
+                        Expiring Soon
+                      </span>
                     )}
                   </td>
                 </tr>
@@ -214,9 +211,9 @@ export default function AccountExpiryReport() {
             </tbody>
           </table>
         </div>
-        
+
         {data.length === 0 && (
-            <p className="text-center text-gray-500 py-10">No account expiry data found.</p>
+          <p className="text-center text-gray-500 py-10">No account expiry data found.</p>
         )}
       </div>
     </div>
