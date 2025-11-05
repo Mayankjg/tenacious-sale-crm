@@ -31,27 +31,38 @@ export default function AddSalesperson() {
   };
 
   const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setProfileImage(URL.createObjectURL(e.target.files[0]));
-    }
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProfileImage(reader.result); 
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const payload = {
+    ...formData,
+    profileImage, 
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const res = await fetch("/api/salespersons", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 
-    const res = await fetch("/api/salespersons", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
-    if (res.ok) {
-      alert("Salesperson saved successfully!");
-      router.push("/managesalesperson");
-    } else {
-      alert("Failed to save data");
-    }
-  };
+  if (res.ok) {
+    alert("Salesperson saved successfully!");
+    router.push("/managesalesperson");
+  } else {
+    alert("Failed to save data");
+  }
+};
 
   return (
    <div className="bg-[#f4f6f9] h-[600px] w-[1000px] m-auto">
@@ -89,7 +100,7 @@ export default function AddSalesperson() {
                   onChange={handleImageChange}
                   className="text-sm pt-1"
                 />
-                <div className="w-[70px] h-[70px] mt-[2px] mb-[2px] mr-[3px] border border-[#ccc] flex items-center justify-center bg-white sm:mt-0">
+                <div className="w-[80px] h-[80px] mt-[2px] mb-[2px] mr-[10px] border border-[#ccc] flex items-center justify-center bg-white sm:mt-0">
                   {profileImage ? (
                     <img
                       src={profileImage}

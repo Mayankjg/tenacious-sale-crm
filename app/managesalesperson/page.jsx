@@ -8,7 +8,6 @@ export default function SalespersonList() {
   const [salespersons, setSalespersons] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Fetch all salespersons
   useEffect(() => {
     fetchData();
   }, []);
@@ -72,7 +71,7 @@ export default function SalespersonList() {
     <div className="p-6 bg-[#f4f6f9] rounded-[5px] min-h-screen font-sans">
       {/* Header */}
       {/* Header Section */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center ml-[20px] mb-4">
         <h2 className="text-2xl font-semibold text-gray-900">
           Salesperson List
         </h2>
@@ -90,7 +89,7 @@ export default function SalespersonList() {
           type="text"
           placeholder="Search by name or email"
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-[300px] ml-[1000px] mr-[10px] h-[35px] border border-gray-300 rounded-[5px] mb-[40px] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00a7cf]"
+          className="w-[200px] ml-[1100px] mr-[10px] h-[35px] border border-gray-300 rounded-[5px] mb-[40px] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00a7cf]"
         />
         <button className="bg-[#00a7cf] w-[70px] h-[35px] text-[white] mr-[10px] mb-[40px] px-5 py-2 text-sm font-medium rounded-[5px] hover:bg-[#0094b8]">
           Search
@@ -99,7 +98,7 @@ export default function SalespersonList() {
 
       {/* Cards Section */}
       {salespersons.length > 0 ? (
-        <div className="w-[1300px] grid grid-cols-1 gap-[20px]">
+        <div className="w-[1300px] ml-[50px] grid grid-cols-1 gap-[20px]">
           {salespersons.map((sp, index) => (
             <div
               key={index}
@@ -110,25 +109,25 @@ export default function SalespersonList() {
                 <img
                   src={sp.profileImage || "/default-avatar.png"}
                   alt="Profile"
-                  className="w-[40px] h-[40px] rounded-[20px] border border-gray-300 object-cover"
+                  className="w-[70px] h-[70px] ml-[40px] rounded-[40px] mt-[50px] border border-gray-300 object-cover"
                 />
                 <div>
-                  <h3 className="text-[16px] ml-[10px] font-semibold text-gray-800 leading-tight">
+                  <h3 className="text-[16px] ml-[50px] mt-[50px] font-semibold text-gray-800 leading-tight">
                     {sp.username}
                   </h3>
-                  <p className="text-gray-600 ml-[10px] text-sm capitalize leading-tight">
+                  <p className="text-gray-600 ml-[50px] text-sm capitalize leading-tight">
                     {sp.firstname} {sp.lastname}
                   </p>
 
                   <div className="flex flex-col mb-[10px] text-sm text-gray-700 mt-1">
-                    <div className="flex ml-[10px] mb-[10px] items-center gap-1 mr-4">
-                      <Briefcase className="w-4 h-4 text-gray-500" />
+                    <div className="flex ml-[50px] mb-[10px] items-center gap-[10px] mr-4">
+                      <Briefcase className="w-[20px] h-[20px] text-gray-500" />
                       <span>
                         Designation:{" "}
                         <span className="font-semibold">{sp.designation}</span>
                       </span>
                     </div>
-                    <div className="flex mb-[20px] ml-[10px] items-center gap-1">
+                    <div className="flex mb-[20px] ml-[50px] items-center gap-[10px]">
                       <Phone className="w-[20px] h-[20px] text-gray-500" />
                       <span>
                         Contact Number:{" "}
@@ -139,7 +138,7 @@ export default function SalespersonList() {
                     </div>
                   </div>
 
-                  <p className="flex items-center ml-[10px] gap-1 text-sm text-gray-700 mt-[1px]">
+                  <p className="flex items-center ml-[50px] mb-[10px] gap-[10px] text-sm text-gray-700 mt-[1px]">
                     <Mail className="w-4 h-4 text-gray-500" />
                     <a
                       href={`mailto:${sp.email}`}
@@ -153,7 +152,10 @@ export default function SalespersonList() {
 
               <div className="flex flex-col items-end gap-2 mr-[20px]">
                 {/* Delete Icon */}
-                <div className="relative group flex flex-col items-center">
+                <div
+                  className="relative group flex flex-col items-center"
+                  onClick={() => handleDelete(sp.id)}
+                >
                   <Trash2
                     className="w-[20px] h-5 text-gray-600 mb-[15px] cursor-pointer hover:text-red-600 transition"
                     title="Delete"
@@ -165,11 +167,11 @@ export default function SalespersonList() {
 
                 {/* Change Password Icon */}
                 <div className="relative group flex flex-col items-center mt-2">
-                  <Key  
-                    className="w-[20px] h-5 text-gray-600 ml-[700px] cursor-pointer hover:text-[#133b74] transition"
+                  <Key
+                    className="w-[20px] h-5 text-gray-600 ml-[600px] cursor-pointer hover:text-[#133b74] transition"
                     title="Change Password"
                   />
-                  <span className="absolute -bottom-[30px] ml-[700px] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
+                  <span className="absolute -bottom-[30px] ml-[600px] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
                     Change Password
                   </span>
                 </div>
