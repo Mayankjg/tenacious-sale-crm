@@ -29,22 +29,25 @@ export default function SalespersonList() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this salesperson?")) return;
-    try {
-      const res = await fetch(`/api/salespersons/${id}`, {
-        method: "DELETE",
-      });
-      if (res.ok) {
-        alert("Salesperson deleted successfully");
-        fetchData(); 
-      } else {
-        alert("Failed to delete salesperson");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong");
+  if (!confirm("Are you sure you want to delete this salesperson?")) return;
+  try {
+    const res = await fetch(`/api/salespersons/${String(id)}`, { 
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      alert("Salesperson deleted successfully");
+      fetchData();
+    } else {
+      const errorText = await res.text(); 
+      console.error("Failed to delete. Server response:", errorText);
+      alert("Failed to delete salesperson");
     }
-  };
+  } catch (error) {
+    console.error("Error during deletion:", error);
+    alert("Something went wrong");
+  }
+};
 
   const handleChangePassword = async (id) => {
     const newPassword = prompt("Enter new password:");
