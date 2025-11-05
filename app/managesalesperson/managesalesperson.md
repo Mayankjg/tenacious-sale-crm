@@ -471,3 +471,32 @@ export default function ManageSalesperson() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"use client";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Mail, Phone, Briefcase, Trash2, Key } from "lucide-react";
+
+export default function SalespersonList() {
+  const router = useRouter();
+  const [salespersons, setSalespersons] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Load salespersons from localStorage
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("salespersons")) || [];
+    setSalespersons(stored);
+  }, []);

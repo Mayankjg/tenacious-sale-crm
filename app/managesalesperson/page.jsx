@@ -6,15 +6,67 @@ import { Mail, Phone, Briefcase, Trash2, Key } from "lucide-react";
 export default function SalespersonList() {
   const router = useRouter();
   const [salespersons, setSalespersons] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
+  // Fetch all salespersons
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("/api/salespersons");
-      const data = await res.json();
-      setSalespersons(data);
-    };
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    const res = await fetch("/api/salespersons");
+    const data = await res.json();
+    setSalespersons(data);
+  };
+
+  // DELETE salesperson
+  const handleDelete = async (id) => {
+    if (!confirm("Are you sure you want to delete this salesperson?")) return;
+    try {
+      const res = await fetch(`/api/salespersons/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        alert("Salesperson deleted successfully");
+        fetchData(); // refresh list
+      } else {
+        alert("Failed to delete salesperson");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    }
+  };
+
+  // CHANGE PASSWORD
+  const handleChangePassword = async (id) => {
+    const newPassword = prompt("Enter new password:");
+    if (!newPassword) return;
+
+    try {
+      const res = await fetch(`/api/salespersons/${id}/change-password`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: newPassword }),
+      });
+
+      if (res.ok) {
+        alert("Password updated successfully!");
+      } else {
+        alert("Failed to update password");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    }
+  };
+
+  // Filter by search query
+  const filteredSalespersons = salespersons.filter(
+    (sp) =>
+      sp.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      sp.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="p-6 bg-[#f4f6f9] rounded-[5px] min-h-screen font-sans">
