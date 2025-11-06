@@ -58,28 +58,27 @@ export default function SalespersonList() {
   }
 };
 
+  const handleChangePassword = async (id) => {
+    const newPassword = prompt("Enter new password:");
+    if (!newPassword) return;
 
-  // const handleChangePassword = async (id) => {
-  //   const newPassword = prompt("Enter new password:");
-  //   if (!newPassword) return;
+    try {
+      const res = await fetch(`/api/salespersons/${id}/change-password`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: newPassword }),
+      });
 
-  //   try {
-  //     const res = await fetch(`/api/salespersons/${id}/change-password`, {
-  //       method: "PUT",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ password: newPassword }),
-  //     });
-
-  //     if (res.ok) {
-  //       alert("Password updated successfully!");
-  //     } else {
-  //       alert("Failed to update password");
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     alert("Something went wrong");
-  //   }
-  // };
+      if (res.ok) {
+        alert("Password updated successfully!");
+      } else {
+        alert("Failed to update password");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    }
+  };
 
   const filteredSalespersons = salespersons.filter(
     (sp) =>

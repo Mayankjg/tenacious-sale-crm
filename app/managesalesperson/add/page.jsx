@@ -190,7 +190,6 @@ export default function AddSalesperson() {
               </div>
             </div>
 
-
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 mb-[20px]">
               <div>
                 <label className="block text-sm text-gray-600 mt-[20px] mb-[10px] ml-[10px]">
