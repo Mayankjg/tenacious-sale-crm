@@ -686,3 +686,398 @@ export default function SalespersonList() {
     </div>
   );
 }
+
+
+
+
+"use client";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { Mail, Phone, Briefcase, Trash2, Key } from "lucide-react";
+
+const pageContainerStyle = {
+  backgroundColor: '#eef1f4',
+  padding: '20px',
+  minHeight: '80vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'flex-start',
+  fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif'
+};
+
+export default function SalespersonList() {
+  const router = useRouter();
+  const [salespersons, setSalespersons] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+   useEffect(() => {
+    const storedData = localStorage.getItem("salespersons");
+    if (storedData) {
+      setSalespersons(JSON.parse(storedData));
+    }
+  }, []);
+
+  // ✅ Update localStorage whenever salespersons change
+  useEffect(() => {
+    localStorage.setItem("salespersons", JSON.stringify(salespersons));
+  }, [salespersons]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const res = await fetch("/api/salespersons");
+    const data = await res.json();
+    setSalespersons(data);
+  };
+
+  const handleDelete = async (id) => {
+  if (!confirm("Are you sure you want to delete this salesperson?")) return;
+
+  try {
+    const res = await fetch(`/api/salespersons/${id}`, { method: "DELETE" });
+
+    if (res.ok) {
+      setSalespersons((prev) => prev.filter((sp) => sp.id !== id));
+      alert("Salesperson deleted successfully");
+    } else {
+      const data = await res.json();
+      alert(data.message || "Failed to delete salesperson");
+    }
+  } catch (error) {
+    console.error("Error deleting salesperson:", error);
+    alert("Something went wrong");
+  }
+};
+
+
+  const handleChangePassword = async (id) => {
+    const newPassword = prompt("Enter new password:");
+    if (!newPassword) return;
+
+    try {
+      const res = await fetch(`/api/salespersons/${id}/change-password`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: newPassword }),
+      });
+
+      if (res.ok) {
+        alert("Password updated successfully!");
+      } else {
+        alert("Failed to update password");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    }
+  };
+
+  const filteredSalespersons = salespersons.filter(
+    (sp) =>
+      sp.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      sp.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <div style={pageContainerStyle}>
+
+      <div className="bg-[#ffffff] h-[550px] w-[1000px] m-auto">
+        <div className="w-[1000px] h-[550px] max-w-10xl bg-white border border-[#e0e0e0] rounded-md shadow-md">
+          <div className="border-b border-[#bcbcbc] p-4 sm:p-5">
+            <h2 className="text-2xl ml-[20px] font-semibold text-gray-900">
+              Salesperson List
+            </h2>
+            <button
+              onClick={() => router.push("/managesalesperson/add")}
+              className="bg-[#1a1a3d] hover:bg-[#111132] text-[white] mr-[20px] text-[20px] px-4 py-2 rounded-[6px]"
+            >
+              Add Sales Person
+            </button>
+          </div>
+          <hr className="border border-black mt-2 mb-6" />
+        </div>
+
+        <div className="flex items-center ml-[15px] gap-2 mb-6">
+          <input
+            type="text"
+            placeholder="Search"
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-[200px] ml-[875px] mr-[10px] h-[35px] mt-[10px] border border-gray-300 rounded-[5px] mb-[40px] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00a7cf]"
+            style={{ textIndent: "10px" }}
+          />
+          <button className="bg-[#00a7cf] w-[70px] h-[40px] text-[white] mr-[4px] mb-[200px] mt-[50px] px-5 py-2 text-sm font-medium rounded-[5px] hover:bg-[#0094b8]">
+            Search
+          </button>
+        </div>
+
+        {salespersons.length > 0 ? (
+          <div className="w-[1150px] ml-[25px] grid grid-cols-1 gap-[20px]">
+            {salespersons.map((sp, index) => (
+              <div
+                key={index}
+                className="flex items-center mb-[10px] justify-between bg-[white] border border-gray-200 rounded-[10px] p-4 shadow-sm hover:shadow-md transition-all duration-200"
+              >
+
+                <div className="flex items-start gap-4">
+                  <img
+                    src={sp.profileImage || "/default-avatar.png"}
+                    alt="Profile"
+                    className="w-[70px] h-[150px] ml-[20px] rounded-[10px] mt-[20px] border border-gray-300 object-cover"
+                  />
+                  <div>
+                    <h3 className="text-[16px] ml-[30px] mt-[20px] font-semibold text-gray-800 leading-tight">
+                      {sp.username}
+                    </h3>
+                    <p className="text-gray-600 ml-[30px] text-sm capitalize leading-tight">
+                      {sp.firstname} {sp.lastname}
+                    </p>
+
+                    <div className="flex flex-col mb-[10px] text-sm text-gray-700 mt-1">
+                      <div className="flex ml-[30px] mb-[10px] items-center gap-[10px] mr-4">
+                        <Briefcase className="w-[20px] h-[20px] text-gray-500" />
+                        <span>
+                          Designation:{" "}
+                          <span className="font-semibold">{sp.designation}</span>
+                        </span>
+                      </div>
+                      <div className="flex mb-[20px] ml-[30px] items-center gap-[10px]">
+                        <Phone className="w-[20px] h-[20px] text-gray-500" />
+                        <span>
+                          Contact Number:{" "}
+                          <span className="font-semibold">
+                            {sp.code} {sp.contact}
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="flex items-center ml-[30px] mb-[5px] gap-[10px] text-sm text-gray-700 mt-[1px]">
+                      <Mail className="w-4 h-4 text-gray-500" />
+                      <a
+                        href={`mailto:${sp.email}`}
+                        className="text-[#007bff] hover:underline"
+                      >
+                        {sp.email}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-end gap-2 mr-[20px]">
+
+                  <div
+                    className="relative group flex flex-col items-center"
+                    onClick={() => handleDelete(sp.id)}
+                  >
+                    <Trash2
+                      className="w-[20px] h-5 text-gray-600 mb-[15px] cursor-pointer hover:text-red-600 transition"
+                      title="Delete"
+                    />
+                    <span className="absolute -left-[40px] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
+                      Delete
+                    </span>
+                  </div>
+
+                  <div className="relative group flex flex-col items-center">
+                    <Key
+                      className="w-[20px] h-5 text-gray-600 ml-[500px] cursor-pointer hover:text-[#133b74] transition"
+                      title="Change Password"
+                    />
+                    <span className="absolute -left-[40px] ml-[500px] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
+                      Change Password
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-end gap-2">
+                  <button className="bg-[#dc3545] mb-[10px] mr-[70px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#c82333] text-sm font-medium px-4 py-2 rounded-md">
+                    View Leads
+                  </button>
+                  <button className="bg-[#133b74] mb-[10px] mr-[70px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-sm font-medium px-4 py-2 rounded-md flex items-center gap-1"
+                  style={{ textIndent: "20px" }}
+                  >
+                    Change Email ID
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500 text-[18px] font-medium mt-10">
+            No Salespersons Found
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+-------    page container layout   ---------------------
+
+
+
+"use client";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { Mail, Phone, Briefcase, Trash2, Key } from "lucide-react";
+
+const pageContainerStyle = {
+  backgroundColor: '#eef1f4',
+  padding: '20px',
+  minHeight: '80vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'flex-start',
+  fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif'
+};
+
+export default function SalespersonList() {
+  const router = useRouter();
+  const [salespersons, setSalespersons] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Load from localStorage
+  useEffect(() => {
+    const storedData = localStorage.getItem("salespersons");
+    if (storedData) setSalespersons(JSON.parse(storedData));
+  }, []);
+
+  // Save to localStorage when changed
+  useEffect(() => {
+    localStorage.setItem("salespersons", JSON.stringify(salespersons));
+  }, [salespersons]);
+
+  const handleDelete = (id) => {
+    if (!confirm("Are you sure you want to delete this salesperson?")) return;
+    const updated = salespersons.filter((sp) => sp.id !== id);
+    setSalespersons(updated);
+    localStorage.setItem("salespersons", JSON.stringify(updated));
+    alert("Salesperson deleted successfully");
+  };
+
+  const filteredSalespersons = salespersons.filter(
+    (sp) =>
+      sp.username?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      sp.email?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <div style={pageContainerStyle}>
+      <div className="bg-[#ffffff] h-[600px] w-[1000px] m-auto">
+        <div className="w-[1000px] h-[550px] max-w-10xl bg-[white] rounded-md shadow-md">
+          <div className=" ml-[20px] mt-[20px] text-[20px] p-4 sm:p-5">
+              Salesperson List
+            <button
+              onClick={() => router.push("/managesalesperson/add")}
+              className="bg-[#1a1a3d] text-[20px] mr-[5px] hover:bg-[#111132] ml-[70px] text-[white] text-[16px] px-6 py-2 rounded-[6px] shadow-sm"
+            >
+              Add Sales Person
+            </button>
+          </div>
+
+          <hr className="border-gray-400 mb-6" />
+
+          {/* Search Bar */}
+          <div className="flex justify-end items-center mb-8">
+            <input
+              type="text"
+              placeholder="Search"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-[200px] h-[35px] mr-[10px] border border-gray-300 rounded-[4px] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00a7cf]"
+              style={{ textIndent: "10px" }}
+            />
+            <button className="bg-[#00a7cf] hover:bg-[#0094b8] text-[white] w-[90px] h-[35px] mr-[20px] text-sm font-medium px-5 py-2 h-[40px] rounded-[4px]">
+              Search
+            </button>
+          </div>
+
+          {/* Salesperson List */}
+          {filteredSalespersons.length > 0 ? (
+            <div className="grid grid-cols-1 gap-6">
+              {filteredSalespersons.map((sp, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-center bg-[#fafafa] border border-gray-300 rounded-lg p-5 shadow-sm hover:shadow-md transition-all duration-200"
+                >
+                  {/* Profile Info */}
+                  <div className="flex items-start gap-6">
+                    <img
+                      src={sp.profileImage || "/default-avatar.png"}
+                      alt="Profile"
+                      className="w-[100px] h-[100px] rounded-lg border border-gray-300 object-cover"
+                    />
+
+                    <div className="flex flex-col">
+                      <h3 className="text-lg font-semibold text-gray-800">
+                        {sp.username}
+                      </h3>
+                      <p className="text-gray-600 text-sm capitalize">
+                        {sp.firstname} {sp.lastname}
+                      </p>
+
+                      <div className="mt-2 space-y-1 text-sm text-gray-700">
+                        <p className="flex items-center gap-2">
+                          <Briefcase className="w-[18px] h-[18px] text-gray-500" />
+                          <span>
+                            <b>Designation:</b> {sp.designation}
+                          </span>
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <Phone className="w-[18px] h-[18px] text-gray-500" />
+                          <span>
+                            <b>Contact:</b> {sp.code} {sp.contact}
+                          </span>
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <Mail className="w-[18px] h-[18px] text-gray-500" />
+                          <a
+                            href={`mailto:${sp.email}`}
+                            className="text-[#007bff] hover:underline"
+                          >
+                            {sp.email}
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex flex-col items-end gap-3">
+                    <button
+                      onClick={() => handleDelete(sp.id)}
+                      className="flex items-center gap-2 bg-[#dc3545] hover:bg-[#c82333] text-white text-sm font-medium px-4 py-2 rounded-md shadow-sm"
+                    >
+                      <Trash2 className="w-4 h-4" /> Delete
+                    </button>
+
+                    <button className="flex items-center gap-2 bg-[#133b74] hover:bg-[#0f2f5a] text-white text-sm font-medium px-4 py-2 rounded-md shadow-sm">
+                      <Key className="w-4 h-4" /> Change Password
+                    </button>
+
+                    <button className="flex items-center gap-2 bg-[#00a7cf] hover:bg-[#0094b8] text-white text-sm font-medium px-4 py-2 rounded-md shadow-sm">
+                      View Leads
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-500 text-[18px] mt-[30px] font-medium mt-10">
+              No Salespersons Found
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -18,6 +18,17 @@ export default function SalespersonList() {
   const [salespersons, setSalespersons] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+   useEffect(() => {
+    const storedData = localStorage.getItem("salespersons");
+    if (storedData) {
+      setSalespersons(JSON.parse(storedData));
+    }
+  }, []);
+
+  // ✅ Update localStorage whenever salespersons change
+  useEffect(() => {
+    localStorage.setItem("salespersons", JSON.stringify(salespersons));
+  }, [salespersons]);
   useEffect(() => {
     fetchData();
   }, []);
@@ -30,46 +41,45 @@ export default function SalespersonList() {
 
   const handleDelete = async (id) => {
   if (!confirm("Are you sure you want to delete this salesperson?")) return;
+
   try {
-    const res = await fetch(`/api/salespersons/${String(id)}`, { 
-      method: "DELETE",
-    });
+    const res = await fetch(`/api/salespersons/${id}`, { method: "DELETE" });
 
     if (res.ok) {
+      setSalespersons((prev) => prev.filter((sp) => sp.id !== id));
       alert("Salesperson deleted successfully");
-      fetchData();
     } else {
-      const errorText = await res.text(); 
-      console.error("Failed to delete. Server response:", errorText);
-      alert("Failed to delete salesperson");
+      const data = await res.json();
+      alert(data.message || "Failed to delete salesperson");
     }
   } catch (error) {
-    console.error("Error during deletion:", error);
+    console.error("Error deleting salesperson:", error);
     alert("Something went wrong");
   }
 };
 
-  const handleChangePassword = async (id) => {
-    const newPassword = prompt("Enter new password:");
-    if (!newPassword) return;
 
-    try {
-      const res = await fetch(`/api/salespersons/${id}/change-password`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password: newPassword }),
-      });
+  // const handleChangePassword = async (id) => {
+  //   const newPassword = prompt("Enter new password:");
+  //   if (!newPassword) return;
 
-      if (res.ok) {
-        alert("Password updated successfully!");
-      } else {
-        alert("Failed to update password");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong");
-    }
-  };
+  //   try {
+  //     const res = await fetch(`/api/salespersons/${id}/change-password`, {
+  //       method: "PUT",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ password: newPassword }),
+  //     });
+
+  //     if (res.ok) {
+  //       alert("Password updated successfully!");
+  //     } else {
+  //       alert("Failed to update password");
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("Something went wrong");
+  //   }
+  // };
 
   const filteredSalespersons = salespersons.filter(
     (sp) =>
@@ -80,7 +90,7 @@ export default function SalespersonList() {
   return (
     <div style={pageContainerStyle}>
 
-      <div className="p-6 bg-[#fffff] rounded-[5px] w-[1200px]">
+      <div className="p-[6] bg-[#ffffff] rounded-[5px] w-[1200px]">
         <div className="bg-[#ffffff] w-full px-4 py-4">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl ml-[20px] font-semibold text-gray-900">
@@ -192,8 +202,10 @@ export default function SalespersonList() {
                   <button className="bg-[#dc3545] mb-[10px] mr-[70px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#c82333] text-sm font-medium px-4 py-2 rounded-md">
                     View Leads
                   </button>
-                  <button className="bg-[#133b74] mb-[10px] mr-[70px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-sm font-medium px-4 py-2 rounded-md flex items-center gap-1">
-                    <Key className="w-4 h-4" /> Change Email ID
+                  <button className="bg-[#133b74] mb-[10px] mr-[70px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-sm font-medium px-4 py-2 rounded-md flex items-center gap-1"
+                  style={{ textIndent: "20px" }}
+                  >
+                    Change Email ID
                   </button>
                 </div>
               </div>

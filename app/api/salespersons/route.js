@@ -59,7 +59,12 @@
 //   }
 // }
 
-let salespersons = [];
+// ✅ app/api/salespersons/route.js
+import { salespersons } from "./data.js";
+
+export async function GET() {
+  return Response.json(salespersons);
+}
 
 export async function POST(req) {
   const newSalesperson = await req.json();
@@ -68,17 +73,4 @@ export async function POST(req) {
   return Response.json(newSalesperson);
 }
 
-export async function GET() {
-  return Response.json(salespersons);
-}
 
-export async function DELETE(req, { params }) {
-  const id = params.id;
-  const index = salespersons.findIndex((sp) => sp.id === id);
-  if (index !== -1) {
-    salespersons.splice(index, 1);
-    return Response.json({ success: true });
-  } else {
-    return new Response("Not found", { status: 404 });
-  }
-}
