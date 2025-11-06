@@ -84,7 +84,7 @@ export default function AddSalesperson() {
             </h2>
           </div>
 
-          <form onSubmit={handleSubmit} className="p-4 sm:p-6 lg:p-8">
+          <form onSubmit={handleSubmit} className="p-4 sm:p-[6px] lg:p-[8px]">
             <div className="grid grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-10 mt-[2px] mb-[2px]">
               <div className="flex flex-col space-x-5">
                 <label className="block text-sm text-gray-600 mt-[20px] mb-[5 px] ml-[10px]">
@@ -101,7 +101,7 @@ export default function AddSalesperson() {
                 />
               </div>
 
-              <div className="flex flex-col mt-[4px] mb-[8px] ">
+              <div className="flex flex-col  mt-[4px] mb-[8px] ">
                 <label className="block text-sm text-gray-600 mt-[20px] mb-[10px] mr-[10px]">
                   Profile Image
                 </label>
@@ -127,7 +127,6 @@ export default function AddSalesperson() {
                 </div>
               </div>
             </div>
-
 
             <div className="grid grid-cols-2 sm:grid-cols-2 gap-6 lg:gap-10 mt-[2px] mb-[2px] ">
               <div className="flex flex-col space-y-2">
@@ -189,6 +188,7 @@ export default function AddSalesperson() {
                 />
               </div>
             </div>
+
 
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 mb-[20px]">
               <div>
