@@ -282,11 +282,10 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-// Keeping the style object but removing the width/height to let Tailwind handle responsiveness
 const pageContainerStyle = {
   backgroundColor: '#eef1f4',
   padding: '20px',
-  minHeight: '100vh', // Use 100vh for better full-page experience
+  minHeight: '100vh', 
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'flex-start',
@@ -349,7 +348,6 @@ export default function AddSalesperson() {
 
     if (res.ok) {
       alert("Salesperson saved successfully!");
-      // Assuming /managesalesperson is the correct path
       router.push("/managesalesperson");
     } else {
       alert("Failed to save data");
@@ -358,11 +356,9 @@ export default function AddSalesperson() {
 
   return (
     <div style={pageContainerStyle}>
-      {/* 1. Main Container: Use w-full and a max-width, remove fixed h-[550px] and w-[1000px] */}
       <div className="bg-[#ffffff] w-full max-w-4xl m-auto">
         <div className="w-full bg-white border border-[#e0e0e0] rounded-md shadow-md">
           
-          {/* Header */}
           <div className="border-b border-[#bcbcbc] p-4">
             <h2 className="text-xl font-normal text-[#333]">
               Add <span className="font-semibold">Salesperson</span>
@@ -371,7 +367,6 @@ export default function AddSalesperson() {
 
           <form onSubmit={handleSubmit} className="p-4 sm:p-6 lg:p-8">
             
-            {/* 2. Grid for User Name & Profile Image: Use md:grid-cols-2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mb-4">
               <div className="flex flex-col">
                 <label className="block mt-[20px] ml-[20px] text-sm text-gray-600 mb-2">
@@ -406,7 +401,6 @@ export default function AddSalesperson() {
                       />
                     ) : (
                       <span className="text-xs text-gray-400 text-center px-2">
-                        {/* No file chosen */}
                       </span>
                     )}
                   </div>
@@ -414,7 +408,6 @@ export default function AddSalesperson() {
               </div>
             </div>
 
-            {/* 3. Grid for First Name & Last Name: Use md:grid-cols-2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-4 mb-4">
               <div className="flex flex-col">
                 <label className="block text-sm mt-[20px] ml-[20px] text-gray-600 mb-2">
@@ -426,7 +419,6 @@ export default function AddSalesperson() {
                   value={formData.firstname}
                   onChange={handleChange}
                   placeholder="First Name"
-                  // Use w-full for fluid width
                   className="w-[350px] h-[35px] mt-[10px] mb-[20px] ml-[20px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none"
                 />
               </div>
@@ -440,13 +432,11 @@ export default function AddSalesperson() {
                   value={formData.lastname}
                   onChange={handleChange}
                   placeholder="Last Name"
-                  // Use w-full for fluid width
                   className="w-[350px] h-[35px] mt-[10px] mb-[20px] ml-[20px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none"
                 />
               </div>
             </div>
             
-            {/* 4. Grid for Email & Designation: Use md:grid-cols-2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-4 mb-4">
               <div className="flex flex-col">
                 <label className="block text-sm mt-[20px] ml-[20px] text-gray-600 mb-2">
@@ -458,7 +448,6 @@ export default function AddSalesperson() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Email"
-                  // Use w-full for fluid width
                   className="w-[350px] h-[35px] mt-[10px] mb-[20px] ml-[20px] border border-[#ccc] rounded-[5px] px-3 py-2 text-sm focus:outline-none"
                 />
               </div>
