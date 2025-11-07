@@ -707,8 +707,8 @@ export default function SalespersonList() {
 
       if (res.ok) {
         // Optimistically update the local state if the API call is successful
-        setSalespersons(prev => prev.map(sp => 
-            sp.id === id ? { ...sp, email: newEmail } : sp
+        setSalespersons(prev => prev.map(sp =>
+          sp.id === id ? { ...sp, email: newEmail } : sp
         ));
         alert("Email ID updated successfully!");
       } else {
@@ -864,7 +864,7 @@ export default function SalespersonList() {
                   <button className="bg-[#dc3545] mb-[10px] mr-[70px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#c82333] text-sm font-medium px-4 py-2">
                     View Leads
                   </button>
-                  <button 
+                  <button
                     className="bg-[#133b74] mb-[10px] mr-[70px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-sm font-medium px-4 py-2 flex items-center gap-1"
                     onClick={() => handleOpenChangeEmail(sp.id)} // Added onClick handler
                   >
@@ -1265,7 +1265,7 @@ export default function SalespersonList() {
 
 //   const handleChangeEmail = (id, newEmail) => {
 //     // Update the local state with the new email
-//     setSalespersons(prev => prev.map(sp => 
+//     setSalespersons(prev => prev.map(sp =>
 //       sp.id === id ? { ...sp, email: newEmail } : sp
 //     ));
 //     alert(`Email ID for salesperson ${id} updated to ${newEmail} (Frontend Mock)!`);
@@ -1414,7 +1414,7 @@ export default function SalespersonList() {
 //                   <button className="bg-[#dc3545] mb-[10px] mr-[70px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#c82333] text-sm font-medium px-4 py-2">
 //                     View Leads
 //                   </button>
-//                   <button 
+//                   <button
 //                     className="bg-[#133b74] mb-[10px] mr-[70px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-sm font-medium px-4 py-2 flex items-center gap-1"
 //                     onClick={() => handleOpenChangeEmail(sp.id)}
 //                   >

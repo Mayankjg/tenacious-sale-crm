@@ -14,10 +14,10 @@ const mockUseRouter = () => {
 };
 
 const initialSalespersons = [
-    { id: 1, username: "GauravSoni", firstname: "Gaurav", lastname: "Soni", email: "gaurav.s@example.com", designation: "Sales Lead", contact: "9876543210", code: "+91", status: "Active", profileImage: "https://placehold.co/70x150/1f4d78/ffffff?text=GS" },
-    { id: 2, username: "PriyaSharma", firstname: "Priya", lastname: "Sharma", email: "priya.s@example.com", designation: "Field Sales Rep", contact: "8888123456", code: "+91", status: "Active", profileImage: "https://placehold.co/70x150/461159/ffffff?text=PS" },
-    { id: 3, username: "SureshPatel", firstname: "Suresh", lastname: "Patel", email: "suresh.p@example.com", designation: "Junior Executive", contact: "7770001112", code: "+91", status: "Inactive", profileImage: "https://placehold.co/70x150/198754/ffffff?text=SP" },
-    { id: 4, username: "KajalVora", firstname: "Kajal", lastname: "Vora", email: "kajal.v@example.com", designation: "Sales Trainee", contact: "9009009009", code: "+91", status: "Inactive", profileImage: "https://placehold.co/70x150/ffc107/333333?text=KV" },
+    { id: 1, username: "Mayank", firstname: "Mayank", lastname: "Jagalaganeshwala", email: "Mayank@example.com", designation: "Sales Lead", contact: "9876543210", code: "+91", status: "Active", profileImage: "https://placehold.co/70x150/1f4d78/ffffff?text=MJ" },
+    { id: 2, username: "Jay", firstname: "Jay", lastname: "Sharma", email: "Jay@example.com", designation: "Field Sales Rep", contact: "8888123456", code: "+91", status: "Active", profileImage: "https://placehold.co/70x150/461159/ffffff?text=JS" },
+    { id: 3, username: "Parth", firstname: "Parth", lastname: "Patel", email: "Parth@example.com", designation: "Junior Executive", contact: "7770001112", code: "+91", status: "Inactive", profileImage: "https://placehold.co/70x150/198754/ffffff?text=PP" },
+    { id: 4, username: "Ruchit", firstname: "Ruchit", lastname: "Vora", email: "Ruchit@example.com", designation: "Sales Trainee", contact: "9009009009", code: "+91", status: "Inactive", profileImage: "https://placehold.co/70x150/ffc107/333333?text=RV" },
 ];
 
 const pageContainerStyle = {
@@ -79,7 +79,6 @@ export default function RequestInactive() {
         <div style={pageContainerStyle}>
             <div className="p-4 bg-white rounded-xl shadow-2xl w-full max-w-[1200px] min-h-[550px]">
 
-                {/* Header Section (Dark Blue Style) */}
                 <div className="bg-white px-4 py-4">
                     <div className="flex justify-between items-center border-b pb-4 border-gray-200">
                         <h2 className="text-2xl font-semibold text-gray-900">
@@ -94,7 +93,6 @@ export default function RequestInactive() {
                     </div>
                 </div>
 
-                {/* Filter Section (Top Right Position) */}
                 <div className="flex justify-end mb-[30px] items-center px-4 pt-4 pb-6">
                     <label className="text-[20px] mt-[30px] mr-[20px] font-medium text-gray-600 mr-2">
                         Filter Status:</label>
@@ -109,7 +107,6 @@ export default function RequestInactive() {
                     </select>
                 </div>
 
-                {/* Salesperson List */}
                 <div className="w-[1100px] px-4 grid grid-cols-1 gap-5">
                     {filteredSalespersons.length > 0 ? (
                         filteredSalespersons.map((sp) => (
@@ -118,9 +115,7 @@ export default function RequestInactive() {
                                 className="flex flex-col mt-[20px] h-[310px] md:flex-row items-stretch justify-between bg-white border border-gray-200 rounded-[10px] p-5 shadow-lg hover:shadow-xl transition-all duration-200"
                             >
 
-                                {/* Left Section: Image and Details */}
                                 <div className="flex items-start gap-6 w-full md:w-3/4">
-                                    {/* Image */}
                                     <img
                                         src={sp.profileImage || "https://placehold.co/70x150/cccccc/333333?text=N/A"}
                                         alt="Profile"
@@ -128,7 +123,6 @@ export default function RequestInactive() {
                                         onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/70x150/cccccc/333333?text=N/A" }}
                                     />
 
-                                    {/* Info Block */}
                                     <div className="flex flex-col flex-grow">
                                         <div className="flex items-center mb-1">
                                             <h3 className="text-xl mb-[1px] ml-[20px] font-bold text-gray-900 capitalize">
@@ -162,7 +156,6 @@ export default function RequestInactive() {
                                     </div>
                                 </div>
 
-                                {/* Right Section: Action Button */}
                                 <div className="mt-4 md:mt-0 flex-shrink-0 flex items-center justify-end md:w-1/4">
                                     <button
                                         onClick={() => handleStatusChange(sp.id, getNextStatus(sp.status))}
