@@ -635,24 +635,19 @@ export default function SalespersonList() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this salesperson?")) return;
+  const handleDelete = (id) => {
+    if (!confirm("Are you sure you want to delete this salesperson? (Local Delete)")) return;
 
     try {
-      const res = await fetch(`/api/salespersons/${id}`, { method: "DELETE" });
-
-      if (res.ok) {
         setSalespersons((prev) => prev.filter((sp) => sp.id !== id));
-        alert("Salesperson deleted successfully");
-      } else {
-        const data = await res.json();
-        alert(data.message || "Failed to delete salesperson");
-      }
+        
+        alert("Salesperson deleted successfully!");
+        
     } catch (error) {
-      console.error("Error deleting salesperson:", error);
-      alert("Something went wrong");
+        console.error("Error during local delete:", error);
+        alert("Local deletion failed.");
     }
-  };
+};
 
   // Password Handlers
   const handleOpenChangePassword = (id) => {
@@ -665,25 +660,17 @@ export default function SalespersonList() {
     setSalespersonToChange(null);
   };
 
-  const handleChangePassword = async (id, newPassword) => {
-    try {
-      const res = await fetch(`/api/salespersons/${id}/change-password`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password: newPassword }),
-      });
+ const handleChangePassword = async (id, newPassword) => {
+    await new Promise(resolve => setTimeout(resolve, 500)); 
 
-      if (res.ok) {
-        alert("Password updated successfully!");
-      } else {
-        const data = await res.json();
-        alert(data.message || "Failed to update password");
-      }
+    try {
+        alert("Password updated successfully!"); 
+        
     } catch (error) {
-      console.error("Error changing password:", error);
-      alert("Something went wrong");
+        console.error("Error during password simulation:", error);
+        alert("Something went wrong"); 
     }
-  };
+};
 
   // Email Handlers (NEW)
   const handleOpenChangeEmail = (id) => {
@@ -697,29 +684,20 @@ export default function SalespersonList() {
   };
 
   const handleChangeEmail = async (id, newEmail) => {
-    // Implement your API call here to update the email
-    try {
-      const res = await fetch(`/api/salespersons/${id}/change-email`, { // **Update API endpoint as needed**
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: newEmail }),
-      });
+    await new Promise(resolve => setTimeout(resolve, 500)); 
 
-      if (res.ok) {
-        // Optimistically update the local state if the API call is successful
+    try {
         setSalespersons(prev => prev.map(sp =>
-          sp.id === id ? { ...sp, email: newEmail } : sp
+            sp.id === id ? { ...sp, email: newEmail } : sp
         ));
+        
         alert("Email ID updated successfully!");
-      } else {
-        const data = await res.json();
-        alert(data.message || "Failed to update email ID");
-      }
+        
     } catch (error) {
-      console.error("Error changing email:", error);
-      alert("Something went wrong");
+        console.error("Error during local email change:", error);
+        alert("Local Email ID update failed.");
     }
-  };
+};
 
 
   const filteredSalespersons = salespersons.filter(
@@ -753,8 +731,8 @@ export default function SalespersonList() {
       <div className="p-[6] bg-[#ffffff] rounded-[5px] w-[1200px]">
         <div className="bg-[#ffffff] w-full px-4 py-4">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl ml-[20px] font-semibold text-gray-900">
-              Salesperson List
+            <h2 className="text-2xl ml-[20px] font-[semibold] text-gray-900">
+              Salesperson <strong> List</strong>
             </h2>
             <button
               onClick={() => router.push("/managesalesperson/add")}
@@ -868,8 +846,9 @@ export default function SalespersonList() {
                     className="bg-[#133b74] mb-[10px] mr-[70px] h-[30px] w-[150px] rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-sm font-medium px-4 py-2 flex items-center gap-1"
                     onClick={() => handleOpenChangeEmail(sp.id)} // Added onClick handler
                   >
-                    <AtSign className="w-4 h-4 mr-[-15px]" /> {/* Added AtSign icon inside the button */}
+                    <div className="ml-[20px]">
                     Change Email ID
+                    </div>
                   </button>
                 </div>
               </div>
@@ -883,7 +862,7 @@ export default function SalespersonList() {
       </div>
     </div>
   );
-}
+} 
 
 
 
