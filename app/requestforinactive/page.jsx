@@ -145,10 +145,10 @@ export default function RequestInactive() {
                                                 <span className="font-medium">Contact:</span> {sp.code} {sp.contact}
                                             </p>
 
-                                            <p className="flex items-center gap-2 text-gray-700 col-span-1 sm:col-span-2">
+                                            <p className="flex items-center gap-2 text-gray-700 col-span-1 md:col-span-2">
                                                 <Mail className="w-4 h-4 ml-[20px] text-gray-500" />
-                                                <span className="font-medium">Email:</span>
-                                                <a href={`mailto:${sp.email}`} className="text-[#007bff] hover:underline truncate">
+                                                <span className="font-semibold">Email:</span>
+                                                <a href={`mailto:${sp.email}`} className="text-blue-600 hover:underline truncate">
                                                     {sp.email}
                                                 </a>
                                             </p>
@@ -156,10 +156,12 @@ export default function RequestInactive() {
                                     </div>
                                 </div>
 
-                                <div className="mt-4 md:mt-0 flex-shrink-0 flex items-center justify-end md:w-1/4">
+                                {/* Right Section: Action Button (Positioned horizontally with the main info block) */}
+                                {/* The button container is now a sibling to the main info div within the overall card flex */}
+                                <div className="flex-shrink-0 w-full lg:w-auto mt-4 lg:mt-0 flex items-center justify-end">
                                     <button
                                         onClick={() => handleStatusChange(sp.id, getNextStatus(sp.status))}
-                                        className={`h-[40px] w-[300px] mb-[10px] max-w-[180px] rounded-[5px] mb-[100px] mr-[20px] text-white text-sm font-semibold px-4 py-2 shadow-md transition-colors duration-200 ${getButtonClass(sp.status)}`}
+                                        className={`w-[200px] lg:w-[150px] h-[40px] mr-[20px] mb-[40px] rounded-[5px] text-white text-sm font-semibold px-4 py-2 shadow-lg transition-colors duration-200 ${getButtonClass(sp.status)}`}
                                     >
                                         {getButtonText(sp.status)}
                                     </button>
@@ -167,8 +169,8 @@ export default function RequestInactive() {
                             </div>
                         ))
                     ) : (
-                        <div className="text-center text-gray-500 text-lg font-medium py-12 border border-dashed border-gray-300 rounded-xl mx-auto max-w-lg">
-                            No Salespersons found with status: {filter}.
+                        <div className="text-center text-gray-500 text-lg font-medium py-12 border-2 border-dashed border-gray-300 rounded-xl mx-auto max-w-lg mt-8">
+                            No Salespersons found with status: **{filter}**.
                         </div>
                     )}
                 </div>
