@@ -1,146 +1,185 @@
 "use client";
 import React, { useState } from "react";
+import { Mail, Phone, Briefcase, Key, Trash2, ArrowLeft } from "lucide-react";
 
 const mockUseRouter = () => {
-  return {
-    push: (path) => {
-      console.log(`[MOCK ROUTER] Navigating to: ${path}`);
-    },
-    back: () => {
-      console.log("[MOCK ROUTER] Navigating back");
-    }
-  };
+    return {
+        push: (path) => {
+            console.log(`[MOCK ROUTER] Navigating to: ${path}`);
+        },
+        back: () => {
+            console.log("[MOCK ROUTER] Navigating back");
+        }
+    };
 };
 
 const initialSalespersons = [
-  { id: 1, name: "Gaurav Soni", email: "gaurav.s@example.com", designation: "Sales Lead", status: "Active" },
-  { id: 2, name: "Priya Sharma", email: "priya.s@example.com", designation: "Field Sales Rep", status: "Active" },
-  { id: 3, name: "Suresh Patel", email: "suresh.p@example.com", designation: "Junior Executive", status: "Inactive" },
-  { id: 4, name: "Kajal Vora", email: "kajal.v@example.com", designation: "Sales Trainee", status: "Active" },
+    { id: 1, username: "GauravSoni", firstname: "Gaurav", lastname: "Soni", email: "gaurav.s@example.com", designation: "Sales Lead", contact: "9876543210", code: "+91", status: "Active", profileImage: "https://placehold.co/70x150/1f4d78/ffffff?text=GS" },
+    { id: 2, username: "PriyaSharma", firstname: "Priya", lastname: "Sharma", email: "priya.s@example.com", designation: "Field Sales Rep", contact: "8888123456", code: "+91", status: "Active", profileImage: "https://placehold.co/70x150/461159/ffffff?text=PS" },
+    { id: 3, username: "SureshPatel", firstname: "Suresh", lastname: "Patel", email: "suresh.p@example.com", designation: "Junior Executive", contact: "7770001112", code: "+91", status: "Inactive", profileImage: "https://placehold.co/70x150/198754/ffffff?text=SP" },
+    { id: 4, username: "KajalVora", firstname: "Kajal", lastname: "Vora", email: "kajal.v@example.com", designation: "Sales Trainee", contact: "9009009009", code: "+91", status: "Inactive", profileImage: "https://placehold.co/70x150/ffc107/333333?text=KV" },
 ];
 
+const pageContainerStyle = {
+    backgroundColor: '#ffffffff',
+    padding: '20px',
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    fontFamily: '"Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif'
+};
+
 export default function RequestInactive() {
-  const router = mockUseRouter();
-  const [salespersons, setSalespersons] = useState(initialSalespersons);
-  const [filter, setFilter] = useState("all"); 
-
-  const handleStatusChange = (id, newStatus) => {
-    console.log(`[ACTION] Updating ID ${id} to ${newStatus}`);
-    
-
-    setSalespersons(prev => 
-      prev.map(person => 
-        person.id === id ? { ...person, status: newStatus } : person
-      )
-    );
-  };
+    const router = mockUseRouter();
+    const [salespersons, setSalespersons] = useState(initialSalespersons);
+    const [filter, setFilter] = useState("all");
 
 
-  const filteredSalespersons = salespersons.filter(person => {
-    if (filter === "all") return true;
-    return person.status.toLowerCase() === filter;
-  });
+    const handleStatusChange = (id, newStatus) => {
 
-  const getStatusColor = (status) => {
-    return status === "Active" 
-      ? "text-green-600 bg-green-100 border border-green-300 px-2 py-0.5 rounded-full text-xs font-medium" 
-      : "text-red-600 bg-red-100 border border-red-300 px-2 py-0.5 rounded-full text-xs font-medium";
-  };
-  
-  const getButtonClass = (status) => {
-    return status === "Active"
-      ? "bg-red-500 hover:bg-red-600 text-white" 
-      : "bg-green-500 hover:bg-green-600 text-white"; 
-  };
-  
-  const getButtonText = (status) => {
-    return status === "Active" ? "Set Inactive" : "Set Active";
-  };
-  
-  const getNextStatus = (status) => {
-    return status === "Active" ? "Inactive" : "Active";
-  };
+        const action = newStatus === 'Inactive' ? 'deactivate' : 'activate';
+        console.log(`[ACTION] Requesting to ${action} salesperson ID ${id}`);
+
+        setSalespersons(prev =>
+            prev.map(person =>
+                person.id === id ? { ...person, status: newStatus } : person
+            )
+        );
+    };
+
+    const filteredSalespersons = salespersons.filter(person => {
+        if (filter === "all") return true;
+        return person.status.toLowerCase() === filter;
+    });
+
+    const getStatusColor = (status) => {
+        return status === "Active"
+            ? "text-green-700 bg-green-100 border border-green-300"
+            : "text-red-700 bg-red-100 border border-red-300";
+    };
+
+    const getButtonClass = (status) => {
+
+        return status === "Active"
+            ? "bg-[#dc3545] hover:bg-[#c82333]"
+            : "bg-[#00a7cf] hover:bg-[#0094b8]";
+    };
+
+    const getButtonText = (status) => {
+        return status === "Active" ? "Set Inactive" : "Set Active";
+    };
+
+    const getNextStatus = (status) => {
+        return status === "Active" ? "Inactive" : "Active";
+    };
 
 
-  return (
-    <div className="bg-[#eef1f4] p-5 min-h-screen flex justify-center items-start font-sans">
-      <div className="bg-white min-h-[550px] w-full max-w-6xl mx-auto rounded-xl shadow-2xl overflow-hidden">
-        <div className="border-b border-[#e0e0e0] p-4 flex justify-between items-center">
-          <h2 className="text-xl font-normal text-[#333]">
-            Request for <span className="font-semibold">Inactive Page</span>
-          </h2>
-          <button
-            onClick={() => router.back()}
-            className="px-4 py-1.5 rounded-lg text-sm font-medium border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition duration-150 shadow-sm"
-          >
-            ← Back
-          </button>
-        </div>
+    return (
+        <div style={pageContainerStyle}>
+            <div className="p-4 bg-white rounded-xl shadow-2xl w-full max-w-[1200px] min-h-[550px]">
 
-        <div className="p-4 sm:p-6">
-          
-          {/* Filter Section */}
-          <div className="mb-6 flex space-x-4">
-            <label className="text-sm font-medium text-gray-600">Filter by Status:</label>
-            <select
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg p-1.5 text-sm"
-            >
-              <option value="all">All</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-          </div>
-
-          {/* Salesperson List (Responsive Grid) */}
-          <div className="space-y-4">
-            {filteredSalespersons.length > 0 ? (
-              filteredSalespersons.map((person) => (
-                <div 
-                  key={person.id} 
-                 
-                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 border border-gray-200 rounded-lg shadow-sm items-center hover:bg-gray-50 transition duration-150"
-                >
-                  {/* Name & Designation */}
-                  <div className="flex flex-col col-span-1">
-                    <p className="text-sm font-bold text-[#333]">{person.name}</p>
-                    <p className="text-xs text-gray-500">{person.designation}</p>
-                  </div>
-                  
-                  {/* Email */}
-                  <div className="hidden sm:flex flex-col col-span-1">
-                     <p className="text-sm text-gray-600 truncate">{person.email}</p>
-                     <p className="text-xs text-gray-400">Email</p>
-                  </div>
-                  
-                  {/* Status Tag */}
-                  <div className="col-span-1 flex items-center">
-                    <span className={getStatusColor(person.status)}>
-                      {person.status}
-                    </span>
-                  </div>
-
-                  {/* Action Button */}
-                  <div className="col-span-1 flex justify-start md:justify-end">
-                    <button
-                      onClick={() => handleStatusChange(person.id, getNextStatus(person.status))}
-                      className={`px-4 py-1.5 rounded-lg text-sm font-medium ${getButtonClass(person.status)} transition duration-150 shadow-md`}
-                    >
-                      {getButtonText(person.status)}
-                    </button>
-                  </div>
+                {/* Header Section (Dark Blue Style) */}
+                <div className="bg-white px-4 py-4">
+                    <div className="flex justify-between items-center border-b pb-4 border-gray-200">
+                        <h2 className="text-2xl font-semibold text-gray-900">
+                            Request for <span className="text-[#dc3545]">Inactivation</span> / Activation
+                        </h2>
+                        <button
+                            onClick={() => router.back()}
+                            className="flex items-center gap-1 bg-[#1a1a3d] hover:bg-[#111132] text-[white] px-4 py-2 rounded-[5px] text-base transition-colors duration-200"
+                        >
+                            <ArrowLeft className="w-5 h-5" /> Back
+                        </button>
+                    </div>
                 </div>
-              ))
-            ) : (
-              <p className="text-center text-gray-500 p-10 border border-dashed border-gray-300 rounded-lg">
-                No Salespersons found with status: {filter}.
-              </p>
-            )}
-          </div>
-          
+
+                {/* Filter Section (Top Right Position) */}
+                <div className="flex justify-end mb-[30px] items-center px-4 pt-4 pb-6">
+                    <label className="text-[20px] mt-[30px] mr-[20px] font-medium text-gray-600 mr-2">
+                        Filter Status:</label>
+                    <select
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
+                        className="border border-gray-300 mt-[30px] rounded-[5px] p-2 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00a7cf]"
+                    >
+                        <option value="all">All Salespersons</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+
+                {/* Salesperson List */}
+                <div className="w-[1100px] px-4 grid grid-cols-1 gap-5">
+                    {filteredSalespersons.length > 0 ? (
+                        filteredSalespersons.map((sp) => (
+                            <div
+                                key={sp.id}
+                                className="flex flex-col mt-[20px] h-[250px] md:flex-row items-stretch justify-between bg-white border border-gray-200 rounded-[10px] p-5 shadow-lg hover:shadow-xl transition-all duration-200"
+                            >
+
+                                {/* Left Section: Image and Details */}
+                                <div className="flex items-start gap-6 w-full md:w-3/4">
+                                    {/* Image */}
+                                    <img
+                                        src={sp.profileImage || "https://placehold.co/70x150/cccccc/333333?text=N/A"}
+                                        alt="Profile"
+                                        className="w-[50px] h-[50px] ml-[20px] mt-[20px] rounded-[20px] border border-gray-300 object-cover flex-shrink-0 shadow-md"
+                                        onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/70x150/cccccc/333333?text=N/A" }}
+                                    />
+
+                                    {/* Info Block */}
+                                    <div className="flex flex-col flex-grow">
+                                        <div className="flex items-center mb-1">
+                                            <h3 className="text-xl mb-[1px] ml-[20px] font-bold text-gray-900 capitalize">
+                                                {sp.firstname} {sp.lastname}
+                                            </h3>
+                                            <span className={`ml-4 text-xs mt-[20px] ml-[20px] font-semibold px-3 py-1 rounded-full ${getStatusColor(sp.status)}`}>
+                                                {sp.status}
+                                            </span>
+                                        </div>
+                                        <p className="text-sm ml-[20px] text-gray-500 mb-4">@{sp.username}</p>
+
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6 text-sm">
+                                            <p className="flex items-center gap-2 text-gray-700">
+                                                <Briefcase className="w-4 h-4 ml-[20px] text-gray-500" />
+                                                <span className="font-medium">Designation:</span> {sp.designation}
+                                            </p>
+
+                                            <p className="flex items-center gap-2 text-gray-700">
+                                                <Phone className="w-4 h-4 ml-[20px] text-gray-500" />
+                                                <span className="font-medium">Contact:</span> {sp.code} {sp.contact}
+                                            </p>
+
+                                            <p className="flex items-center gap-2 text-gray-700 col-span-1 sm:col-span-2">
+                                                <Mail className="w-4 h-4 ml-[20px] text-gray-500" />
+                                                <span className="font-medium">Email:</span>
+                                                <a href={`mailto:${sp.email}`} className="text-[#007bff] hover:underline truncate">
+                                                    {sp.email}
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Right Section: Action Button */}
+                                <div className="mt-4 md:mt-0 flex-shrink-0 flex items-center justify-end md:w-1/4">
+                                    <button
+                                        onClick={() => handleStatusChange(sp.id, getNextStatus(sp.status))}
+                                        className={`h-[40px] w-full max-w-[180px] rounded-[5px] mb-[100px] mr-[20px] text-white text-sm font-semibold px-4 py-2 shadow-md transition-colors duration-200 ${getButtonClass(sp.status)}`}
+                                    >
+                                        {getButtonText(sp.status)}
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="text-center text-gray-500 text-lg font-medium py-12 border border-dashed border-gray-300 rounded-xl mx-auto max-w-lg">
+                            No Salespersons found with status: {filter}.
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
