@@ -115,7 +115,7 @@ export default function RequestInactive() {
                         filteredSalespersons.map((sp) => (
                             <div
                                 key={sp.id}
-                                className="flex flex-col mt-[20px] h-[250px] md:flex-row items-stretch justify-between bg-white border border-gray-200 rounded-[10px] p-5 shadow-lg hover:shadow-xl transition-all duration-200"
+                                className="flex flex-col mt-[20px] h-[310px] md:flex-row items-stretch justify-between bg-white border border-gray-200 rounded-[10px] p-5 shadow-lg hover:shadow-xl transition-all duration-200"
                             >
 
                                 {/* Left Section: Image and Details */}
@@ -166,7 +166,7 @@ export default function RequestInactive() {
                                 <div className="mt-4 md:mt-0 flex-shrink-0 flex items-center justify-end md:w-1/4">
                                     <button
                                         onClick={() => handleStatusChange(sp.id, getNextStatus(sp.status))}
-                                        className={`h-[40px] w-full max-w-[180px] rounded-[5px] mb-[100px] mr-[20px] text-white text-sm font-semibold px-4 py-2 shadow-md transition-colors duration-200 ${getButtonClass(sp.status)}`}
+                                        className={`h-[40px] w-[300px] mb-[10px] max-w-[180px] rounded-[5px] mb-[100px] mr-[20px] text-white text-sm font-semibold px-4 py-2 shadow-md transition-colors duration-200 ${getButtonClass(sp.status)}`}
                                     >
                                         {getButtonText(sp.status)}
                                     </button>
