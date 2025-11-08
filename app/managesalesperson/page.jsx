@@ -963,7 +963,7 @@ export default function SalespersonList() {
               </h2>
               <button
                 onClick={() => router.push("/managesalesperson/add")}
-                className="bg-[#1f3853] hover:bg-[#111132] text-white md:mr-5 text-lg px-4 py-2 rounded-md"
+                className="bg-[#1f3853] h-[35 px] hover:bg-[#111132] text-[white] md:mr-5 text-lg px-4 py-2 rounded-[5px]"
               >
                 Add Sales Person
               </button>
@@ -977,10 +977,10 @@ export default function SalespersonList() {
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input w-full sm:w-[200px] h-9 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00a7cf]"
+              className="search-input w-[200px] sm:w-[200px] h-[30px] mr-[20px] border border-gray-300 rounded-[5px] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00a7cf]"
               style={{ textIndent: "10px" }}
             />
-            <button className="bg-[#0baad1] w-full sm:w-[70px] h-10 text-white px-5 py-2 text-sm font-medium rounded-md hover:bg-[#0094b8]">
+            <button className="bg-[#0baad1] w-[150px] sm:w-[70px] h-[35px] text-white px-5 py-2 text-sm font-medium rounded-[5px] hover:bg-[#0094b8]">
               Search
             </button>
           </div>
@@ -992,13 +992,13 @@ export default function SalespersonList() {
                   key={sp.id || index}
                   className="salesperson-card mt-[20px] flex items-start hover:bg-gray-50 justify-between bg-white border border-gray-200 rounded-[20px] p-4 shadow-sm hover:shadow-md transition-all duration-200"
                 >
-                  <div className="flex flex-col ml-[20px] md:flex-row items-start gap-4 flex-1 w-full">
+                  <div className="flex flex-col ml-[5px] md:flex-row items-start gap-4 flex-1 w-full">
                     <img
                       src={sp.profileImage || "/default-avatar.png"}
                       alt="Profile"
                       className="profile-image mt-[20px] w-[70px] h-[100px] rounded-[5px] border border-gray-300 object-cover"
                     />
-                    <div className="card-content mb-[30px] flex-1 w-full">
+                    <div className="card-content mb-[10px] flex-1 w-full">
                       <h3 className="card-header text-lg md:text-xl ml-[110px] mb-[10px] font-bold text-gray-800 leading-tight mb-3">
                         {sp.username}
                       </h3>
@@ -1031,7 +1031,7 @@ export default function SalespersonList() {
                             </span>
                           </div>
                           
-                          <button className="action-button bg-[#dc3545] mr-[60px] h-[30px] px-4 rounded-[5px] text-white hover:bg-[#c82333] text-sm font-medium">
+                          <button className="action-button bg-[#dc3545] mr-[100px] h-[30px] px-4 rounded-[5px] text-[white] hover:bg-[#c82333] text-sm font-medium">
                             View Leads
                           </button>
                         </div>
@@ -1063,16 +1063,16 @@ export default function SalespersonList() {
                             onClick={() => handleOpenChangePassword(sp.id)}
                           >
                             <Key
-                              className="password-icon w-5 h-5 text-gray-600 hover:text-[#133b74] transition"
+                              className="password-icon w-5 h-5 mr-[70px] text-gray-600 hover:text-[#133b74] transition"
                               title="Change Password"
                             />
-                            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+                            <span className="absolute top-30 left-2/2 mr-[100px] -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
                               Change Password
                             </span>
                           </div>
                           
                           <button
-                            className="action-button bg-[#2b3342] h-9 px-4 rounded-md text-white hover:bg-[#0f2f5a] text-sm font-medium"
+                            className="action-button bg-[#2b3342] mr-[85px] h-[30px] px-4 rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-sm font-medium"
                             onClick={() => handleOpenChangeEmail(sp.id)}
                           >
                             Change Email
