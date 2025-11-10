@@ -1055,7 +1055,7 @@ const NewPasswordModal = ({ salespersonId, onClose, onPasswordChange }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
