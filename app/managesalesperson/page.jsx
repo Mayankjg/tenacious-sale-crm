@@ -640,11 +640,12 @@ const NewPasswordModal = ({ salespersonId, onClose, onPasswordChange }) => {
   };
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[1000] p-5"
       onClick={onClose}
     >
-      <div 
+
+      <div
         className="bg-white p-8 rounded-lg w-full max-w-md shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
@@ -716,11 +717,11 @@ const ChangeEmailModal = ({ salespersonId, onClose, onEmailChange }) => {
   };
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[1000] p-5"
       onClick={onClose}
     >
-      <div 
+      <div
         className="bg-white p-8 rounded-lg w-full max-w-md shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
