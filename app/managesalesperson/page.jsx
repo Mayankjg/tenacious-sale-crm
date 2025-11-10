@@ -611,6 +611,441 @@
 
 
 
+
+
+
+
+
+
+
+
+// "use client";
+// import { useRouter } from "next/navigation";
+// import React, { useEffect, useState } from "react";
+// import { Mail, Phone, Briefcase, Trash2, Key } from "lucide-react";
+
+// const NewPasswordModal = ({ salespersonId, onClose, onPasswordChange }) => {
+//   const [newPassword, setNewPassword] = useState("");
+//   const [confirmPassword, setConfirmPassword] = useState("");
+//   const [error, setError] = useState("");
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     setError("");
+
+//     if (newPassword.length < 6) {
+//       setError("Password must be at least 6 characters long.");
+//       return;
+//     }
+
+//     if (newPassword !== confirmPassword) {
+//       setError("New password and confirm password do not match.");
+//       return;
+//     }
+
+//     onPasswordChange(salespersonId, newPassword);
+//     onClose();
+//   };
+
+//   return (
+//     <div
+//       className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[1000] p-5"
+//       onClick={onClose}
+//     >
+//       <div
+//         className="bg-white p-8 rounded-lg w-full max-w-md shadow-lg"
+//         onClick={(e) => e.stopPropagation()}
+//       >
+//         <h3 className="text-xl font-semibold mb-4 text-gray-900">Change Password</h3>
+//         <form onSubmit={handleSubmit}>
+//           {error && <p className="text-red-500 mb-3 text-sm">{error}</p>}
+
+//           <label className="block mb-2 text-sm font-medium text-gray-700">New Password</label>
+//           <input
+//             type="password"
+//             value={newPassword}
+//             onChange={(e) => setNewPassword(e.target.value)}
+//             className="w-full p-2.5 mb-4 border border-gray-300 rounded-md pl-5"
+//             placeholder="Enter new password"
+//             required
+//             minLength="6"
+//           />
+
+//           <label className="block mb-2 text-sm font-medium text-gray-700">Confirm Password</label>
+//           <input
+//             type="password"
+//             value={confirmPassword}
+//             onChange={(e) => setConfirmPassword(e.target.value)}
+//             className="w-full p-2.5 mb-4 border border-gray-300 rounded-md pl-5"
+//             placeholder="Confirm password"
+//             required
+//           />
+
+//           <div className="flex justify-end gap-3 mt-4">
+//             <button
+//               type="submit"
+//               className="bg-[#00a7cf] hover:bg-[#0094b8] text-white px-4 py-2.5 rounded-md font-bold ml-5 transition-colors"
+//             >
+//               Update Password
+//             </button>
+//             <button
+//               type="button"
+//               onClick={onClose}
+//               className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2.5 rounded-md font-bold ml-2.5 transition-colors"
+//             >
+//               Cancel
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
+
+// const ChangeEmailModal = ({ salespersonId, onClose, onEmailChange }) => {
+//   const [newEmail, setNewEmail] = useState("");
+//   const [error, setError] = useState("");
+
+//   const validateEmail = (email) => {
+//     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     setError("");
+
+//     if (!validateEmail(newEmail)) {
+//       setError("Please enter a valid email address.");
+//       return;
+//     }
+
+//     onEmailChange(salespersonId, newEmail);
+//     onClose();
+//   };
+
+//   return (
+//     <div
+//       className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[1000] p-5"
+//       onClick={onClose}
+//     >
+//       <div
+//         className="bg-white p-8 rounded-lg w-full max-w-md shadow-lg"
+//         onClick={(e) => e.stopPropagation()}
+//       >
+//         <h3 className="text-xl font-semibold mb-4 text-gray-900">Change Email ID</h3>
+//         <form onSubmit={handleSubmit}>
+//           {error && <p className="text-red-500 mb-3 text-sm">{error}</p>}
+
+//           <label className="block mb-2 text-sm font-medium text-gray-700">New Email ID</label>
+//           <input
+//             type="email"
+//             value={newEmail}
+//             onChange={(e) => setNewEmail(e.target.value)}
+//             className="w-full p-2.5 mb-4 border border-gray-300 rounded-md pl-5"
+//             placeholder="Enter new email address"
+//             required
+//           />
+
+//           <div className="flex justify-end gap-3 mt-4">
+//             <button
+//               type="submit"
+//               className="bg-[#133b74] hover:bg-[#0f2f5a] text-white px-4 py-2.5 rounded-md font-bold ml-5 transition-colors"
+//             >
+//               Update Email
+//             </button>
+//             <button
+//               type="button"
+//               onClick={onClose}
+//               className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2.5 rounded-md font-bold ml-2.5 transition-colors"
+//             >
+//               Cancel
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default function SalespersonList() {
+//   const router = useRouter();
+//   const [salespersons, setSalespersons] = useState([]);
+//   const [searchQuery, setSearchQuery] = useState("");
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [salespersonToChange, setSalespersonToChange] = useState(null);
+//   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+//   const [salespersonToChangeEmail, setSalespersonToChangeEmail] = useState(null);
+
+//   useEffect(() => {
+//     const storedData = localStorage.getItem("salespersons");
+//     if (storedData) {
+//       setSalespersons(JSON.parse(storedData));
+//     }
+//     fetchData();
+//   }, []);
+
+//   useEffect(() => {
+//     localStorage.setItem("salespersons", JSON.stringify(salespersons));
+//   }, [salespersons]);
+
+//   const fetchData = async () => {
+//     try {
+//       const res = await fetch("/api/salespersons");
+//       const data = await res.json();
+//       setSalespersons(data);
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//     }
+//   };
+
+//   const handleDelete = (id) => {
+//     if (!confirm("Are you sure you want to delete this salesperson ?")) return;
+
+//     try {
+//       setSalespersons((prev) => prev.filter((sp) => sp.id !== id));
+//       alert("Salesperson deleted successfully!");
+//     } catch (error) {
+//       console.error("Error during local delete:", error);
+//       alert("Local deletion failed.");
+//     }
+//   };
+
+//   const handleOpenChangePassword = (id) => {
+//     setSalespersonToChange(id);
+//     setIsModalOpen(true);
+//   };
+
+//   const handleCloseChangePassword = () => {
+//     setIsModalOpen(false);
+//     setSalespersonToChange(null);
+//   };
+
+//   const handleChangePassword = async (id, newPassword) => {
+//     await new Promise(resolve => setTimeout(resolve, 500));
+
+//     try {
+//       alert("Password updated successfully!");
+//     } catch (error) {
+//       console.error("Error during password simulation:", error);
+//       alert("Something went wrong");
+//     }
+//   };
+
+//   const handleOpenChangeEmail = (id) => {
+//     setSalespersonToChangeEmail(id);
+//     setIsEmailModalOpen(true);
+//   };
+
+//   const handleCloseChangeEmail = () => {
+//     setIsEmailModalOpen(false);
+//     setSalespersonToChangeEmail(null);
+//   };
+
+//   const handleChangeEmail = async (id, newEmail) => {
+//     await new Promise(resolve => setTimeout(resolve, 500));
+
+//     try {
+//       setSalespersons(prev => prev.map(sp =>
+//         sp.id === id ? { ...sp, email: newEmail } : sp
+//       ));
+
+//       alert("Email ID updated successfully!");
+//     } catch (error) {
+//       console.error("Error during local email change:", error);
+//       alert("Local Email ID update failed.");
+//     }
+//   };
+
+//   const filteredSalespersons = salespersons.filter(
+//     (sp) =>
+//       sp.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+//       sp.email.toLowerCase().includes(searchQuery.toLowerCase())
+//   );
+
+//   const displayList = searchQuery ? filteredSalespersons : salespersons;
+
+//   return (
+//     <div className="bg-[#eef1f4] p-5 sm:p-3 min-h-[80vh] flex justify-center items-start font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]">
+//       {isModalOpen && (
+//         <NewPasswordModal
+//           salespersonId={salespersonToChange}
+//           onClose={handleCloseChangePassword}
+//           onPasswordChange={handleChangePassword}
+//         />
+//       )}
+
+//       {isEmailModalOpen && (
+//         <ChangeEmailModal
+//           salespersonId={salespersonToChangeEmail}
+//           onClose={handleCloseChangeEmail}
+//           onEmailChange={handleChangeEmail}
+//         />
+//       )}
+
+//       <div className="p-1.5 rounded-[5px] h-auto w-full max-w-[1200px] xl:w-[95%] xl:max-w-[1100px]">
+//         <div className="bg-white w-full px-4 py-4 sm:px-3 sm:py-3">
+//           <div className="flex justify-between items-center lg:flex-col lg:items-start lg:gap-4 sm:flex-col sm:items-start sm:gap-3">
+//             <h2 className="text-2xl ml-5 lg:ml-2.5 sm:ml-0 sm:text-xl font-semibold text-gray-900">
+//               Salesperson <strong>List</strong>
+//             </h2>
+//             <button
+//               onClick={() => router.push("/managesalesperson/add")}
+//               className="bg-[#1f3853] hover:bg-[#111132] text-[white] mr-5 lg:mr-2.5 lg:w-full sm:mr-0 sm:w-full text-[18px] sm:text-base px-4 py-2 rounded-[5px] transition-colors"
+//             >
+//               Add Sales Person
+//             </button>
+//           </div>
+//           <hr className="border-t border-black mt-2 mb-6" />
+//         </div>
+
+//         <div className="flex items-center ml-4 gap-2 mb-6 lg:flex-col lg:ml-0 lg:items-stretch sm:flex-col sm:ml-0 sm:items-stretch sm:gap-2">
+//           <input
+//             type="text"
+//             placeholder="Search"
+//             value={searchQuery}
+//             onChange={(e) => setSearchQuery(e.target.value)}
+//             className="w-[200px] ml-auto lg:ml-0 lg:w-full sm:ml-0 sm:w-full mr-2.5 lg:mr-0 sm:mr-0 h-9 mt-2.5 sm:mt-0 border border-gray-300 rounded-[5px] mb-10 lg:mb-2.5 sm:mb-2 px-3 py-2 text-[18px] sm:text-base focus:outline-none focus:ring-2 focus:ring-[#00a7cf] pl-5"
+//           />
+//           <button className="bg-[#0baad1] w-[70px] lg:w-full sm:w-full h-10 text-white mr-1 lg:mr-0 sm:mr-0 mb-10 lg:mb-0 sm:mb-0 mt-2.5 lg:mt-0 sm:mt-0 px-5 py-2 text-[18px] sm:text-base font-medium rounded-[5px] hover:bg-[#0094b8] transition-colors">
+//             Search
+//           </button>
+//         </div>
+
+//         {displayList.length > 0 ? (
+//           <div className="w-full max-w-[1150px] lg:w-full lg:ml-0 sm:w-full sm:ml-0 ml-6 lg:ml-0 sm:ml-0 mt-[20px] sm:mt-2 grid grid-cols-1 gap-2.5">
+//             {displayList.map((sp, index) => (
+//               <div
+//                 key={sp.id || index}
+//                 className="flex items-center h-auto min-h-[200px] bg-[#ffffff] mt-[20px] sm:mt-3 hover:bg-[#f6f6f6] mb-2.5 justify-between bg-white border border-gray-200 rounded-[10px] p-4 sm:p-3 shadow-sm hover:shadow-md transition-all duration-200 lg:flex-col lg:items-start sm:flex-col sm:items-start"
+//               >
+//                 <div className="flex items-start gap-4 sm:gap-3 flex-1 w-full lg:flex-row sm:flex-col">
+//                   <img
+//                     src={sp.profileImage || "/default-avatar.png"}
+//                     alt="Profile"
+//                     className="w-[70px] h-[100px] ml-[10px] lg:ml-2.5 sm:ml-0 sm:w-[60px] sm:h-20 rounded-[10px] mt-5 sm:mt-2 border border-gray-300 object-cover"
+//                   />
+//                   <div className="flex-1 w-full lg:w-auto sm:w-full">
+//                     <h3 className="text-xl ml-8 lg:ml-4 sm:ml-0 sm:text-lg mt-5 sm:mt-2 font-bold text-gray-800 leading-tight">
+//                       {sp.username}
+//                     </h3>
+
+//                     <div className="flex items-center justify-between ml-8 lg:ml-4 sm:ml-0 lg:flex-col lg:items-start lg:gap-4 sm:flex-col sm:items-start sm:gap-3 mt-2.5">
+//                       <div className="flex items-center ml-[10px] sm:ml-0 gap-10 lg:gap-4 sm:flex-col sm:gap-2 sm:items-start">
+//                         <p className="text-gray-600 text-base sm:text-sm capitalize">
+//                           {sp.firstname} {sp.lastname}
+//                         </p>
+//                         <div className="flex items-center gap-2.5 ml-[60px] lg:ml-0 sm:ml-0">
+//                           <Briefcase className="w-[18px] h-[18px] text-gray-500" />
+//                           <span className="text-base sm:text-sm text-gray-700">
+//                             Designation: <span className="font-semibold">{sp.designation}</span>
+//                           </span>
+//                         </div>
+//                       </div>
+
+//                       <div className="flex items-center gap-3 sm:gap-2 lg:w-full lg:justify-start sm:w-full sm:justify-start sm:flex-wrap">
+//                         <div
+//                           className="relative group flex items-center cursor-pointer"
+//                           onClick={() => handleDelete(sp.id)}
+//                         >
+//                           <Trash2
+//                             className="w-5 h-5 mr-[120px] lg:mr-2.5 sm:mr-2 text-gray-600 hover:text-red-600 transition"
+//                             title="Delete"
+//                           />
+//                           <span className="absolute bottom-[20] -left-[20] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
+//                             Delete
+//                           </span>
+//                         </div>
+
+//                         <button className="bg-[#dc3545] h-9 w-[120px] sm:w-auto sm:flex-1 sm:min-w-[100px] lg:w-auto lg:flex-1 mt-2.5 sm:mt-0 mr-[50px] lg:mr-0 sm:mr-0 rounded-[5px] text-[white] hover:bg-[#c82333] text-[15px] sm:text-sm font-medium transition-colors">
+//                           View Leads
+//                         </button>
+//                       </div>
+//                     </div>
+
+//                     <div className="flex items-center justify-between ml-8 lg:ml-4 sm:ml-0 lg:flex-col lg:items-start lg:gap-4 sm:flex-col sm:items-start sm:gap-3 mt-4 mb-5 sm:mb-3">
+//                       <div className="flex items-center gap-10 lg:gap-4 sm:flex-col sm:gap-2 ml-[10px] sm:ml-0 sm:items-start">
+//                         <div className="flex items-center gap-2.5">
+//                           <Mail className="w-[18px] h-[18px] mb-2.5 sm:mb-0 text-gray-500" />
+//                           <a
+//                             href={`mailto:${sp.email}`}
+//                             className="text-[#007bff] mb-2.5 sm:mb-0 text-base sm:text-sm hover:underline break-all"
+//                           >
+//                             {sp.email}
+//                           </a>
+//                         </div>
+//                         <div className="flex items-center mb-2.5 sm:mb-0 gap-2.5 ml-[10px] sm:ml-0">
+//                           <Phone className="w-[18px] h-[18px] text-gray-500" />
+//                           <span className="text-base sm:text-sm text-gray-700">
+//                             Contact Number:{" "}
+//                             <span className="font-semibold">
+//                               {sp.contact}
+//                             </span>
+//                           </span>
+//                         </div>
+//                       </div>
+
+//                       <div className="flex items-center gap-3 sm:gap-2 lg:w-full lg:justify-start sm:w-full sm:justify-start sm:flex-wrap">
+//                         <div
+//                           className="relative group flex items-center cursor-pointer"
+//                           onClick={() => handleOpenChangePassword(sp.id)}
+//                         >
+//                           <Key
+//                             className="w-5 h-5 mr-[120px] lg:mr-2.5 sm:mr-2 mb-2.5 sm:mb-0 ml-[40px] lg:ml-0 sm:ml-0 text-gray-600 hover:text-[#133b74] transition"
+//                             title="Change Password"
+//                           />
+//                           <span className="absolute top-[20] -left-[50] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
+//                             Change Password
+//                           </span>
+//                         </div>
+
+//                         <button
+//                           className="bg-[#2b3342] h-9 w-[140px] sm:w-auto sm:flex-1 sm:min-w-[120px] lg:w-auto lg:flex-1 mr-[30px] lg:mr-0 sm:mr-0 mb-2.5 sm:mb-0 rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-[15px] sm:text-sm font-medium transition-colors"
+//                           onClick={() => handleOpenChangeEmail(sp.id)}
+//                         >
+//                           Change Email ID
+//                         </button>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         ) : (
+//           <div className="text-center text-gray-500 text-lg sm:text-base font-medium mt-10 sm:mt-5">
+//             No Salespersons Found
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -644,7 +1079,6 @@ const NewPasswordModal = ({ salespersonId, onClose, onPasswordChange }) => {
       className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[1000] p-5"
       onClick={onClose}
     >
-
       <div
         className="bg-white p-8 rounded-lg w-full max-w-md shadow-lg"
         onClick={(e) => e.stopPropagation()}
@@ -858,7 +1292,7 @@ export default function SalespersonList() {
   const displayList = searchQuery ? filteredSalespersons : salespersons;
 
   return (
-    <div className="bg-[#eef1f4] p-5 min-h-[80vh] flex justify-center items-start font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]">
+    <div className="bg-[#eef1f4] p-5 sm:p-3 min-h-[80vh] flex justify-center items-start font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]">
       {isModalOpen && (
         <NewPasswordModal
           salespersonId={salespersonToChange}
@@ -875,15 +1309,15 @@ export default function SalespersonList() {
         />
       )}
 
-      <div className="p-1.5 rounded-[5px] h-[1000px] w-full max-w-[1200px] xl:w-[95%] xl:max-w-[1100px]">
-        <div className="bg-white w-full px-4 py-4">
-          <div className="flex justify-between items-center xl:flex-col xl:items-start xl:gap-4 lg:flex-col lg:items-start lg:gap-4">
-            <h2 className="text-2xl ml-5 xl:ml-2.5 lg:ml-2.5 font-semibold text-gray-900">
+      <div className="p-1.5 rounded-[5px] h-auto w-full max-w-[1200px] xl:w-[95%] xl:max-w-[1100px]">
+        <div className="bg-white w-full px-4 py-4 sm:px-3 sm:py-3">
+          <div className="flex justify-between items-center lg:flex-col lg:items-start lg:gap-4 sm:flex-col sm:items-start sm:gap-3">
+            <h2 className="text-2xl ml-5 lg:ml-2.5 sm:ml-0 sm:text-xl font-semibold text-gray-900">
               Salesperson <strong>List</strong>
             </h2>
             <button
               onClick={() => router.push("/managesalesperson/add")}
-              className="bg-[#1f3853] hover:bg-[#111132] text-[white] mr-5 xl:mr-2.5 lg:mr-2.5 xl:w-full lg:w-full text-[18px] px-4 py-2 rounded-[5px] transition-colors"
+              className="bg-[#1f3853] hover:bg-[#111132] text-[white] mr-5 lg:mr-2.5 lg:w-full sm:mr-0 sm:w-full text-[18px] sm:text-base px-4 py-2 rounded-[5px] transition-colors"
             >
               Add Sales Person
             </button>
@@ -891,113 +1325,112 @@ export default function SalespersonList() {
           <hr className="border-t border-black mt-2 mb-6" />
         </div>
 
-        <div className="flex items-center ml-4 gap-2 mb-6 xl:flex-col xl:ml-0 xl:items-start lg:flex-col lg:ml-0 lg:items-start">
+        <div className="flex items-center ml-4 gap-2 mb-6 lg:flex-col lg:ml-0 lg:items-stretch sm:flex-col sm:ml-0 sm:items-stretch sm:gap-2">
           <input
             type="text"
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-[200px] ml-[875px] xl:ml-0 xl:w-full xl:max-w-[390px] mr-[10px] xl:mb-2.5 lg:ml-0 lg:w-full lg:max-w-[390px] lg:mb-2.5 mr-2.5 h-9 mt-2.5 border border-gray-300 rounded-[5px] mb-10 px-3 py-2 text-[18px] focus:outline-none focus:ring-2 focus:ring-[#00a7cf] pl-5"
+            className="w-[200px] ml-auto lg:ml-0 lg:w-full sm:ml-0 sm:w-full mr-2.5 lg:mr-0 sm:mr-0 h-9 mt-2.5 sm:mt-0 border border-gray-300 rounded-[5px] mb-10 lg:mb-2.5 sm:mb-2 px-3 py-2 text-[18px] sm:text-base focus:outline-none focus:ring-2 focus:ring-[#00a7cf] pl-5"
           />
-          <button className="bg-[#0baad1] w-[70px] xl:w-full xl:max-w-[395px] xl:mt-0 lg:w-full lg:max-w-[395px] lg:mt-0 h-10 text-white mr-1 mb-10 mt-2.5 px-5 py-2 text-[18px] font-medium rounded-[5px] hover:bg-[#0094b8] transition-colors">
+          <button className="bg-[#0baad1] w-[70px] lg:w-full sm:w-full h-10 text-white mr-1 lg:mr-0 sm:mr-0 mb-10 lg:mb-0 sm:mb-0 mt-2.5 lg:mt-0 sm:mt-0 px-5 py-2 text-[18px] sm:text-base font-medium rounded-[5px] hover:bg-[#0094b8] transition-colors">
             Search
           </button>
         </div>
 
         {displayList.length > 0 ? (
-          <div className="w-full max-w-[1150px] xl:w-full xl:ml-0 lg:w-full lg:ml-0 ml-6 mt-[20px] grid grid-cols-1 gap-2.5">
+          <div className="w-full max-w-[1150px] lg:w-full lg:ml-0 sm:w-full sm:ml-0 ml-6 lg:ml-0 sm:ml-0 mt-[20px] sm:mt-2 grid grid-cols-1 gap-2.5">
             {displayList.map((sp, index) => (
               <div
                 key={sp.id || index}
-                className="flex items-center h-[200px] bg-[#ffffff] mt-[20px] hover:bg-[#f6f6f6] mb-2.5 justify-between bg-white border border-gray-200 rounded-[10px] p-4 shadow-sm hover:shadow-md transition-all duration-200 md:flex-col md:items-start"
+                className="flex items-start h-auto min-h-[200px] bg-[#ffffff] mt-[20px] sm:mt-3 hover:bg-[#f6f6f6] mb-2.5 bg-white border border-gray-200 rounded-[10px] p-4 sm:p-3 shadow-sm hover:shadow-md transition-all duration-200 md:flex-col"
               >
-                <div className="flex items-start gap-4 flex-1">
+                <div className="flex items-start gap-4 sm:gap-3 flex-1 w-full">
                   <img
                     src={sp.profileImage || "/default-avatar.png"}
                     alt="Profile"
-                    className="w-[70px] h-[100px] ml-[10px] md:ml-2.5 rounded-[10px] mt-5 border border-gray-300 object-cover sm:w-[60px] sm:h-20"
+                    className="w-[70px] h-[100px] ml-[10px] md:ml-2.5 sm:ml-0 sm:w-[60px] sm:h-20 rounded-[10px] mt-5 sm:mt-2 border border-gray-300 object-cover"
                   />
-                  <div className="flex-1 md:w-full">
-                    <h3 className="text-xl ml-8 md:ml-4 ml-[10px] sm:text-lg mt-5 font-bold text-gray-800 leading-tight">
+                  
+                  <div className="flex-1 w-full">
+                    {/* Username */}
+                    <h3 className="text-xl ml-8 md:ml-4 sm:ml-0 sm:text-lg mt-5 sm:mt-2 font-bold text-gray-800 leading-tight">
                       {sp.username}
                     </h3>
 
-                    <div className="flex items-center justify-between ml-8 md:ml-4 md:flex-col md:items-start md:gap-4 mt-2.5">
-                      <div className="flex items-center ml-[10px] gap-10 md:flex-col md:gap-2.5 md:items-start">
-                        <p className="text-gray-600 text-base capitalize">
-                          {sp.firstname} {sp.lastname}
-                        </p>
-                        <div className="flex items-center gap-2.5 md:ml-0">
-                          <Briefcase className="w-[18px] h-[18px] ml-[60px] md:ml-0 text-gray-500" />
-                          <span className="text-base text-gray-700">
-                            Designation: <span className="font-semibold">{sp.designation}</span>
-                          </span>
-                        </div>
-                      </div>
+                    {/* First Name, Last Name */}
+                    <p className="text-gray-600 text-base sm:text-sm capitalize ml-8 md:ml-4 sm:ml-0 mt-2">
+                      {sp.firstname} {sp.lastname}
+                    </p>
 
-                      <div className="flex items-center gap-3 md:w-full md:justify-start md:gap-2.5">
-                        <div
-                          className="relative group flex items-center cursor-pointer"
-                          onClick={() => handleDelete(sp.id)}
-                        >
-                          <Trash2
-                            className="w-5 mr-[90px] md:mr-2.5 h-5 mr-[120px] text-gray-600 hover:text-red-600 transition"
-                            title="Delete"
-                          />
-                          <span className="absolute bottom-[20] -left-[20] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
-                            Delete
-                          </span>
-                        </div>
-
-                        <button className="bg-[#dc3545] h-9 w-[120px] md:w-full md:mr-2.5 mt-2.5 mr-[50px] rounded-[5px] text-[white] hover:bg-[#c82333] text-[15px] font-medium transition-colors">
-                          View Leads
-                        </button>
-                      </div>
+                    {/* Designation */}
+                    <div className="flex items-center gap-2.5 ml-8 md:ml-4 sm:ml-0 mt-2">
+                      <Briefcase className="w-[18px] h-[18px] text-gray-500" />
+                      <span className="text-base sm:text-sm text-gray-700">
+                        Designation: <span className="font-semibold">{sp.designation}</span>
+                      </span>
                     </div>
 
-                    <div className="flex items-center justify-between ml-8 md:ml-4 md:flex-col md:items-start md:gap-4 mt-4 mb-5">
-                      <div className="flex items-center gap-10 md:flex-col md:gap-2.5 ml-[10px] md:items-start">
-                        <div className="flex items-center gap-2.5">
-                          <Mail className="w-[18px] h-[18px] mb-2.5 text-gray-500" />
-                          <a
-                            href={`mailto:${sp.email}`}
-                            className="text-[#007bff] mb-2.5 text-base hover:underline"
-                          >
-                            {sp.email}
-                          </a>
-                        </div>
-                        <div className="flex items-center mb-2.5 gap-2.5">
-                          <Phone className="w-[18px] h-[18px] ml-[10px] text-gray-500" />
-                          <span className="text-base text-gray-700">
-                            Contact Number:{" "}
-                            <span className="font-semibold">
-                              {sp.contact}
-                            </span>
-                          </span>
-                        </div>
+                    {/* Delete and View Leads */}
+                    <div className="flex items-center gap-3 ml-8 md:ml-4 sm:ml-0 mt-3 sm:flex-wrap">
+                      <div
+                        className="relative group flex items-center cursor-pointer"
+                        onClick={() => handleDelete(sp.id)}
+                      >
+                        <Trash2
+                          className="w-5 h-5 text-gray-600 hover:text-red-600 transition"
+                          title="Delete"
+                        />
+                        <span className="absolute bottom-6 -left-2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
+                          Delete
+                        </span>
                       </div>
 
-                      <div className="flex items-center gap-3 md:w-full md:justify-start md:gap-2.5">
-                        <div
-                          className="relative group flex items-center cursor-pointer"
-                          onClick={() => handleOpenChangePassword(sp.id)}
-                        >
-                          <Key
-                            className="w-5 h-5 mr-[120px] md:mr-2.5 mb-2.5 ml-[40px] text-gray-600 hover:text-[#133b74] transition"
-                            title="Change Password"
-                          />
-                          <span className="absolute top-[20] -left-[50] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
-                            Change Password
-                          </span>
-                        </div>
+                      <button className="bg-[#dc3545] h-9 px-4 sm:flex-1 rounded-[5px] text-[white] hover:bg-[#c82333] text-[15px] sm:text-sm font-medium transition-colors">
+                        View Leads
+                      </button>
+                    </div>
 
-                        <button
-                          className="bg-[#2b3342] h-9 w-[140px] mr-[30px] md:w-full md:mr-2.5 mb-2.5 mr-8 rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-[] font-medium transition-colors"
-                          onClick={() => handleOpenChangeEmail(sp.id)}
-                        >
-                          Change Email ID
-                        </button>
+                    {/* Email */}
+                    <div className="flex items-center gap-2.5 ml-8 md:ml-4 sm:ml-0 mt-3">
+                      <Mail className="w-[18px] h-[18px] text-gray-500" />
+                      <a
+                        href={`mailto:${sp.email}`}
+                        className="text-[#007bff] text-base sm:text-sm hover:underline break-all"
+                      >
+                        {sp.email}
+                      </a>
+                    </div>
+
+                    {/* Contact Number */}
+                    <div className="flex items-center gap-2.5 ml-8 md:ml-4 sm:ml-0 mt-2">
+                      <Phone className="w-[18px] h-[18px] text-gray-500" />
+                      <span className="text-base sm:text-sm text-gray-700">
+                        Contact Number: <span className="font-semibold">{sp.contact}</span>
+                      </span>
+                    </div>
+
+                    {/* Change Password and Change Email ID */}
+                    <div className="flex items-center gap-3 ml-8 md:ml-4 sm:ml-0 mt-3 mb-2 sm:flex-wrap">
+                      <div
+                        className="relative group flex items-center cursor-pointer"
+                        onClick={() => handleOpenChangePassword(sp.id)}
+                      >
+                        <Key
+                          className="w-5 h-5 text-gray-600 hover:text-[#133b74] transition"
+                          title="Change Password"
+                        />
+                        <span className="absolute bottom-6 -left-12 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
+                          Change Password
+                        </span>
                       </div>
+
+                      <button
+                        className="bg-[#2b3342] h-9 px-4 sm:flex-1 rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-[15px] sm:text-sm font-medium transition-colors"
+                        onClick={() => handleOpenChangeEmail(sp.id)}
+                      >
+                        Change Email ID
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -1005,7 +1438,7 @@ export default function SalespersonList() {
             ))}
           </div>
         ) : (
-          <div className="text-center text-gray-500 text-lg font-medium mt-10">
+          <div className="text-center text-gray-500 text-lg sm:text-base font-medium mt-10 sm:mt-5">
             No Salespersons Found
           </div>
         )}
