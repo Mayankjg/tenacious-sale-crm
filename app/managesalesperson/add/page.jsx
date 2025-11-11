@@ -686,7 +686,7 @@ const internalStyles = `
       grid-template-columns: 1fr !important;
     }
     .input-field {
-      width: 40% !important;
+      width: 60% !important;
       margin-left: 10px !important;
       margin-right: 10px !important;
     }
@@ -701,7 +701,7 @@ const internalStyles = `
       width: 100% !important;
     }
     .contact-input {
-      width: 40% !important;
+      width: 60% !important;
       margin-left: 10px !important;
     }
   }
@@ -731,7 +731,7 @@ const internalStyles = `
       width: 100% !important;
     }
     .save-button, .cancel-button {
-      width: 40% !important;
+      width: 60% !important;
       margin-bottom: 10px;
       margin-left: 0 !important;
       margin-right: 0 !important;
