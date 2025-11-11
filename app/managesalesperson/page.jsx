@@ -2333,7 +2333,7 @@ export default function SalespersonList() {
   const displayList = searchQuery ? filteredSalespersons : salespersons;
 
   return (
-    <div className="bg-[#eef1f4] p-5 min-h-[80vh] flex justify-center items-start font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif] md:p-3">
+    <div className="bg-[#eef1f4] p-5 min-h-[80vh] flex justify-center items-start font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]">
       {isModalOpen && (
         <NewPasswordModal
           salespersonId={salespersonToChange}
@@ -2350,16 +2350,16 @@ export default function SalespersonList() {
         />
       )}
 
-      <div className="p-[6px] bg-white rounded-[5px] w-full max-w-[1200px] xl:w-[95%] xl:max-w-[1100px]">
+      <div className="p-[6px] bg-[white] mt-[20px] h-[2000px] rounded-[5px] w-full max-w-[1200px] xl:w-[95%] xl:max-w-[1100px]">
         {/* Header Section */}
         <div className="bg-white w-full px-4 py-4">
-          <div className="flex justify-between items-center md:flex-col md:items-start md:gap-4">
-            <h2 className="text-2xl ml-5 md:ml-0 font-semibold text-gray-900">
+          <div className="flex justify-between items-center flex-wrap gap-4">
+            <h2 className="text-2xl ml-5 font-semibold text-gray-900 max-[768px]:ml-0 max-[768px]:text-xl">
               Salesperson <strong>List</strong>
             </h2>
             <button
               onClick={() => router.push("/managesalesperson/add")}
-              className="bg-[#1f3853] hover:bg-[#111132] text-white mr-5 md:mr-0 md:w-full text-[18px] px-4 py-2 rounded-[6px] transition-colors"
+              className="bg-[#1f3853] hover:bg-[#111132] text-[white] mr-5 text-[20px] px-4 py-2 rounded-[6px] transition-colors max-[768px]:mr-0 max-[768px]:w-full max-[768px]:text-base"
             >
               Add Sales Person
             </button>
@@ -2368,124 +2368,123 @@ export default function SalespersonList() {
         </div>
 
         {/* Search Section */}
-        <div className="flex items-center ml-[15px] md:ml-0 md:px-4 gap-2 mb-6 md:flex-col md:items-stretch">
+        <div className="flex items-center ml-[15px] gap-2 mb-6 max-[768px]:flex-col max-[768px]:ml-0 max-[768px]:px-4">
           <input
             type="text"
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-[200px] ml-auto md:ml-0 md:w-full mr-[10px] md:mr-0 h-[35px] mt-[10px] md:mt-0 border border-gray-300 rounded-[5px] mb-10 md:mb-0 px-3 py-2 text-[18px] focus:outline-none focus:ring-2 focus:ring-[#00a7cf] pl-[10px]"
+            className="w-[200px] ml-auto mr-[30px] h-[35px] mt-[10px] border border-gray-300 rounded-[5px] mb-10 px-3 py-2 text-[18px] focus:outline-none focus:ring-2 focus:ring-[#00a7cf] pl-[10px] max-[768px]:w-full max-[768px]:ml-0 max-[768px]:mr-0 max-[768px]:mt-0 max-[768px]:mb-0 max-[768px]:text-base"
           />
-          <button className="bg-[#0baad1] w-[100px] md:w-full h-10 text-white mr-1 md:mr-0 mb-10 md:mb-0 mt-[10px] md:mt-0 px-5 py-2 text-[18px] font-medium rounded-[5px] hover:bg-[#0094b8] transition-colors">
+          <button className="bg-[#0baad1] w-[100px] h-[40px] mr-[20px] text-[white] mr-1 mb-10 mt-[10px] px-5 py-2 text-[18px] font-medium rounded-[5px] hover:bg-[#0094b8] transition-colors max-[768px]:w-full max-[768px]:mr-0 max-[768px]:mb-0 max-[768px]:mt-0 max-[768px]:text-base">
             Search
           </button>
         </div>
 
         {/* Cards List */}
         {displayList.length > 0 ? (
-          <div className="w-[1150px] xl:w-full ml-[25px] xl:ml-0 md:ml-0 md:px-4 grid grid-cols-1 gap-[10px]">
+          <div className="w-[1150px] mr-[25px] grid grid-cols-1 gap-[10px] max-[1280px]:w-full max-[1280px]:ml-0 max-[1280px]:px-4">
             {displayList.map((sp, index) => (
               <div
                 key={sp.id || index}
-                className="flex items-center mt-[20px] md:mt-3 bg-white hover:bg-[#f6f6f6] mb-[10px] justify-between border border-gray-200 rounded-[10px] p-4 shadow-sm hover:shadow-md transition-all duration-200 md:flex-col md:items-start"
+                className="flex items-center mt-[20px] bg-[white] ml-[20px] hover:bg-[#f6f6f6] mb-[10px] justify-between border border-gray-200 rounded-[10px] p-4 shadow-sm hover:shadow-md transition-all duration-200 max-[768px]:flex-col max-[768px]:items-start max-[768px]:mt-3"
               >
-                <div className="flex items-start gap-4 flex-1 w-full md:flex-col">
+                <div className="flex items-start gap-4 flex-1 w-full max-[768px]:flex-col">
                   <img
                     src={sp.profileImage || "/default-avatar.png"}
                     alt="Profile"
-                    className="w-[70px] h-[100px] ml-5 md:ml-0 rounded-[10px] mt-5 md:mt-0 border border-gray-300 object-cover"
+                    className="w-[70px] h-[100px] ml-[10px] mt-[10px] rounded-[10px] mt-5 border border-gray-300 object-cover max-[768px]:ml-0 max-[768px]:mt-0 max-[768px]:w-[60px] max-[768px]:h-[80px]"
                   />
                   <div className="flex-1 w-full">
-                    <h3 className="text-xl ml-[30px] md:ml-0 mt-5 md:mt-3 font-bold text-gray-800 leading-tight">
+                    <h3 className="text-xl ml-[30px] mt-5 font-bold text-gray-800 leading-tight max-[768px]:ml-0 max-[768px]:mt-2 max-[768px]:text-lg">
                       {sp.username}
                     </h3>
 
                     {/* First Row */}
-                    <div className="flex items-center justify-between ml-[30px] md:ml-0 mt-[10px] md:flex-col md:items-start md:gap-3">
-                      <div className="flex items-center gap-10 md:flex-col md:gap-2 md:items-start">
-                        <p className="text-gray-600 text-base capitalize">
-                          {sp.firstname} {sp.lastname}
-                        </p>
-                        <div className="flex items-center gap-[10px] ml-[60px] md:ml-0">
-                          <Briefcase className="w-[18px] h-[18px] text-gray-500" />
-                          <span className="text-base text-gray-700">
-                            Designation: <span className="font-semibold">{sp.designation}</span>
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-3 md:w-full md:justify-start md:mt-2">
-                        <div
-                          className="relative group flex items-center cursor-pointer"
-                          onClick={() => handleDelete(sp.id)}
-                        >
-                          <Trash2
-                            className="w-5 h-5 mr-[100px] md:mr-3 text-gray-600 hover:text-red-600 transition"
-                            title="Delete"
-                          />
-                          <span className="absolute -top-5 -left-[10px] md:left-1/2 md:-translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
-                            Delete
-                          </span>
-                        </div>
-
-                        <button className="bg-[#dc3545] h-[35px] w-[120px] md:flex-1 mt-[10px] md:mt-0 mr-[50px] md:mr-0 rounded-[5px] text-white hover:bg-[#c82333] text-[15px] font-medium transition-colors">
-                          View Leads
-                        </button>
-                      </div>
+                    <div className="flex items-center justify-between ml-[30px] mt-[10px] max-[768px]:flex-col max-[768px]:items-start max-[768px]:ml-0 max-[768px]:gap-3">
+                     <div className="flex items-center gap-10 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
+                       <p className="text-gray-600 text-base capitalize max-w-[200px] truncate max-[768px]:text-sm max-[768px]:max-w-full">
+                        {sp.firstname} {sp.lastname}
+                       </p>
+                     <div className="flex items-center gap-[10px] ml-[130px] max-[768px]:ml-0">
+                      <Briefcase className="w-[18px] h-[18px] text-gray-500 flex-shrink-0" />
+                      <span className="text-base text-gray-700 mr-[50px] max-[768px]:text-sm max-[768px]:mr-0">
+                         Designation: <span className="font-semibold max-w-[150px] inline-block truncate align-bottom">{sp.designation}</span>
+                      </span>
                     </div>
+                   </div>
+                   <div className="flex items-center gap-3 max-[768px]:flex-col max-[768px]:w-full max-[768px]:mt-2">
+                   <div
+                     className="relative group flex items-center cursor-pointer"
+                     onClick={() => handleDelete(sp.id)}
+                   >
+                  <Trash2
+                    className="w-5 h-5 mr-[100px] text-gray-600 hover:text-red-600 transition max-[768px]:mr-0"
+                    title="Delete"
+                  />
+                  <span className="absolute -top-[20px] -left-[10px] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none max-[768px]:left-1/2 max-[768px]:-translate-x-1/2">
+                   Delete
+               </span>
+                </div>
 
+                    <button className="bg-[#dc3545] h-[35px] w-[120px] mt-[10px] mr-[50px] rounded-[5px] text-[white] hover:bg-[#c82333] text-[15px] font-medium transition-colors max-[768px]:w-full max-[768px]:mt-0 max-[768px]:mr-0 max-[768px]:text-sm">
+                    View Leads
+                      </button>
+                    </div>
+                    </div> 
+                    
                     {/* Second Row */}
-                    <div className="flex items-center justify-between ml-[30px] md:ml-0 mt-[15px] mb-5 md:mb-3 md:flex-col md:items-start md:gap-3">
-                      <div className="flex items-center gap-10 md:flex-col md:gap-2 md:items-start">
-                        <div className="flex items-center gap-[10px]">
-                          <Mail className="w-[18px] h-[18px] mb-[10px] md:mb-0 text-gray-500" />
+                    <div className="flex items-center justify-between ml-[30px] mt-[15px] mb-5 max-[768px]:flex-col max-[768px]:items-start max-[768px]:ml-0 max-[768px]:gap-3 max-[768px]:mb-3">
+                      <div className="flex items-center gap-10 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2 max-[768px]:w-full">
+                       <div className="flex items-center gap-[10px]">
+                       <Mail className="w-[18px] h-[18px] mb-[10px] text-gray-500 flex-shrink-0 max-[768px]:mb-0" />
                           <a
                             href={`mailto:${sp.email}`}
-                            className="text-[#007bff] mb-[10px] md:mb-0 text-base hover:underline break-all"
+                            className="text-[#007bff] mb-[10px] text-base hover:underline break-all max-w-[250px] max-[768px]:mb-0 max-[768px]:text-sm max-[768px]:max-w-full"
                           >
                             {sp.email}
                           </a>
                         </div>
-                        <div className="flex items-center mb-[10px] md:mb-0 gap-[10px]">
-                          <Phone className="w-[18px] h-[18px] text-gray-500" />
-                          <span className="text-base text-gray-700">
-                            Contact Number:{" "}
-                            <span className="font-semibold">
-                              {sp.contact}
-                            </span>
-                          </span>
-                        </div>
-                      </div>
+                       <div className="flex items-center mb-[10px] ml-[60px] gap-[10px] max-[768px]:mb-0 max-[768px]:ml-0 max-[768px]:w-full">
+                      <Phone className="w-[18px] h-[18px] text-gray-500 flex-shrink-0" />
+                    <span className="text-base text-gray-700 max-[768px]:text-sm">
+                   Contact Number:{" "}
+                  <span className="font-semibold max-w-[150px] inline-block truncate align-bottom">
+                   {sp.contact}
+                   </span>
+                 </span>
+              </div>
+            </div>
 
-                      <div className="flex items-center gap-3 md:w-full md:justify-start md:mt-2">
-                        <div
-                          className="relative group flex items-center cursor-pointer"
-                          onClick={() => handleOpenChangePassword(sp.id)}
-                        >
-                          <Key
-                            className="w-5 h-5 mr-[100px] md:mr-3 mb-[10px] md:mb-0 text-gray-600 hover:text-[#133b74] transition"
-                            title="Change Password"
-                          />
-                          <span className="absolute -bottom-[10px] md:top-[-30px] right-10 md:left-1/2 md:-translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
-                            Change Password
-                          </span>
-                        </div>
+  <div className="flex items-center gap-3 max-[768px]:flex-col max-[768px]:w-full max-[768px]:mt-2">
+    <div
+      className="relative group flex items-center cursor-pointer"
+      onClick={() => handleOpenChangePassword(sp.id)}
+    >
+      <Key
+        className="w-5 h-5 mr-[100px] mb-[10px] text-gray-600 hover:text-[#133b74] transition max-[768px]:mr-0 max-[768px]:mb-0"
+        title="Change Password"
+      />
+      <span className="absolute -top-[20px] right-[40px] bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none max-[768px]:top-[-30px] max-[768px]:bottom-auto max-[768px]:left-1/2 max-[768px]:-translate-x-1/2 max-[768px]:right-auto">
+        Change Password
+      </span>
+    </div>
 
-                        <button
-                          className="bg-[#2b3342] h-[35px] w-[140px] md:flex-1 mb-[10px] md:mb-0 mr-[30px] md:mr-0 rounded-[5px] text-white hover:bg-[#0f2f5a] text-[15px] font-medium transition-colors"
-                          onClick={() => handleOpenChangeEmail(sp.id)}
-                        >
-                          Change Email ID
-                        </button>
-                      </div>
-                    </div>
+    <button
+      className="bg-[#2b3342] h-[35px] w-[140px] mb-[10px] mr-[30px] rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-[15px] font-medium transition-colors max-[768px]:w-full max-[768px]:mb-0 max-[768px]:mr-0 max-[768px]:text-sm"
+      onClick={() => handleOpenChangeEmail(sp.id)}
+    >
+      Change Email ID
+    </button>
+  </div>
+</div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="text-center text-gray-500 text-lg font-medium mt-10 md:mt-5 md:px-4">
+          <div className="text-center text-gray-500 text-lg font-medium mt-10 max-[768px]:text-base max-[768px]:mt-5 max-[768px]:px-4">
             No Salespersons Found
           </div>
         )}
@@ -2493,8 +2492,6 @@ export default function SalespersonList() {
     </div>
   );
 }
-
-
 
 
 
