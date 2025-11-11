@@ -2121,7 +2121,7 @@ const NewPasswordModal = ({ salespersonId, onClose, onPasswordChange }) => {
       onClick={onClose}
     >
       <div
-        className="bg-white p-[30px] rounded-[10px] w-full max-w-[400px] shadow-lg"
+        className="bg-[white] mt-[120px] border border-gray-300 p-[30px] rounded-[10px] w-[400px] max-w-[400px] shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="text-xl font-semibold mb-4 text-gray-900">Change Password</h3>
@@ -2197,7 +2197,7 @@ const ChangeEmailModal = ({ salespersonId, onClose, onEmailChange }) => {
       onClick={onClose}
     >
       <div
-        className="bg-white p-[30px] rounded-[10px] w-full max-w-[400px] shadow-lg"
+        className="bg-[white] mt-[120px] p-[70px] border border-gray-200 rounded-[10px] w-[300px] max-w-[400px] shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="text-xl font-semibold mb-4 text-gray-900">Change Email ID</h3>
@@ -2406,9 +2406,9 @@ export default function SalespersonList() {
                        <p className="text-gray-600 text-base capitalize max-w-[200px] truncate max-[768px]:text-sm max-[768px]:max-w-full">
                         {sp.firstname} {sp.lastname}
                        </p>
-                     <div className="flex items-center gap-[10px] ml-[130px] max-[768px]:ml-0">
+                     <div className="flex items-center gap-[10px] ml-[110px] max-[768px]:ml-0">
                       <Briefcase className="w-[18px] h-[18px] text-gray-500 flex-shrink-0" />
-                      <span className="text-base text-gray-700 mr-[50px] max-[768px]:text-sm max-[768px]:mr-0">
+                      <span className="text-base text-gray-700 ml-[5px] max-[768px]:text-sm max-[768px]:mr-0">
                          Designation: <span className="font-semibold max-w-[150px] inline-block truncate align-bottom">{sp.designation}</span>
                       </span>
                     </div>
@@ -2492,6 +2492,44 @@ export default function SalespersonList() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
