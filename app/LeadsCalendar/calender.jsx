@@ -485,11 +485,13 @@ const LeadsCalendar = () => {
                   <div className="text-left py-[1] px-[1] text-sm font-normal text-gray-600 border-r border-[#8C8C8C]">
                     All-day
                   </div>
-                  {weekDays.map((day, index) => (
+                  {weekDays.map((day, dayIndex) => (
                     <div
-                      key={index}
-                      className="text-center py-[1] text-sm font-semibold text-[#8C8C8C] border-r border-[#8C8C8C] last:border-r-0"
+                      key={dayIndex}
+                      className="text-center min-h-[60px] p-2 border-r border-gray-300 last:border-r-0 bg-white hover:bg-gray-50 transition-colors relative"
                     >
+                      <div className="absolute left-0 right-0 top-[1/2] border-dashed border-gray-400"></div>
+                          {/* Events can be added here */}
                       {fullDaysOfWeek[day.getDay()]} {day.getMonth() + 1}/{day.getDate()}
                     </div>
                   ))}
