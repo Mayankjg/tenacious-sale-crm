@@ -490,7 +490,7 @@ const LeadsCalendar = () => {
                       key={dayIndex}
                       className="text-center min-h-[60px] p-2 border-r border-gray-300 last:border-r-0 bg-white hover:bg-gray-50 transition-colors relative"
                     >
-                      <div className="absolute left-0 right-0 top-[1/2] border-dashed border-gray-400"></div>
+                      <div className="absolute left-0 right-0 top-[1/2] border-[dashed] border-[gray]"></div>
                           {/* Events can be added here */}
                       {fullDaysOfWeek[day.getDay()]} {day.getMonth() + 1}/{day.getDate()}
                     </div>
