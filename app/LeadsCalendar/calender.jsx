@@ -481,7 +481,7 @@ const LeadsCalendar = () => {
             <div className="bg-white rounded-[5px] ml-[30px] mr-[30px] mt-[20px] shadow-sm overflow-x-auto border border-[gray]">
               <div className="min-w-[900px]">
                 {/* Week Header */}
-                <div className="grid grid-cols-8 text-[20px] mr-[19px] bg-gray-200 bg-[#e5e9ec] border-b border-[#8C8C8C]">
+                <div className="grid grid-cols-8 text-[20px] mr-[15px] bg-gray-200 bg-[#e5e9ec] border-b border-[#8C8C8C]">
                   <div className="text-left py-[1] px-[1] text-sm font-normal text-gray-600 border-r border-[#8C8C8C]">
                     All-day
                   </div>
