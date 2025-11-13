@@ -2097,7 +2097,7 @@ const NewPasswordModal = ({ salespersonId, onClose, onPasswordChange }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { 
     e.preventDefault();
     setError("");
 
@@ -2350,7 +2350,7 @@ export default function SalespersonList() {
         />
       )}
 
-      <div className="p-[6px] bg-[white] mt-[20px] h-[2000px] rounded-[5px] w-full max-w-[1200px] xl:w-[95%] xl:max-w-[1100px]">
+      <div className="p-[6px] bg-[white] mt-[20px] h-[900px] rounded-[5px] w-full max-w-[1200px] xl:w-[95%] xl:max-w-[1100px]">
         {/* Header Section */}
         <div className="bg-white w-full px-4 py-4">
           <div className="flex justify-between items-center flex-wrap gap-4">
@@ -2359,7 +2359,7 @@ export default function SalespersonList() {
             </h2>
             <button
               onClick={() => router.push("/managesalesperson/add")}
-              className="bg-[#1f3853] hover:bg-[#111132] text-[white] mr-5 text-[20px] px-4 py-2 rounded-[6px] transition-colors max-[768px]:mr-0 max-[768px]:w-full max-[768px]:text-base"
+              className="bg-[#1f3853] hover:bg-[#111132] text-[white] mr-[20px] text-[20px] px-4 py-2 rounded-[6px] transition-colors max-[768px]:mr-0 max-[768px]:w-[430px] max-[768px]:text-base"
             >
               Add Sales Person
             </button>
@@ -2368,15 +2368,15 @@ export default function SalespersonList() {
         </div>
 
         {/* Search Section */}
-        <div className="flex items-center ml-[15px] gap-2 mb-6 max-[768px]:flex-col max-[768px]:ml-0 max-[768px]:px-4">
+        <div className="flex items-center ml-[10px] gap-2 mb-6 max-[768px]:flex-col max-[768px]:ml-0 max-[768px]:px-4">
           <input
             type="text"
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-[200px] ml-auto mr-[30px] h-[35px] mt-[10px] border border-gray-300 rounded-[5px] mb-10 px-3 py-2 text-[18px] focus:outline-none focus:ring-2 focus:ring-[#00a7cf] pl-[10px] max-[768px]:w-full max-[768px]:ml-0 max-[768px]:mr-0 max-[768px]:mt-0 max-[768px]:mb-0 max-[768px]:text-base"
+            className="w-[200px] ml-auto mr-[30px] h-[35px] mt-[10px] border border-gray-300 rounded-[5px] mb-10 px-3 py-2 text-[18px] focus:outline-none focus:ring-2 focus:ring-[#00a7cf] max-[768px]:w-full max-[768px]:ml-0 max-[768px]:mr-0 max-[768px]:mt-0 max-[768px]:mb-0 max-[768px]:text-base"
           />
-          <button className="bg-[#0baad1] w-[100px] h-[40px] mr-[20px] text-[white] mr-1 mb-10 mt-[10px] px-5 py-2 text-[18px] font-medium rounded-[5px] hover:bg-[#0094b8] transition-colors max-[768px]:w-full max-[768px]:mr-0 max-[768px]:mb-0 max-[768px]:mt-0 max-[768px]:text-base">
+          <button className="bg-[#0baad1] w-[100px] h-[40px] text-[white] mr-1 mb-10 mt-[10px] px-5 py-2 text-[18px] font-medium rounded-[5px] hover:bg-[#0094b8] transition-colors max-[768px]:w-full max-[768px]:mr-0 max-[768px]:mb-0 max-[768px]:mt-0 max-[768px]:text-base">
             Search
           </button>
         </div>
@@ -2552,403 +2552,236 @@ export default function SalespersonList() {
 
 
 
-// "use client";
-// import { useRouter } from "next/navigation";
-// import React, { useEffect, useState } from "react";
-// import { Mail, Phone, Briefcase, Trash2, Key } from "lucide-react";
+// import React from 'react';
+// import { Mail, Phone, Briefcase, Trash2, Edit } from 'lucide-react';
 
-// const NewPasswordModal = ({ salespersonId, onClose, onPasswordChange }) => {
-//   const [newPassword, setNewPassword] = useState("");
-//   const [confirmPassword, setConfirmPassword] = useState("");
-//   const [error, setError] = useState("");
-  
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     setError("");
-
-//     if (newPassword.length < 6) {
-//       setError("Password must be at least 6 characters long.");
-//       return;
+// const SalesmanCard = () => {
+//   const salesmen = [
+//     {
+//       id: 1,
+//       image: 'https://via.placeholder.com/60',
+//       name: 'suku',
+//       fullName: 'suku chauhan',
+//       email: 'chauhanpratik9191613@gmail.com',
+//       designation: 'sw',
+//       contact: '123654789'
+//     },
+//     {
+//       id: 2,
+//       image: 'https://via.placeholder.com/60',
+//       name: 'Test',
+//       fullName: 'Test Testing',
+//       email: 'testangel00@gmail.com',
+//       designation: 'Sales Associate',
+//       contact: '7845125471'
+//     },
+//     {
+//       id: 3,
+//       image: 'https://via.placeholder.com/60',
+//       name: 'Tester_salesman',
+//       fullName: 'Tester Saleman',
+//       email: 'testofyyy@gmail.com',
+//       designation: 'Sales Associate',
+//       contact: '1234567890'
 //     }
-
-//     if (newPassword !== confirmPassword) {
-//       setError("New password and confirm password do not match.");
-//       return;
-//     }
-
-//     onPasswordChange(salespersonId, newPassword);
-//     onClose();
-//   };
+//   ];
 
 //   return (
-//     <div
-//       className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[1000] p-5"
-//       onClick={onClose}
-//     >
-//       <div
-//         className="bg-white p-8 rounded-lg w-full max-w-md shadow-lg"
-//         onClick={(e) => e.stopPropagation()}
-//       >
-//         <h3 className="text-xl font-semibold mb-4 text-gray-900">Change Password</h3>
-//         <form onSubmit={handleSubmit}>
-//           {error && <p className="text-red-500 mb-3 text-sm">{error}</p>}
-
-//           <label className="block mb-2 text-sm font-medium text-gray-700">New Password</label>
-//           <input
-//             type="password"
-//             value={newPassword}
-//             onChange={(e) => setNewPassword(e.target.value)}
-//             className="w-full p-2.5 mb-4 border border-gray-300 rounded-md pl-5"
-//             placeholder="Enter new password"
-//             required
-//             minLength="6"
-//           />
-
-//           <label className="block mb-2 text-sm font-medium text-gray-700">Confirm Password</label>
-//           <input
-//             type="password"
-//             value={confirmPassword}
-//             onChange={(e) => setConfirmPassword(e.target.value)}
-//             className="w-full p-2.5 mb-4 border border-gray-300 rounded-md pl-5"
-//             placeholder="Confirm password"
-//             required
-//           />
-
-//           <div className="flex justify-end gap-3 mt-4">
-//             <button
-//               type="submit"
-//               className="bg-[#00a7cf] hover:bg-[#0094b8] text-white px-4 py-2.5 rounded-md font-bold ml-5 transition-colors"
-//             >
-//               Update Password
-//             </button>
-//             <button
-//               type="button"
-//               onClick={onClose}
-//               className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2.5 rounded-md font-bold ml-2.5 transition-colors"
-//             >
-//               Cancel
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// const ChangeEmailModal = ({ salespersonId, onClose, onEmailChange }) => {
-//   const [newEmail, setNewEmail] = useState("");
-//   const [error, setError] = useState("");
-
-//   const validateEmail = (email) => {
-//     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     setError("");
-
-//     if (!validateEmail(newEmail)) {
-//       setError("Please enter a valid email address.");
-//       return;
-//     }
-
-//     onEmailChange(salespersonId, newEmail);
-//     onClose();
-//   };
-
-//   return (
-//     <div
-//       className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[1000] p-5"
-//       onClick={onClose}
-//     >
-//       <div
-//         className="bg-white p-8 rounded-lg w-full max-w-md shadow-lg"
-//         onClick={(e) => e.stopPropagation()}
-//       >
-//         <h3 className="text-xl font-semibold mb-4 text-gray-900">Change Email ID</h3>
-//         <form onSubmit={handleSubmit}>
-//           {error && <p className="text-red-500 mb-3 text-sm">{error}</p>}
-
-//           <label className="block mb-2 text-sm font-medium text-gray-700">New Email ID</label>
-//           <input
-//             type="email"
-//             value={newEmail}
-//             onChange={(e) => setNewEmail(e.target.value)}
-//             className="w-full p-2.5 mb-4 border border-gray-300 rounded-md pl-5"
-//             placeholder="Enter new email address"
-//             required
-//           />
-
-//           <div className="flex justify-end gap-3 mt-4">
-//             <button
-//               type="submit"
-//               className="bg-[#133b74] hover:bg-[#0f2f5a] text-white px-4 py-2.5 rounded-md font-bold ml-5 transition-colors"
-//             >
-//               Update Email
-//             </button>
-//             <button
-//               type="button"
-//               onClick={onClose}
-//               className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2.5 rounded-md font-bold ml-2.5 transition-colors"
-//             >
-//               Cancel
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default function SalespersonList() {
-//   const router = useRouter();
-//   const [salespersons, setSalespersons] = useState([]);
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const [salespersonToChange, setSalespersonToChange] = useState(null);
-//   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
-//   const [salespersonToChangeEmail, setSalespersonToChangeEmail] = useState(null);
-
-//   useEffect(() => {
-//     const storedData = localStorage.getItem("salespersons");
-//     if (storedData) {
-//       setSalespersons(JSON.parse(storedData));
-//     }
-//     fetchData();
-//   }, []);
-
-//   useEffect(() => {
-//     localStorage.setItem("salespersons", JSON.stringify(salespersons));
-//   }, [salespersons]);
-
-//   const fetchData = async () => {
-//     try {
-//       const res = await fetch("/api/salespersons");
-//       const data = await res.json();
-//       setSalespersons(data);
-//     } catch (error) {
-//       console.error("Error fetching data:", error);
-//     }
-//   };
-
-//   const handleDelete = (id) => {
-//     if (!confirm("Are you sure you want to delete this salesperson ?")) return;
-
-//     try {
-//       setSalespersons((prev) => prev.filter((sp) => sp.id !== id));
-//       alert("Salesperson deleted successfully!");
-//     } catch (error) {
-//       console.error("Error during local delete:", error);
-//       alert("Local deletion failed.");
-//     }
-//   };
-
-//   const handleOpenChangePassword = (id) => {
-//     setSalespersonToChange(id);
-//     setIsModalOpen(true);
-//   };
-
-//   const handleCloseChangePassword = () => {
-//     setIsModalOpen(false);
-//     setSalespersonToChange(null);
-//   };
-
-//   const handleChangePassword = async (id, newPassword) => {
-//     await new Promise(resolve => setTimeout(resolve, 500));
-
-//     try {
-//       alert("Password updated successfully!");
-//     } catch (error) {
-//       console.error("Error during password simulation:", error);
-//       alert("Something went wrong");
-//     }
-//   };
-
-//   const handleOpenChangeEmail = (id) => {
-//     setSalespersonToChangeEmail(id);
-//     setIsEmailModalOpen(true);
-//   };
-
-//   const handleCloseChangeEmail = () => {
-//     setIsEmailModalOpen(false);
-//     setSalespersonToChangeEmail(null);
-//   };
-
-//   const handleChangeEmail = async (id, newEmail) => {
-//     await new Promise(resolve => setTimeout(resolve, 500));
-
-//     try {
-//       setSalespersons(prev => prev.map(sp =>
-//         sp.id === id ? { ...sp, email: newEmail } : sp
-//       ));
-
-//       alert("Email ID updated successfully!");
-//     } catch (error) {
-//       console.error("Error during local email change:", error);
-//       alert("Local Email ID update failed.");
-//     }
-//   };
-
-//   const filteredSalespersons = salespersons.filter(
-//     (sp) =>
-//       sp.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//       sp.email.toLowerCase().includes(searchQuery.toLowerCase())
-//   );
-
-//   const displayList = searchQuery ? filteredSalespersons : salespersons;
-
-//   return (
-//     <div className="bg-[#eef1f4] p-5 sm:p-3 min-h-[80vh] flex justify-center items-start font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]">
-//       {isModalOpen && (
-//         <NewPasswordModal
-//           salespersonId={salespersonToChange}
-//           onClose={handleCloseChangePassword}
-//           onPasswordChange={handleChangePassword}
-//         />
-//       )}
-
-//       {isEmailModalOpen && (
-//         <ChangeEmailModal
-//           salespersonId={salespersonToChangeEmail}
-//           onClose={handleCloseChangeEmail}
-//           onEmailChange={handleChangeEmail}
-//         />
-//       )}
-
-//       <div className="p-1.5 rounded-[5px] h-auto w-full max-w-[1200px] xl:w-[95%] xl:max-w-[1100px]">
-//         <div className="bg-white w-full px-4 py-4 sm:px-3 sm:py-3">
-//           <div className="flex justify-between items-center lg:flex-col lg:items-start lg:gap-4 sm:flex-col sm:items-start sm:gap-3">
-//             <h2 className="text-2xl ml-5 lg:ml-2.5 sm:ml-0 sm:text-xl font-semibold text-gray-900">
-//               Salesperson <strong>List</strong>
-//             </h2>
-//             <button
-//               onClick={() => router.push("/managesalesperson/add")}
-//               className="bg-[#1f3853] hover:bg-[#111132] text-[white] mr-5 lg:mr-2.5 lg:w-full sm:mr-0 sm:w-full text-[18px] sm:text-base px-4 py-2 rounded-[5px] transition-colors"
-//             >
-//               Add Sales Person
-//             </button>
-//           </div>
-//           <hr className="border-t border-black mt-2 mb-6" />
-//         </div>
-
-//         <div className="flex items-center ml-4 gap-2 mb-6 lg:flex-col lg:ml-0 lg:items-stretch sm:flex-col sm:ml-0 sm:items-stretch sm:gap-2">
-//           <input
-//             type="text"
-//             placeholder="Search"
-//             value={searchQuery}
-//             onChange={(e) => setSearchQuery(e.target.value)}
-//             className="w-[200px] ml-auto lg:ml-0 lg:w-full sm:ml-0 sm:w-full mr-2.5 lg:mr-0 sm:mr-0 h-9 mt-2.5 sm:mt-0 border border-gray-300 rounded-[5px] mb-10 lg:mb-2.5 sm:mb-2 px-3 py-2 text-[18px] sm:text-base focus:outline-none focus:ring-2 focus:ring-[#00a7cf] pl-5"
-//           />
-//           <button className="bg-[#0baad1] w-[70px] lg:w-full sm:w-full h-10 text-white mr-1 lg:mr-0 sm:mr-0 mb-10 lg:mb-0 sm:mb-0 mt-2.5 lg:mt-0 sm:mt-0 px-5 py-2 text-[18px] sm:text-base font-medium rounded-[5px] hover:bg-[#0094b8] transition-colors">
-//             Search
-//           </button>
-//         </div>
-
-//         {displayList.length > 0 ? (
-//           <div className="w-full max-w-[1150px] lg:w-full lg:ml-0 sm:w-full sm:ml-0 ml-6 lg:ml-0 sm:ml-0 mt-[20px] sm:mt-2 grid grid-cols-1 gap-2.5">
-//             {displayList.map((sp, index) => (
-//               <div
-//                 key={sp.id || index}
-//                 className="flex items-start h-auto min-h-[200px] bg-[#ffffff] mt-[20px] sm:mt-3 hover:bg-[#f6f6f6] mb-2.5 bg-white border border-gray-200 rounded-[10px] p-4 sm:p-3 shadow-sm hover:shadow-md transition-all duration-200 md:flex-col"
-//               >
-//                 <div className="flex items-start gap-4 sm:gap-3 flex-1 w-full">
-//                   <img
-//                     src={sp.profileImage || "/default-avatar.png"}
-//                     alt="Profile"
-//                     className="w-[70px] h-[100px] ml-[10px] md:ml-2.5 sm:ml-0 sm:w-[60px] sm:h-20 rounded-[10px] mt-5 sm:mt-2 border border-gray-300 object-cover"
-//                   />
-                  
-//                   <div className="flex-1 w-full">
-//                     {/* Username */}
-//                     <h3 className="text-xl ml-8 md:ml-4 sm:ml-0 sm:text-lg mt-5 sm:mt-2 font-bold text-gray-800 leading-tight">
-//                       {sp.username}
-//                     </h3>
-
-//                     {/* First Name, Last Name */}
-//                     <p className="text-gray-600 text-base sm:text-sm capitalize ml-8 md:ml-4 sm:ml-0 mt-2">
-//                       {sp.firstname} {sp.lastname}
-//                     </p>
-
-//                     {/* Designation */}
-//                     <div className="flex items-center gap-2.5 ml-8 md:ml-4 sm:ml-0 mt-2">
-//                       <Briefcase className="w-[18px] h-[18px] text-gray-500" />
-//                       <span className="text-base sm:text-sm text-gray-700">
-//                         Designation: <span className="font-semibold">{sp.designation}</span>
-//                       </span>
-//                     </div>
-
-//                     {/* Delete and View Leads */}
-//                     <div className="flex items-center gap-3 ml-8 md:ml-4 sm:ml-0 mt-3 sm:flex-wrap">
-//                       <div
-//                         className="relative group flex items-center cursor-pointer"
-//                         onClick={() => handleDelete(sp.id)}
-//                       >
-//                         <Trash2
-//                           className="w-5 h-5 text-gray-600 hover:text-red-600 transition"
-//                           title="Delete"
-//                         />
-//                         <span className="absolute bottom-6 -left-2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
-//                           Delete
-//                         </span>
-//                       </div>
-
-//                       <button className="bg-[#dc3545] h-9 px-4 sm:flex-1 rounded-[5px] text-[white] hover:bg-[#c82333] text-[15px] sm:text-sm font-medium transition-colors">
-//                         View Leads
-//                       </button>
-//                     </div>
-
-//                     {/* Email */}
-//                     <div className="flex items-center gap-2.5 ml-8 md:ml-4 sm:ml-0 mt-3">
-//                       <Mail className="w-[18px] h-[18px] text-gray-500" />
-//                       <a
-//                         href={`mailto:${sp.email}`}
-//                         className="text-[#007bff] text-base sm:text-sm hover:underline break-all"
-//                       >
-//                         {sp.email}
-//                       </a>
-//                     </div>
-
-//                     {/* Contact Number */}
-//                     <div className="flex items-center gap-2.5 ml-8 md:ml-4 sm:ml-0 mt-2">
-//                       <Phone className="w-[18px] h-[18px] text-gray-500" />
-//                       <span className="text-base sm:text-sm text-gray-700">
-//                         Contact Number: <span className="font-semibold">{sp.contact}</span>
-//                       </span>
-//                     </div>
-
-//                     {/* Change Password and Change Email ID */}
-//                     <div className="flex items-center gap-3 ml-8 md:ml-4 sm:ml-0 mt-3 mb-2 sm:flex-wrap">
-//                       <div
-//                         className="relative group flex items-center cursor-pointer"
-//                         onClick={() => handleOpenChangePassword(sp.id)}
-//                       >
-//                         <Key
-//                           className="w-5 h-5 text-gray-600 hover:text-[#133b74] transition"
-//                           title="Change Password"
-//                         />
-//                         <span className="absolute bottom-6 -left-12 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
-//                           Change Password
-//                         </span>
-//                       </div>
-
-//                       <button
-//                         className="bg-[#2b3342] h-9 px-4 sm:flex-1 rounded-[5px] text-[white] hover:bg-[#0f2f5a] text-[15px] sm:text-sm font-medium transition-colors"
-//                         onClick={() => handleOpenChangeEmail(sp.id)}
-//                       >
-//                         Change Email ID
-//                       </button>
-//                     </div>
-//                   </div>
+//     <div className="min-h-screen bg-[#f9fafb] p-4 md:p-6">
+//       <div className="max-w-[1400px] mx-auto space-y-0">
+//         {salesmen.map((person, index) => (
+//           <div
+//             key={person.id}
+//             className={`bg-white border-l border-r border-b ${index === 0 ? 'border-t' : ''} border-gray-200 px-6 py-6`}
+//           >
+//             {/* Desktop Layout - Grid with exact spacing */}
+//             <div className="hidden lg:grid lg:grid-cols-[280px_1fr_auto] lg:gap-8 lg:items-start">
+//               {/* Left Section - Image and Name */}
+//               <div className="flex items-center gap-4">
+//                 <img
+//                   src={person.image}
+//                   alt={person.name}
+//                   className="w-[60px] h-[60px] rounded-full object-cover flex-shrink-0"
+//                 />
+//                 <div>
+//                   <h3 className="text-[20px] font-normal text-black mb-1">{person.name}</h3>
+//                   <p className="text-[16px] text-[#6b7280]">{person.fullName}</p>
 //                 </div>
 //               </div>
-//             ))}
+
+//               {/* Middle Section - Email, Designation, Contact */}
+//               <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+//                 {/* Email */}
+//                 <div className="flex items-center gap-2">
+//                   <Mail size={18} className="text-[#3b82f6] flex-shrink-0" />
+//                   <a href={`mailto:${person.email}`} className="text-[#3b82f6] text-[15px] hover:underline">
+//                     {person.email}
+//                   </a>
+//                 </div>
+
+//                 {/* Designation */}
+//                 <div className="flex items-center gap-2">
+//                   <Briefcase size={18} className="text-[#6b7280] flex-shrink-0" />
+//                   <span className="text-[#6b7280] text-[15px]">
+//                     Designation : <span className="text-[#374151] font-medium">{person.designation}</span>
+//                   </span>
+//                 </div>
+
+//                 {/* Empty cell for alignment */}
+//                 <div></div>
+
+//                 {/* Contact Number */}
+//                 <div className="flex items-center gap-2">
+//                   <Phone size={18} className="text-[#6b7280] flex-shrink-0" />
+//                   <span className="text-[#6b7280] text-[15px]">
+//                     Contact Number : <span className="text-[#374151] font-medium">{person.contact}</span>
+//                   </span>
+//                 </div>
+//               </div>
+
+//               {/* Right Section - Action Icons and Buttons */}
+//               <div className="flex items-center gap-4">
+//                 <button className="text-[#9ca3af] hover:text-[#ef4444] transition-colors">
+//                   <Trash2 size={22} />
+//                 </button>
+//                 <button className="text-[#9ca3af] hover:text-[#3b82f6] transition-colors">
+//                   <Edit size={22} />
+//                 </button>
+//                 <button className="bg-[#ef4444] text-white px-6 py-2.5 rounded text-[15px] hover:bg-[#dc2626] transition-colors whitespace-nowrap">
+//                   View Leads
+//                 </button>
+//                 <button className="bg-[#1e3a5f] text-white px-5 py-2.5 rounded text-[15px] hover:bg-[#152a45] transition-colors whitespace-nowrap">
+//                   Change Email ID
+//                 </button>
+//               </div>
+//             </div>
+
+//             {/* Tablet Layout (768px - 1023px) */}
+//             <div className="hidden md:block lg:hidden">
+//               <div className="space-y-4">
+//                 {/* Top Row - Image, Name, and Icons */}
+//                 <div className="flex items-start justify-between">
+//                   <div className="flex items-center gap-4 flex-1">
+//                     <img
+//                       src={person.image}
+//                       alt={person.name}
+//                       className="w-[60px] h-[60px] rounded-full object-cover flex-shrink-0"
+//                     />
+//                     <div>
+//                       <h3 className="text-[20px] font-normal text-black mb-1">{person.name}</h3>
+//                       <p className="text-[16px] text-[#6b7280]">{person.fullName}</p>
+//                     </div>
+//                   </div>
+//                   <div className="flex items-center gap-3">
+//                     <button className="text-[#9ca3af] hover:text-[#ef4444] transition-colors">
+//                       <Trash2 size={22} />
+//                     </button>
+//                     <button className="text-[#9ca3af] hover:text-[#3b82f6] transition-colors">
+//                       <Edit size={22} />
+//                     </button>
+//                   </div>
+//                 </div>
+
+//                 {/* Contact Info Grid */}
+//                 <div className="grid grid-cols-1 gap-3 pl-[76px]">
+//                   <div className="flex items-center gap-2">
+//                     <Mail size={18} className="text-[#3b82f6] flex-shrink-0" />
+//                     <a href={`mailto:${person.email}`} className="text-[#3b82f6] text-[15px] hover:underline">
+//                       {person.email}
+//                     </a>
+//                   </div>
+                  
+//                   <div className="flex items-center gap-2">
+//                     <Briefcase size={18} className="text-[#6b7280] flex-shrink-0" />
+//                     <span className="text-[#6b7280] text-[15px]">
+//                       Designation : <span className="text-[#374151] font-medium">{person.designation}</span>
+//                     </span>
+//                   </div>
+                  
+//                   <div className="flex items-center gap-2">
+//                     <Phone size={18} className="text-[#6b7280] flex-shrink-0" />
+//                     <span className="text-[#6b7280] text-[15px]">
+//                       Contact Number : <span className="text-[#374151] font-medium">{person.contact}</span>
+//                     </span>
+//                   </div>
+//                 </div>
+
+//                 {/* Buttons */}
+//                 <div className="flex gap-3 pl-[76px]">
+//                   <button className="bg-[#ef4444] text-white px-6 py-2.5 rounded text-[15px] hover:bg-[#dc2626] transition-colors">
+//                     View Leads
+//                   </button>
+//                   <button className="bg-[#1e3a5f] text-white px-5 py-2.5 rounded text-[15px] hover:bg-[#152a45] transition-colors">
+//                     Change Email ID
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Mobile Layout (<768px) */}
+//             <div className="block md:hidden">
+//               <div className="space-y-4">
+//                 {/* Profile Section */}
+//                 <div className="flex items-start gap-3">
+//                   <img
+//                     src={person.image}
+//                     alt={person.name}
+//                     className="w-[50px] h-[50px] rounded-full object-cover flex-shrink-0"
+//                   />
+//                   <div className="flex-1 min-w-0">
+//                     <h3 className="text-[18px] font-normal text-black mb-0.5">{person.name}</h3>
+//                     <p className="text-[14px] text-[#6b7280]">{person.fullName}</p>
+//                   </div>
+//                   <div className="flex gap-2">
+//                     <button className="text-[#9ca3af] hover:text-[#ef4444] transition-colors">
+//                       <Trash2 size={20} />
+//                     </button>
+//                     <button className="text-[#9ca3af] hover:text-[#3b82f6] transition-colors">
+//                       <Edit size={20} />
+//                     </button>
+//                   </div>
+//                 </div>
+
+//                 {/* Contact Info */}
+//                 <div className="space-y-2.5 text-[14px]">
+//                   <div className="flex items-start gap-2">
+//                     <Mail size={16} className="text-[#3b82f6] flex-shrink-0 mt-0.5" />
+//                     <a href={`mailto:${person.email}`} className="text-[#3b82f6] hover:underline break-all">
+//                       {person.email}
+//                     </a>
+//                   </div>
+                  
+//                   <div className="flex items-center gap-2">
+//                     <Briefcase size={16} className="text-[#6b7280] flex-shrink-0" />
+//                     <span className="text-[#6b7280]">
+//                       Designation : <span className="text-[#374151] font-medium">{person.designation}</span>
+//                     </span>
+//                   </div>
+                  
+//                   <div className="flex items-center gap-2">
+//                     <Phone size={16} className="text-[#6b7280] flex-shrink-0" />
+//                     <span className="text-[#6b7280]">
+//                       Contact : <span className="text-[#374151] font-medium">{person.contact}</span>
+//                     </span>
+//                   </div>
+//                 </div>
+
+//                 {/* Buttons */}
+//                 <div className="flex flex-col gap-2 pt-1">
+//                   <button className="bg-[#ef4444] text-white px-4 py-2.5 rounded text-[14px] hover:bg-[#dc2626] transition-colors w-full">
+//                     View Leads
+//                   </button>
+//                   <button className="bg-[#1e3a5f] text-white px-4 py-2.5 rounded text-[14px] hover:bg-[#152a45] transition-colors w-full">
+//                     Change Email ID
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
 //           </div>
-//         ) : (
-//           <div className="text-center text-gray-500 text-lg sm:text-base font-medium mt-10 sm:mt-5">
-//             No Salespersons Found
-//           </div>
-//         )}
+//         ))}
 //       </div>
 //     </div>
 //   );
-// }
+// };
+
+// export default SalesmanCard;
